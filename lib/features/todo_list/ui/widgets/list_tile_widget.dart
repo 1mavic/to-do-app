@@ -3,12 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
+import 'package:ya_todo_app/const/const_data.dart';
 
 class ListTileWidget extends StatefulWidget {
   const ListTileWidget({
-    Key? key,
     required this.text,
-  }) : super(key: key);
+    super.key,
+  });
   final String text;
   @override
   State<ListTileWidget> createState() => _ListTileWidgetState();
@@ -29,7 +30,7 @@ class _ListTileWidgetState extends State<ListTileWidget>
     moveAnimation = controller.drive(
       Tween<Offset>(
         begin: Offset.zero,
-        end: Offset(0.5, 0),
+        end: const Offset(0.5, 0),
       ),
     );
     super.initState();
@@ -39,7 +40,7 @@ class _ListTileWidgetState extends State<ListTileWidget>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(child: ColoredBox(color: Colors.red)),
+        const Positioned.fill(child: ColoredBox(color: Colors.red)),
         SlideTransition(
           position: moveAnimation,
           child: GestureDetector(
@@ -54,7 +55,7 @@ class _ListTileWidgetState extends State<ListTileWidget>
                 tileColor:
                     Theme.of(context).extension<AppColors>()?.backSecondary,
                 style: ListTileStyle.drawer,
-                contentPadding: const EdgeInsets.only(right: 16),
+                contentPadding: const EdgeInsets.only(right: hPadding),
                 titleAlignment: ListTileTitleAlignment.top,
                 leading: Checkbox(
                   shape: RoundedRectangleBorder(
@@ -157,7 +158,7 @@ class _ListTileWidgetState extends State<ListTileWidget>
     //     child: ListTile(
     //       tileColor: Theme.of(context).extension<AppColors>()?.backSecondary,
     //       style: ListTileStyle.drawer,
-    //       contentPadding: const EdgeInsets.only(right: 16),
+    //       contentPadding: const EdgeInsets.only(right: hPadding),
     //       titleAlignment: ListTileTitleAlignment.top,
     //       leading: Checkbox(
     //         shape: RoundedRectangleBorder(

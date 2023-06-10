@@ -9,8 +9,12 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart'
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
+/// widget with all to do list
 class TodoListWidget extends StatefulWidget {
-  const TodoListWidget({Key? key}) : super(key: key);
+  /// widget with all to do list
+  const TodoListWidget({
+    super.key,
+  });
 
   @override
   State<TodoListWidget> createState() => _TodoListWidgetState();
@@ -39,16 +43,20 @@ class _TodoListWidgetState extends State<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> _list = [
+    const list = <String>[
+      // ignore: lines_longer_than_80_chars
+      'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj. flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
+      'asd asd asd asd',
+      'fsadf asdf',
+      // ignore: lines_longer_than_80_chars
       'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
       'asd asd asd asd',
       'fsadf asdf',
+      // ignore: lines_longer_than_80_chars
       'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
       'asd asd asd asd',
       'fsadf asdf',
-      'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
-      'asd asd asd asd',
-      'fsadf asdf',
+      // ignore: lines_longer_than_80_chars
       'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
       'asd asd asd asd',
       'fsadf asdf',
@@ -78,7 +86,7 @@ class _TodoListWidgetState extends State<TodoListWidget> {
               duration: const Duration(milliseconds: 300),
               child: Padding(
                 padding: const EdgeInsets.only(
-                  left: 16,
+                  left: hPadding,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,7 +103,7 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                         log('tap');
                       },
                       splashRadius: 0.1,
-                      icon: Icon(Icons.remove_red_eye),
+                      icon: const Icon(Icons.remove_red_eye),
                       color: Theme.of(context).extension<AppColors>()?.blue,
                     )
                   ],
@@ -139,7 +147,7 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                         log('tap');
                       },
                       splashRadius: 0.1,
-                      icon: Icon(Icons.remove_red_eye),
+                      icon: const Icon(Icons.remove_red_eye),
                       color: Theme.of(context).extension<AppColors>()?.blue,
                     )
                   ],
@@ -158,14 +166,14 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    if (index == _list.length) {
-                      return NewButtonWidget();
+                    if (index == list.length) {
+                      return const NewButtonWidget();
                     }
                     return ListTileWidget(
-                      text: _list[index],
+                      text: list[index],
                     );
                   },
-                  itemCount: _list.length + 1,
+                  itemCount: list.length + 1,
                 ),
               ),
             ),

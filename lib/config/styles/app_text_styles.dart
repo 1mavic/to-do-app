@@ -1,5 +1,8 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
+/// class with application design system text styles
 abstract class AppTextStyle {
   static const largeTitle = TextStyle(
     fontFamily: 'Roboto',
@@ -42,6 +45,13 @@ abstract class AppTextStyle {
     fontFamily: 'Roboto',
     fontSize: 14,
     height: 16.41 / 14,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const inputLabel = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    height: 18 / 16,
     fontWeight: FontWeight.w400,
   );
 }

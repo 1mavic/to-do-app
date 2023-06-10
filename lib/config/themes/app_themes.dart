@@ -1,6 +1,9 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 
+/// application theme data
 abstract class AppTheme {
   static final lightTheme = ThemeData.light().copyWith(
     popupMenuTheme: const PopupMenuThemeData(

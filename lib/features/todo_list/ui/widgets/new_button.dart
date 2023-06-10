@@ -1,10 +1,15 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
+import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
 class NewButtonWidget extends StatefulWidget {
-  NewButtonWidget({Key? key}) : super(key: key);
+  const NewButtonWidget({
+    super.key,
+  });
 
   @override
   State<NewButtonWidget> createState() => _NewButtonWidgetState();
@@ -18,7 +23,7 @@ class _NewButtonWidgetState extends State<NewButtonWidget> {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 12,
-          horizontal: 16,
+          horizontal: hPadding,
         ),
         child: Row(
           children: [

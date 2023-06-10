@@ -1,6 +1,10 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
+/// theme extension with design system colors for app
 class AppColors extends ThemeExtension<AppColors> {
+  /// theme extension with disign system colors for app
   const AppColors({
     this.supportSeparator,
     this.supportOverlay,

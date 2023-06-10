@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "cancel": MessageLookupByLibrary.simpleMessage("ОТМЕНА"),
+        "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "doSmth": MessageLookupByLibrary.simpleMessage("Что надо сделать…"),
         "doToDate": MessageLookupByLibrary.simpleMessage("Сделать до"),
         "done": m0,
         "hight": MessageLookupByLibrary.simpleMessage("!! Высокий"),
@@ -32,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myTodos": MessageLookupByLibrary.simpleMessage("Мои дела"),
         "newItem": MessageLookupByLibrary.simpleMessage("Новое"),
         "no": MessageLookupByLibrary.simpleMessage("Нет"),
+        "ready": MessageLookupByLibrary.simpleMessage("ГОТОВО"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить")
       };
 }

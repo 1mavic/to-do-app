@@ -139,6 +139,46 @@ class S {
       args: [],
     );
   }
+
+  /// `ОТМЕНА`
+  String get cancel {
+    return Intl.message(
+      'ОТМЕНА',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ГОТОВО`
+  String get ready {
+    return Intl.message(
+      'ГОТОВО',
+      name: 'ready',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Удалить`
+  String get delete {
+    return Intl.message(
+      'Удалить',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Что надо сделать…`
+  String get doSmth {
+    return Intl.message(
+      'Что надо сделать…',
+      name: 'doSmth',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

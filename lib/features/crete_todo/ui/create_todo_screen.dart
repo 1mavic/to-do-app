@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
-import 'package:ya_todo_app/config/styles/app_text_styles.dart';
+import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/features/crete_todo/ui/widgets/date_picker_widget.dart';
 import 'package:ya_todo_app/features/crete_todo/ui/widgets/importance_widget.dart';
+import 'package:ya_todo_app/features/crete_todo/ui/widgets/my_button_widget.dart';
+import 'package:ya_todo_app/features/crete_todo/ui/widgets/my_divider.dart';
+import 'package:ya_todo_app/features/crete_todo/ui/widgets/my_text_field_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
-import 'widgets/date_picker_widget.dart';
-
+/// screen for creating or viewing created To do item
 class CreateTodoScreen extends StatelessWidget {
-  const CreateTodoScreen({Key? key}) : super(key: key);
+  /// screen for creating or viewing created To do item
+  const CreateTodoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,7 @@ class CreateTodoScreen extends StatelessWidget {
       //
       // ),
       body: CustomScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         slivers: [
           SliverAppBar(
             pinned: true,
@@ -30,65 +35,70 @@ class CreateTodoScreen extends StatelessWidget {
               splashRadius: 0.1,
               color: Theme.of(context).extension<AppColors>()?.primary,
             ),
-            title: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  S.of(context).save.toUpperCase(),
-                  style: AppTextStyle.button.copyWith(
-                    color: Theme.of(context).extension<AppColors>()?.blue,
-                  ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                MyButtonWidget.blue(
+                  onPressed: () {},
+                  disabled: false,
+                  text: S.of(context).save.toUpperCase(),
                 ),
-              ),
-            ]),
+              ],
+            ),
           ),
           SliverPadding(
-            padding: EdgeInsets.only(top: 23),
+            padding: const EdgeInsets.only(top: 23),
             sliver: SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: hPadding,
+                    ),
+                    child: MyTextFieldWidget(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: hPadding,
                     ),
                     child: ImportancePickerWidget(),
                   ),
-                  SizedBox(
-                    height: 20,
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: hPadding,
+                    ),
+                    child: MyDividerWidget(),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: hPadding,
                     ),
                     child: DatePickerWidget(),
                   ),
-                  SizedBox(
-                    height: 20,
+                  const SizedBox(
+                    height: 24,
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 300,
-                    color: Colors.red,
+                  const MyDividerWidget(),
+                  const SizedBox(
+                    height: 8,
                   ),
-                  SizedBox(
-                    height: 20,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                    ),
+                    child: MyButtonWidget.red(
+                      onPressed: () {},
+                      disabled: false,
+                      text: S.of(context).delete,
+                      icon: Icons.delete,
+                    ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 300,
-                    color: Colors.green,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 300,
-                    color: Colors.blue,
-                  ),
-                  SizedBox(
-                    height: 20,
+                  const SizedBox(
+                    height: 12,
                   ),
                 ],
               ),
