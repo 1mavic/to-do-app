@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ya_todo_app/config/colors/app_colors.dart';
 
 /// card widget with child content and decoration
 class CardWidget extends StatelessWidget {
@@ -13,6 +14,7 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).extension<AppColors>()?.backSecondary,
       margin: const EdgeInsets.symmetric(
         horizontal: 8,
       ),

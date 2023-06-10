@@ -2,6 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ya_todo_app/core/domain/models/importance.dart';
+import 'package:ya_todo_app/core/domain/models/status.dart';
 part 'todo.freezed.dart';
 part 'todo.g.dart';
 
@@ -13,9 +14,9 @@ class Todo with _$Todo {
     /// id property. if null to do is not saved
     int? id,
     @Default('') String text,
-    @Default(Importance.no) importance,
+    @Default(Priority.no) Priority priority,
     DateTime? deadline,
-    @Default(false) done,
+    @Default(false) bool done,
   }) = _Todo;
 
   const Todo._();

@@ -1,26 +1,30 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
+import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
+import 'package:ya_todo_app/features/todo_list/domain/providers/filter_provider.dart';
+import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
+import 'package:ya_todo_app/features/todo_list/ui/widgets/filter_button.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
 /// widget with all to do list
-class TodoListWidget extends StatefulWidget {
+class TodoListWidget extends ConsumerStatefulWidget {
   /// widget with all to do list
   const TodoListWidget({
     super.key,
   });
 
   @override
-  State<TodoListWidget> createState() => _TodoListWidgetState();
+  ConsumerState<TodoListWidget> createState() => _TodoListWidgetState();
 }
 
-class _TodoListWidgetState extends State<TodoListWidget> {
+class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
   late ScrollController _controller;
   bool _expanded = false;
   @override
@@ -43,28 +47,16 @@ class _TodoListWidgetState extends State<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    const list = <String>[
-      // ignore: lines_longer_than_80_chars
-      'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj. flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
-      'asd asd asd asd',
-      'fsadf asdf',
-      // ignore: lines_longer_than_80_chars
-      'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
-      'asd asd asd asd',
-      'fsadf asdf',
-      // ignore: lines_longer_than_80_chars
-      'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
-      'asd asd asd asd',
-      'fsadf asdf',
-      // ignore: lines_longer_than_80_chars
-      'asd as a sdfsdf asdfasd  asd asd  asd ads a asldf lkasjdlf jasd jflk ajlksdj flajsdl falsj d fjasld jflkajsdlfj asd sd sld jfasjd ',
-      'asd asd asd asd',
-      'fsadf asdf',
-    ];
     return Scaffold(
       backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<dynamic>(
+              builder: (context) => const CreateTodoScreen(),
+            ),
+          );
+        },
         backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
         child: const Icon(Icons.add),
       ),
@@ -98,14 +90,12 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                             Theme.of(context).extension<AppColors>()?.primary,
                       ),
                     ),
-                    IconButton(
+                    FilterButton(
+                      filter: ref.watch(filterProvider),
                       onPressed: () {
-                        log('tap');
+                        ref.read(filterProvider.notifier).change();
                       },
-                      splashRadius: 0.1,
-                      icon: const Icon(Icons.remove_red_eye),
-                      color: Theme.of(context).extension<AppColors>()?.blue,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -131,25 +121,29 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                         const SizedBox(
                           height: 6,
                         ),
-                        Text(
-                          S.of(context).done(5),
-                          style: AppTextStyle.body.copyWith(
-                            color: Theme.of(context)
-                                .extension<AppColors>()
-                                ?.tertiary,
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 400),
+                          opacity: ref.watch(doneCounterProvider) > 0 ? 1 : 0,
+                          child: Text(
+                            S.of(context).done(
+                                  ref.watch(doneCounterProvider),
+                                ),
+                            style: AppTextStyle.body.copyWith(
+                              color: Theme.of(context)
+                                  .extension<AppColors>()
+                                  ?.tertiary,
+                            ),
                           ),
                         ),
                       ],
                     ),
                     const Spacer(),
-                    IconButton(
+                    FilterButton(
+                      filter: ref.watch(filterProvider),
                       onPressed: () {
-                        log('tap');
+                        ref.read(filterProvider.notifier).change();
                       },
-                      splashRadius: 0.1,
-                      icon: const Icon(Icons.remove_red_eye),
-                      color: Theme.of(context).extension<AppColors>()?.blue,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -157,29 +151,39 @@ class _TodoListWidgetState extends State<TodoListWidget> {
 
             // bottom: ,
           ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 10),
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 10),
             sliver: SliverToBoxAdapter(
               child: CardWidget(
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    if (index == list.length) {
-                      return const NewButtonWidget();
-                    }
-                    return ListTileWidget(
-                      text: list[index],
-                    );
-                  },
-                  itemCount: list.length + 1,
-                ),
+                child: _ListWidget(),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ListWidget extends ConsumerWidget {
+  const _ListWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final list = ref.watch(filteredListProvider);
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        if (index == list.length) {
+          return const NewButtonWidget();
+        }
+        return ListTileWidget(
+          todo: list[index],
+        );
+      },
+      itemCount: list.length + 1,
     );
   }
 }

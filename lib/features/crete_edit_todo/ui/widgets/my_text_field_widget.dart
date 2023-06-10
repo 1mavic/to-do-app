@@ -8,9 +8,14 @@ import 'package:ya_todo_app/generated/l10n.dart';
 
 class MyTextFieldWidget extends StatelessWidget {
   const MyTextFieldWidget({
+    required this.onChanged,
+    this.initialText,
+    this.validator,
     super.key,
   });
-
+  final void Function(String) onChanged;
+  final String? initialText;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -40,6 +45,9 @@ class MyTextFieldWidget extends StatelessWidget {
           hPadding,
         ),
         child: TextFormField(
+          initialValue: initialText,
+          onChanged: onChanged,
+          validator: validator,
           keyboardType: TextInputType.multiline,
           textCapitalization: TextCapitalization.sentences,
           minLines: 3,
@@ -57,6 +65,8 @@ class MyTextFieldWidget extends StatelessWidget {
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            focusedErrorBorder: InputBorder.none,
           ),
         ),
       ),

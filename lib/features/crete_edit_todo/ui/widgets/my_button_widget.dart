@@ -5,10 +5,10 @@ import 'package:ya_todo_app/config/styles/text_button_style.dart';
 class MyButtonWidget extends StatelessWidget {
   /// custom textbutton implementation
   const MyButtonWidget({
-    required this.disabled,
     required this.onPressed,
     required this.text,
     required this.type,
+    this.disabled = false,
     this.icon,
     super.key,
   });
@@ -16,19 +16,29 @@ class MyButtonWidget extends StatelessWidget {
   /// button with red style
   const MyButtonWidget.red({
     required this.text,
-    required this.disabled,
     required this.onPressed,
     this.type = TextButtonType.red,
+    this.disabled = false,
     super.key,
     this.icon,
+  });
+
+  /// button with big blue style
+  const MyButtonWidget.blueBig({
+    required this.text,
+    required this.onPressed,
+    this.type = TextButtonType.blueBig,
+    this.disabled = false,
+    this.icon,
+    super.key,
   });
 
   /// button with blue style
   const MyButtonWidget.blue({
     required this.text,
-    required this.disabled,
     required this.onPressed,
     this.type = TextButtonType.blue,
+    this.disabled = false,
     this.icon,
     super.key,
   });

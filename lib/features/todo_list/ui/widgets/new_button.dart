@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
 class NewButtonWidget extends StatefulWidget {
@@ -18,30 +19,41 @@ class NewButtonWidget extends StatefulWidget {
 class _NewButtonWidgetState extends State<NewButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: hPadding,
-        ),
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 15,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: hPadding,
+      ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<dynamic>(
+              builder: (context) => const CreateTodoScreen(),
             ),
-            Expanded(
-              child: Text(
-                S.of(context).newItem,
-                style: AppTextStyle.body.copyWith(
-                  color: Theme.of(context).extension<AppColors>()?.tertiary,
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 2,
+          ),
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 36,
+              ),
+              Expanded(
+                child: Text(
+                  S.of(context).newItem,
+                  style: AppTextStyle.body.copyWith(
+                    color: Theme.of(context).extension<AppColors>()?.tertiary,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 14,
-            ),
-          ],
+              const SizedBox(
+                width: 14,
+              ),
+            ],
+          ),
         ),
       ),
     );

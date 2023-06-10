@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/core/extensions/date_time_ext.dart';
-import 'package:ya_todo_app/features/crete_todo/ui/widgets/my_switch_widget.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_switch_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
 /// widget with picked to do date
@@ -12,16 +12,27 @@ class DatePickerWidget extends StatefulWidget {
   /// if swithcer is off date is null
   /// by default date is today
   const DatePickerWidget({
+    required this.onDatePick,
+    this.pickedDate,
     super.key,
   });
+  final DateTime? pickedDate;
+  final void Function(DateTime?) onDatePick;
 
   @override
   State<DatePickerWidget> createState() => _DatePickerWidgetState();
 }
 
 class _DatePickerWidgetState extends State<DatePickerWidget> {
-  bool _value = false;
-  DateTime _pickedDate = DateTime.now();
+  late bool _value;
+  DateTime _cachedDate = DateTime.now();
+
+  @override
+  void initState() {
+    _value = widget.pickedDate != null;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,7 +69,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                       onTap: () async {
                         final newDate = await showDatePicker(
                           context: context,
-                          initialDate: _pickedDate,
+                          initialDate: widget.pickedDate ?? DateTime.now(),
                           firstDate: DateTime.now(),
                           lastDate: DateTime.now().add(
                             const Duration(days: 365),
@@ -89,13 +100,15 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                           ),
                         );
                         if (newDate != null) {
-                          setState(() {
-                            _pickedDate = newDate;
-                          });
+                          _cachedDate = newDate;
                         }
+                        widget.onDatePick(
+                          newDate ?? _cachedDate,
+                        );
                       },
                       child: Text(
-                        _pickedDate.getFormattedTime(Intl.getCurrentLocale()),
+                        widget.pickedDate
+                            .getFormattedTime(Intl.getCurrentLocale()),
                         style: AppTextStyle.sub.copyWith(
                           color: Theme.of(context).extension<AppColors>()?.blue,
                         ),
@@ -109,6 +122,11 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           MySwitchWidget(
             value: _value,
             onChanged: (bool value) {
+              if (value) {
+                widget.onDatePick(_cachedDate);
+              } else {
+                widget.onDatePick(null);
+              }
               setState(() {
                 _value = value;
               });

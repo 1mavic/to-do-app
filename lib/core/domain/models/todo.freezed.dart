@@ -20,11 +20,12 @@ Todo _$TodoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Todo {
+  /// id property. if null to do is not saved
   int? get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
-  dynamic get importance => throw _privateConstructorUsedError;
+  Priority get priority => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
-  dynamic get done => throw _privateConstructorUsedError;
+  bool get done => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,11 +38,7 @@ abstract class $TodoCopyWith<$Res> {
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
   $Res call(
-      {int? id,
-      String text,
-      dynamic importance,
-      DateTime? deadline,
-      dynamic done});
+      {int? id, String text, Priority priority, DateTime? deadline, bool done});
 }
 
 /// @nodoc
@@ -59,9 +56,9 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
   $Res call({
     Object? id = freezed,
     Object? text = null,
-    Object? importance = freezed,
+    Object? priority = null,
     Object? deadline = freezed,
-    Object? done = freezed,
+    Object? done = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -72,18 +69,18 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      importance: freezed == importance
-          ? _value.importance
-          : importance // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as Priority,
       deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      done: freezed == done
+      done: null == done
           ? _value.done
           : done // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
     ) as $Val);
   }
 }
@@ -95,11 +92,7 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
-      String text,
-      dynamic importance,
-      DateTime? deadline,
-      dynamic done});
+      {int? id, String text, Priority priority, DateTime? deadline, bool done});
 }
 
 /// @nodoc
@@ -113,9 +106,9 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
   $Res call({
     Object? id = freezed,
     Object? text = null,
-    Object? importance = freezed,
+    Object? priority = null,
     Object? deadline = freezed,
-    Object? done = freezed,
+    Object? done = null,
   }) {
     return _then(_$_Todo(
       id: freezed == id
@@ -126,12 +119,18 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      importance: freezed == importance ? _value.importance! : importance,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as Priority,
       deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      done: freezed == done ? _value.done! : done,
+      done: null == done
+          ? _value.done
+          : done // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -142,13 +141,14 @@ class _$_Todo extends _Todo {
   const _$_Todo(
       {this.id,
       this.text = '',
-      this.importance = Importance.no,
+      this.priority = Priority.no,
       this.deadline,
       this.done = false})
       : super._();
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
 
+  /// id property. if null to do is not saved
   @override
   final int? id;
   @override
@@ -156,16 +156,16 @@ class _$_Todo extends _Todo {
   final String text;
   @override
   @JsonKey()
-  final dynamic importance;
+  final Priority priority;
   @override
   final DateTime? deadline;
   @override
   @JsonKey()
-  final dynamic done;
+  final bool done;
 
   @override
   String toString() {
-    return 'Todo(id: $id, text: $text, importance: $importance, deadline: $deadline, done: $done)';
+    return 'Todo(id: $id, text: $text, priority: $priority, deadline: $deadline, done: $done)';
   }
 
   @override
@@ -175,22 +175,17 @@ class _$_Todo extends _Todo {
             other is _$_Todo &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.text, text) || other.text == text) &&
-            const DeepCollectionEquality()
-                .equals(other.importance, importance) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
-            const DeepCollectionEquality().equals(other.done, done));
+            (identical(other.done, done) || other.done == done));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      text,
-      const DeepCollectionEquality().hash(importance),
-      deadline,
-      const DeepCollectionEquality().hash(done));
+  int get hashCode =>
+      Object.hash(runtimeType, id, text, priority, deadline, done);
 
   @JsonKey(ignore: true)
   @override
@@ -210,23 +205,25 @@ abstract class _Todo extends Todo {
   const factory _Todo(
       {final int? id,
       final String text,
-      final dynamic importance,
+      final Priority priority,
       final DateTime? deadline,
-      final dynamic done}) = _$_Todo;
+      final bool done}) = _$_Todo;
   const _Todo._() : super._();
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
   @override
+
+  /// id property. if null to do is not saved
   int? get id;
   @override
   String get text;
   @override
-  dynamic get importance;
+  Priority get priority;
   @override
   DateTime? get deadline;
   @override
-  dynamic get done;
+  bool get done;
   @override
   @JsonKey(ignore: true)
   _$$_TodoCopyWith<_$_Todo> get copyWith => throw _privateConstructorUsedError;

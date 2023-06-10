@@ -179,6 +179,46 @@ class S {
       args: [],
     );
   }
+
+  /// `дата`
+  String get date {
+    return Intl.message(
+      'дата',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вы хотите удалить запись?`
+  String get confirm {
+    return Intl.message(
+      'Вы хотите удалить запись?',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `УДАЛИТЬ`
+  String get remove {
+    return Intl.message(
+      'УДАЛИТЬ',
+      name: 'remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Поле не должно быть пустым`
+  String get emptyFieldError {
+    return Intl.message(
+      'Поле не должно быть пустым',
+      name: 'emptyFieldError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

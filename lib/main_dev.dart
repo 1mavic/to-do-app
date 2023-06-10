@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/themes/app_themes.dart';
-import 'package:ya_todo_app/features/crete_todo/ui/create_todo_screen.dart';
+import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
+import 'package:ya_todo_app/navigation/router_delegate.dart';
+import 'package:ya_todo_app/navigation/router_parser.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 /// application entry point
@@ -15,6 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final routerDelegate = AppRouterDelegate();
+    // final routerInformationParser = RouterInformationParser();
+
     return MaterialApp(
       localizationsDelegates: const [
         S.delegate,
@@ -25,7 +35,9 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       darkTheme: AppTheme.darkTheme,
       theme: AppTheme.lightTheme,
-      home: const CreateTodoScreen(),
+      home: const TodoListWidget(),
+      // routerDelegate: routerDelegate,
+      // routeInformationParser: routerInformationParser,
     );
   }
 }

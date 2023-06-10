@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
-/// to do importance enum
-enum Importance {
+/// to do priority enum
+enum Priority {
   no,
   low,
   hight;
 
-  const Importance();
+  const Priority();
 
-  /// get text string for importance
+  /// get text string for priority
   String text(BuildContext context) => switch (this) {
         no => S.of(context).no,
         low => S.of(context).low,
         hight => S.of(context).hight,
       };
 
-  /// get display text color for importance
+  /// get display text color for priority
   Color? textColor(BuildContext context) => switch (this) {
         no => Theme.of(context).extension<AppColors>()?.tertiary,
         low => Theme.of(context).extension<AppColors>()?.primary,

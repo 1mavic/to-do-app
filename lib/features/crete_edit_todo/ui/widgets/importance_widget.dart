@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
@@ -7,21 +8,18 @@ import 'package:ya_todo_app/generated/l10n.dart';
 
 /// widget for picking importance for to do
 /// by default value is Importance.no
-class ImportancePickerWidget extends StatefulWidget {
+class PriorityPickerWidget extends ConsumerWidget {
   /// widget for picking importance for to do. \n
   /// by default value is Importance.no
-  const ImportancePickerWidget({
+  const PriorityPickerWidget({
+    required this.priority,
+    required this.onChange,
     super.key,
   });
-
+  final Priority priority;
+  final void Function(Priority) onChange;
   @override
-  State<ImportancePickerWidget> createState() => _ImportancePickerWidgetState();
-}
-
-class _ImportancePickerWidgetState extends State<ImportancePickerWidget> {
-  Importance _picked = Importance.no;
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: hPadding,
@@ -38,40 +36,36 @@ class _ImportancePickerWidgetState extends State<ImportancePickerWidget> {
           const SizedBox(
             height: 4,
           ),
-          PopupMenuButton<Importance>(
-            initialValue: _picked,
-            onSelected: (Importance item) {
-              setState(() {
-                _picked = item;
-              });
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<Importance>>[
-              PopupMenuItem<Importance>(
-                value: Importance.no,
+          PopupMenuButton<Priority>(
+            initialValue: priority,
+            onSelected: onChange,
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<Priority>>[
+              PopupMenuItem<Priority>(
+                value: Priority.no,
                 textStyle: Theme.of(context).popupMenuTheme.textStyle?.copyWith(
                       color: Theme.of(context).extension<AppColors>()?.primary,
                     ),
-                child: Text(Importance.no.text(context)),
+                child: Text(Priority.no.text(context)),
               ),
-              PopupMenuItem<Importance>(
-                value: Importance.low,
+              PopupMenuItem<Priority>(
+                value: Priority.low,
                 textStyle: Theme.of(context).popupMenuTheme.textStyle?.copyWith(
                       color: Theme.of(context).extension<AppColors>()?.primary,
                     ),
-                child: Text(Importance.low.text(context)),
+                child: Text(Priority.low.text(context)),
               ),
-              PopupMenuItem<Importance>(
-                value: Importance.hight,
+              PopupMenuItem<Priority>(
+                value: Priority.hight,
                 textStyle: Theme.of(context).popupMenuTheme.textStyle?.copyWith(
                       color: Theme.of(context).extension<AppColors>()?.red,
                     ),
-                child: Text(Importance.hight.text(context)),
+                child: Text(Priority.hight.text(context)),
               ),
             ],
             child: Text(
-              _picked.text(context),
+              priority.text(context),
               style: AppTextStyle.sub.copyWith(
-                color: _picked.textColor(context),
+                color: priority.textColor(context),
               ),
             ),
           ),
