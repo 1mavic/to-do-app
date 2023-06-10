@@ -49,6 +49,96 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Мои дела`
+  String get myTodos {
+    return Intl.message(
+      'Мои дела',
+      name: 'myTodos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выполнено — {count}`
+  String done(Object count) {
+    return Intl.message(
+      'Выполнено — $count',
+      name: 'done',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Новое`
+  String get newItem {
+    return Intl.message(
+      'Новое',
+      name: 'newItem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сохранить`
+  String get save {
+    return Intl.message(
+      'Сохранить',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Важность`
+  String get importance {
+    return Intl.message(
+      'Важность',
+      name: 'importance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нет`
+  String get no {
+    return Intl.message(
+      'Нет',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Низкий`
+  String get low {
+    return Intl.message(
+      'Низкий',
+      name: 'low',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `!! Высокий`
+  String get hight {
+    return Intl.message(
+      '!! Высокий',
+      name: 'hight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сделать до`
+  String get doToDate {
+    return Intl.message(
+      'Сделать до',
+      name: 'doToDate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

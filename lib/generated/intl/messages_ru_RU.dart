@@ -20,6 +20,18 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru_RU';
 
+  static String m0(count) => "Выполнено — ${count}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "doToDate": MessageLookupByLibrary.simpleMessage("Сделать до"),
+        "done": m0,
+        "hight": MessageLookupByLibrary.simpleMessage("!! Высокий"),
+        "importance": MessageLookupByLibrary.simpleMessage("Важность"),
+        "low": MessageLookupByLibrary.simpleMessage("Низкий"),
+        "myTodos": MessageLookupByLibrary.simpleMessage("Мои дела"),
+        "newItem": MessageLookupByLibrary.simpleMessage("Новое"),
+        "no": MessageLookupByLibrary.simpleMessage("Нет"),
+        "save": MessageLookupByLibrary.simpleMessage("Сохранить")
+      };
 }
