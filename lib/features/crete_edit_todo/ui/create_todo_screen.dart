@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/core/widgets/dialogs/remove_alert_dialog_widget.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/domain/crud_todo_provider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/date_picker_widget.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/importance_widget.dart';
@@ -145,29 +146,10 @@ class CreateTodoScreen extends ConsumerWidget {
                       onPressed: () async {
                         final currentId = id;
                         if (currentId == null) return;
-
                         final res = await showDialog<bool>(
                               context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text(
-                                  S.of(context).confirm,
-                                  style: AppTextStyle.title,
-                                ),
-                                actions: [
-                                  MyButtonWidget.blue(
-                                    text: S.of(context).cancel,
-                                    onPressed: () {
-                                      Navigator.of(context).pop(false);
-                                    },
-                                  ),
-                                  MyButtonWidget.red(
-                                    text: S.of(context).remove,
-                                    onPressed: () {
-                                      Navigator.of(context).pop(true);
-                                    },
-                                  ),
-                                ],
-                              ),
+                              builder: (context) =>
+                                  const RemoveAlertDialogWidget(),
                             ) ??
                             false;
 

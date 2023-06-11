@@ -21,10 +21,15 @@ Todo _$TodoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Todo {
   /// id property. if null to do is not saved
+  @HiveField(0)
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get text => throw _privateConstructorUsedError;
+  @HiveField(2)
   Priority get priority => throw _privateConstructorUsedError;
+  @HiveField(3)
   DateTime? get deadline => throw _privateConstructorUsedError;
+  @HiveField(4)
   bool get done => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +43,11 @@ abstract class $TodoCopyWith<$Res> {
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
   $Res call(
-      {int? id, String text, Priority priority, DateTime? deadline, bool done});
+      {@HiveField(0) int? id,
+      @HiveField(1) String text,
+      @HiveField(2) Priority priority,
+      @HiveField(3) DateTime? deadline,
+      @HiveField(4) bool done});
 }
 
 /// @nodoc
@@ -92,7 +101,11 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id, String text, Priority priority, DateTime? deadline, bool done});
+      {@HiveField(0) int? id,
+      @HiveField(1) String text,
+      @HiveField(2) Priority priority,
+      @HiveField(3) DateTime? deadline,
+      @HiveField(4) bool done});
 }
 
 /// @nodoc
@@ -137,30 +150,36 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 1)
 class _$_Todo extends _Todo {
-  const _$_Todo(
-      {this.id,
-      this.text = '',
-      this.priority = Priority.no,
-      this.deadline,
-      this.done = false})
+  _$_Todo(
+      {@HiveField(0) this.id,
+      @HiveField(1) this.text = '',
+      @HiveField(2) this.priority = Priority.no,
+      @HiveField(3) this.deadline,
+      @HiveField(4) this.done = false})
       : super._();
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
 
   /// id property. if null to do is not saved
   @override
+  @HiveField(0)
   final int? id;
   @override
   @JsonKey()
+  @HiveField(1)
   final String text;
   @override
   @JsonKey()
+  @HiveField(2)
   final Priority priority;
   @override
+  @HiveField(3)
   final DateTime? deadline;
   @override
   @JsonKey()
+  @HiveField(4)
   final bool done;
 
   @override
@@ -202,27 +221,32 @@ class _$_Todo extends _Todo {
 }
 
 abstract class _Todo extends Todo {
-  const factory _Todo(
-      {final int? id,
-      final String text,
-      final Priority priority,
-      final DateTime? deadline,
-      final bool done}) = _$_Todo;
-  const _Todo._() : super._();
+  factory _Todo(
+      {@HiveField(0) final int? id,
+      @HiveField(1) final String text,
+      @HiveField(2) final Priority priority,
+      @HiveField(3) final DateTime? deadline,
+      @HiveField(4) final bool done}) = _$_Todo;
+  _Todo._() : super._();
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
   @override
 
   /// id property. if null to do is not saved
+  @HiveField(0)
   int? get id;
   @override
+  @HiveField(1)
   String get text;
   @override
+  @HiveField(2)
   Priority get priority;
   @override
+  @HiveField(3)
   DateTime? get deadline;
   @override
+  @HiveField(4)
   bool get done;
   @override
   @JsonKey(ignore: true)

@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
-import 'package:ya_todo_app/core/domain/models/importance.dart';
+import 'package:ya_todo_app/core/domain/models/priority.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 
 /// widget for picking importance for to do
