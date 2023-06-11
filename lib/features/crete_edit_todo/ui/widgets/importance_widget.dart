@@ -16,7 +16,11 @@ class PriorityPickerWidget extends ConsumerWidget {
     required this.onChange,
     super.key,
   });
+
+  /// current to do priority
   final Priority priority;
+
+  /// callback for priority changed
   final void Function(Priority) onChange;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

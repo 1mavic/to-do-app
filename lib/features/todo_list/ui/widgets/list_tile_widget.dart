@@ -15,11 +15,15 @@ import 'package:ya_todo_app/core/extensions/date_time_ext.dart';
 import 'package:ya_todo_app/core/widgets/dialogs/remove_alert_dialog_widget.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 
+/// list tile widget with to do
 class ListTileWidget extends ConsumerStatefulWidget {
+  /// list tile widget with to do
   const ListTileWidget({
     required this.todo,
     super.key,
   });
+
+  /// to do to display in list tile
   final Todo todo;
   @override
   ConsumerState<ListTileWidget> createState() => _ListTileWidgetState();
@@ -217,14 +221,5 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
         ),
       ),
     );
-  }
-}
-
-class BackWidget extends StatelessWidget {
-  const BackWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

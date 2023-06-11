@@ -16,7 +16,11 @@ class DatePickerWidget extends StatefulWidget {
     this.pickedDate,
     super.key,
   });
+
+  /// current picked date in to do
   final DateTime? pickedDate;
+
+  /// callback when date is changes or deleted
   final void Function(DateTime?) onDatePick;
 
   @override
