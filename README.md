@@ -12,7 +12,7 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
 ## apk file
-[download apk](https://github.com/flutterchina/dio)
+[download apk](https://drive.google.com/file/d/1ijm9Km8hxDz6eBlHV_Yg5Udf7hGnhUpw/view?usp=sharing)
 
 ## run
 
