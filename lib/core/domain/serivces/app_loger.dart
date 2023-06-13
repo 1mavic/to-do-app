@@ -43,4 +43,11 @@ provider did faile
     $obj,
 ''');
   }
+
+  /// log navigation event
+  void logNavigation(String nav) {
+    log('''
+    Navigation event: $nav
+''');
+  }
 }

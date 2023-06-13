@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/themes/app_themes.dart';
+import 'package:ya_todo_app/core/di/di_container.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
-import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
-import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
+import 'package:ya_todo_app/navigation/navigation.dart';
 
 void main() {
   unawaited(
@@ -19,10 +19,9 @@ void main() {
 
         final container = ProviderContainer(
           observers: [
-            const AppLogger(),
+            diContainer.appLogger,
           ],
         );
-
         final prov = container.read(localDbProvider);
         await prov.initialize();
         await SystemChrome.setPreferredOrientations([
@@ -55,10 +54,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final routerDelegate = AppRouterDelegate();
-    // final routerInformationParser = RouterInformationParser();
+    final routerDelegate = AppRouterDelegate(
+      diContainer.appLogger,
+    );
+    final routerInformationParser = AppRouteInformationParser();
 
-    return MaterialApp(
+    return MaterialApp.router(
+      routeInformationParser: routerInformationParser,
+      routerDelegate: routerDelegate,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -68,7 +71,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       darkTheme: AppTheme.darkTheme,
       theme: AppTheme.lightTheme,
-      home: const TodoListWidget(),
+      // home: const TodoListWidget(),
       // routerDelegate: routerDelegate,
       // routeInformationParser: routerInformationParser,
     );

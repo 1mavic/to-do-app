@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,7 +11,7 @@ import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/todo_list_provider.dart';
 import 'package:ya_todo_app/core/extensions/date_time_ext.dart';
 import 'package:ya_todo_app/core/widgets/dialogs/remove_alert_dialog_widget.dart';
-import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
+import 'package:ya_todo_app/navigation/navigation.dart';
 
 /// list tile widget with to do
 class ListTileWidget extends ConsumerStatefulWidget {
@@ -35,7 +33,6 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      onUpdate: (details) => log(details.progress.toString()),
       background: widget.todo.done
           ? ColoredBox(
               color: Theme.of(context).extension<AppColors>()!.green!,
@@ -165,48 +162,50 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                 _ => const SizedBox(width: 3),
               },
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.todo.text,
-                      style: AppTextStyle.body.copyWith(
-                        decoration: widget.todo.done
-                            ? TextDecoration.lineThrough
-                            : null,
-                        color:
-                            Theme.of(context).extension<AppColors>()?.primary,
-                      ),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (widget.todo.deadline != null) ...[
-                      const SizedBox(
-                        height: 4,
-                      ),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => context.navigateTo(
+                    RouteConfig.detail(widget.todo.id),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        widget.todo.deadline
-                            .getShortFormat(Intl.getCurrentLocale()),
-                        style: AppTextStyle.subHead.copyWith(
-                          color: Theme.of(context)
-                              .extension<AppColors>()
-                              ?.tertiary,
+                        widget.todo.text,
+                        style: AppTextStyle.body.copyWith(
+                          decoration: widget.todo.done
+                              ? TextDecoration.lineThrough
+                              : null,
+                          color:
+                              Theme.of(context).extension<AppColors>()?.primary,
                         ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                       ),
+                      if (widget.todo.deadline != null) ...[
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          widget.todo.deadline
+                              .getShortFormat(Intl.getCurrentLocale()),
+                          style: AppTextStyle.subHead.copyWith(
+                            color: Theme.of(context)
+                                .extension<AppColors>()
+                                ?.tertiary,
+                          ),
+                        ),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<dynamic>(
-                      builder: (context) => CreateTodoScreen(
-                        id: widget.todo.id,
-                      ),
-                    ),
-                  );
-                },
+                onTap: () => context.navigateTo(
+                  RouteConfig.detail(
+                    widget.todo.id,
+                  ),
+                ),
                 child: SizedBox.square(
                   dimension: 24,
                   child: Icon(

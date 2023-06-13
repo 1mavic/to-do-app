@@ -1,27 +1,21 @@
-// import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs
 
-// class RouteConfig {
-//   final int? id;
-//   final String? selectedItem;
-//   final String? selectedRoute;
-//   final bool show404;
+import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
+import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
 
-//   @override
-//   final GlobalKey<NavigatorState> navigatorKey;
+/// application route config
+class RouteConfig {
+  RouteConfig.list()
+      : pageType = TodoListWidget,
+        param = null,
+        isUnknown = false;
 
-//   // AppRouterDelegate() : navigatorKey = GlobalKey<NavigatorState>();
+  RouteConfig.detail(int? id)
+      : pageType = CreateTodoScreen,
+        param = (id ?? '').toString(),
+        isUnknown = false;
 
-// // Add initializers for your routes
-// // Sample initializer is:
-
-//   RouteConfig.list()
-//       : selectedRoute = null,
-//         selectedItem = null,
-//         show404 = false,
-//         id = null;
-
-// // Add getter for your routes
-// // Sample getter is:
-
-//   bool get isListPage => selectedItem == null && selectedRoute == null;
-// }
+  final Type? pageType;
+  final String? param;
+  final bool isUnknown;
+}

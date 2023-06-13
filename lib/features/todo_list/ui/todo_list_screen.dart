@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
-import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
@@ -12,6 +11,7 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/filter_button.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
+import 'package:ya_todo_app/navigation/navigation.dart';
 
 /// widget with all to do list
 class TodoListWidget extends ConsumerStatefulWidget {
@@ -51,11 +51,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
       backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<dynamic>(
-              builder: (context) => const CreateTodoScreen(),
-            ),
-          );
+          context.navigateTo(RouteConfig.detail(null));
         },
         backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
         child: const Icon(Icons.add),

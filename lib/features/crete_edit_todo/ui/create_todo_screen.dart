@@ -11,6 +11,7 @@ import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_button_widget
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_divider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_text_field_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
+import 'package:ya_todo_app/navigation/navigation.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -40,7 +41,7 @@ class CreateTodoScreen extends ConsumerWidget {
             titleSpacing: 8,
             leading: IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () async => context.pop(),
               splashRadius: 0.1,
               color: Theme.of(context).extension<AppColors>()?.primary,
             ),
@@ -55,7 +56,7 @@ class CreateTodoScreen extends ConsumerWidget {
                       } else {
                         ref.read(todoListProvider.notifier).edit(todo);
                       }
-                      Navigator.of(context).pop();
+                      context.pop();
                     }
                   },
                   disabled: todo.text.isEmpty,
@@ -156,7 +157,7 @@ class CreateTodoScreen extends ConsumerWidget {
 
                         if (res == true && context.mounted) {
                           ref.read(todoListProvider.notifier).remove(currentId);
-                          Navigator.of(context).pop();
+                          await context.pop();
                         }
                       },
                       disabled: id == null,
