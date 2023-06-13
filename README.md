@@ -12,7 +12,7 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
 ## apk file
-[download apk](https://drive.google.com/file/d/1ijm9Km8hxDz6eBlHV_Yg5Udf7hGnhUpw/view?usp=sharing)
+[download apk](https://drive.google.com/file/d/1SOF4OR7ZUprD64pUh2n5-Dv9KHLbhKJL/view?usp=sharing)
 
 ## run
 
@@ -28,6 +28,7 @@ sh build_apk_release.sh
 * light and dark themes
 * filter on list of todos. show all or only not completed
 * todo local storage
+* Navigator 2.0
 
 ### Libraries & Tools Used
 
