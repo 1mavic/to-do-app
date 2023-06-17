@@ -13,8 +13,8 @@
                 "URL=https://beta.mrdekk.ru/todobackend/",
                 "--dart-define",
                 "token=septifolious",
-                // "--flavor",
-                // "dev",
+                //"--flavor",
+                //"dev",
             ]
         }
     ]
