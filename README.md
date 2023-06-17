@@ -16,7 +16,7 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 
 ## run
 
-fvm flutter run --target lib/main_dev.dart
+fvm flutter run --target lib/main_dev.dart --dart-define URL=$url --dart-define token=$token
 
 ## build release
 
@@ -29,9 +29,11 @@ sh build_apk_release.sh
 * filter on list of todos. show all or only not completed
 * todo local storage
 * Navigator 2.0
+* api 
 
 ### Libraries & Tools Used
 
+* [dio](https://pub.dev/packages/dio) (network calls)
 * [freezed](https://pub.dev/packages/freezed) (data classes)
 * [hive_flutter](https://pub.dev/packages/hive_flutter) (local data provider)
 * [hooks_riverpod](https://pub.dev/packages/hooks_riverpod) (State Management)
