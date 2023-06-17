@@ -16,6 +16,8 @@ class ApiClient {
     List<Interceptor>? customInterceptors,
   }) {
     _dio.options.baseUrl = baseUrl;
+    _dio.options.receiveTimeout = const Duration(seconds: 3);
+    _dio.options.sendTimeout = const Duration(seconds: 3);
     _dio.options.headers = {
       'Authorization': 'Bearer $token',
       'ContentType': 'application/json',

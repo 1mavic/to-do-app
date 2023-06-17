@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
-import 'package:ya_todo_app/core/domain/providers/list_repository_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/todo_repository_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
@@ -82,13 +81,14 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                 //   data: body,
                 //   // options: Options(headers: api.options.headers),
                 // );
-                final res1 = await ref.read(listRepositoryProvider).getList();
-                log(res1.toString());
+                // final res1 =
+                //await ref.read(listRepositoryProvider).getList();
+                // log(res1.toString());
                 // final list = res.list;
                 // final result =
                 //await ref.read(listRepositoryProvider).updateList(list);
                 final res = await ref.read(todoRepositoryProvider).deleteTodo(
-                      '143fde4557-e8vb-12d3-aа56-426655440000',
+                      '123e4557-e89b-12d3-aа55-426655440000',
                     );
                 log(res.toString());
               } catch (e) {

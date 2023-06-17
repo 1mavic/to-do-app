@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
 import 'package:ya_todo_app/core/data/repository/revision_repository.dart';
+import 'package:ya_todo_app/core/domain/models/exceptions/api_exception.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 
 /// dio interceptor for retry call when getting unsynchronized data error
@@ -55,7 +56,7 @@ class RetryInterceptor extends QueuedInterceptor {
     return handler.next(err);
   }
 
-  Future<Response<dynamic>> _retry(
+  static Future<Response<dynamic>> _retry(
     Dio dio,
     RequestOptions requestOptions,
   ) async {
@@ -72,8 +73,14 @@ class RetryInterceptor extends QueuedInterceptor {
       );
 
       return res;
-    } catch (e) {
-      rethrow;
+    } catch (e, stackTrace) {
+      throw ApiException.defult(
+        'message',
+        'response',
+        400,
+        stackTrace.toString(),
+        DateTime.now(),
+      );
     }
   }
 }
