@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:ya_todo_app/core/data/local_data_source/local_data_source_i.dart';
@@ -10,51 +12,69 @@ final todoListProvider = StateNotifierProvider<_TodoListNotifier, List<Todo>>(
   (ref) => _TodoListNotifier(ref.watch(localDbProvider)),
 );
 
-abstract class TodoListNotifierI extends StateNotifier<List<Todo>> {
-  TodoListNotifierI(super.state);
+/// interface for to-do list notifiers
+abstract class TodoListNotifierI {
+  /// interface for to-do list notifiers
+  const TodoListNotifierI();
+
+  /// add new to do to list
+  Future<void> add(Todo todo);
+
+  /// remove to do from list
+  Future<void> remove(String? id);
+
+  /// change to do complete/not completed property
+  Future<void> toggle(String? id);
+
+  /// edit to do
+  Future<void> edit(Todo newTodo);
 }
 
-class _TodoListNotifier extends StateNotifier<List<Todo>> {
+class _TodoListNotifier extends StateNotifier<List<Todo>>
+    implements TodoListNotifierI {
   _TodoListNotifier(this._localDb) : super(_localDb.getData());
 
   final LocalDataSourceI _localDb;
 
-  /// add new to do to list
-  void add(Todo todo) {
+  @override
+  Future<void> add(Todo todo) async {
     state = [
       ...state,
       todo.copyWith(
         id: const Uuid().toString(),
       ),
     ];
-    _localDb.saveData(state);
+    unawaited(_localDb.saveData(state));
   }
 
   /// remove to do from list
-  void remove(String? id) {
+  @override
+  Future<void> remove(String? id) async {
     state = state
         .where(
           (element) => element.id != id,
         )
         .toList();
-    _localDb.saveData(state);
+    unawaited(_localDb.saveData(state));
   }
 
   /// change to do complete/not completed property
-  void toggle(String? id) {
+  @override
+  Future<void> toggle(String? id) async {
     state = [
       for (final todo in state)
         if (todo.id == id) todo.copyWith(done: !todo.done) else todo,
     ];
-    _localDb.saveData(state);
+    unawaited(_localDb.saveData(state));
   }
 
   /// edit to do
-  void edit(Todo newTodo) {
+  @override
+  Future<void> edit(Todo newTodo) async {
     state = [
       for (final todo in state)
         if (todo.id == newTodo.id) newTodo else todo,
     ];
-    _localDb.saveData(state);
+    unawaited(_localDb.saveData(state));
   }
 }

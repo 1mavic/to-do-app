@@ -3,9 +3,10 @@ import 'package:ya_todo_app/core/domain/models/todo.dart';
 part 'list_responce.freezed.dart';
 part 'list_responce.g.dart';
 
+/// model data for list to-do responce from api
 @freezed
 class ListResponce with _$ListResponce {
-  @JsonSerializable(explicitToJson: true)
+  /// model data for list to-do responce from api
   const factory ListResponce(
     String? status,
     List<Todo> list,
@@ -14,5 +15,7 @@ class ListResponce with _$ListResponce {
 
   const ListResponce._();
 
-  factory ListResponce.fromJson(Map<String, Object?> json) => _$ListResponceFromJson(json);
+  /// from json constructor
+  factory ListResponce.fromJson(Map<String, Object?> json) =>
+      _$ListResponceFromJson(json);
 }

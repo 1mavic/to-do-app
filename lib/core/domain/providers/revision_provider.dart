@@ -1,15 +1,21 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// provider for revision data
 final revisionProvider = Provider<DataRevision>((ref) => DataRevision());
 
+/// revision data class
 class DataRevision {
+  /// revision data class
   DataRevision();
 
-  int _revision = 0;
+  /// current local revision number
+  int revision = 0;
 
-  int get currentRevision => _revision;
+  // /// get last updated rivision number
+  // int get currentRevision => _revision;
 
-  void changeRevision(int newResion) {
-    _revision = newResion;
-  }
+  // /// set new  rivision number
+  // set currentRevision(int newResion) {
+  //   _revision = newResion;
+  // }
 }

@@ -82,7 +82,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
       },
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
-          ref.read(todoListProvider.notifier).toggle(widget.todo.id);
+          await ref.read(todoListProvider.notifier).toggle(widget.todo.id);
           return false;
         } else if (direction == DismissDirection.endToStart) {
           final res = await showDialog<bool>(
@@ -92,7 +92,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
               false;
 
           if (res == true) {
-            ref.read(todoListProvider.notifier).remove(widget.todo.id);
+            await ref.read(todoListProvider.notifier).remove(widget.todo.id);
             return true;
           }
 
@@ -122,14 +122,17 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                       borderRadius: BorderRadius.circular(3),
                     ),
                     activeColor: Colors.amber,
-                    fillColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+                    fillColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
                       return widget.todo.priority == Priority.important
                           ? Theme.of(context).extension<AppColors>()!.red!
                           : Theme.of(context).extension<AppColors>()!.green!;
                     }),
                     value: widget.todo.done,
                     onChanged: (_) {
-                      ref.read(todoListProvider.notifier).toggle(widget.todo.id);
+                      ref
+                          .read(todoListProvider.notifier)
+                          .toggle(widget.todo.id);
                     },
                   ),
                 ),
@@ -170,8 +173,11 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                       Text(
                         widget.todo.text,
                         style: AppTextStyle.body.copyWith(
-                          decoration: widget.todo.done ? TextDecoration.lineThrough : null,
-                          color: Theme.of(context).extension<AppColors>()?.primary,
+                          decoration: widget.todo.done
+                              ? TextDecoration.lineThrough
+                              : null,
+                          color:
+                              Theme.of(context).extension<AppColors>()?.primary,
                         ),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
@@ -181,11 +187,13 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                           height: 4,
                         ),
                         Text(
-                          // TODO(macegora): bang
-                          DateTime.fromMillisecondsSinceEpoch(widget.todo.deadline!)
-                              .getShortFormat(Intl.getCurrentLocale()),
+                          DateTime.fromMillisecondsSinceEpoch(
+                            widget.todo.deadline ?? 0,
+                          ).getShortFormat(Intl.getCurrentLocale()),
                           style: AppTextStyle.subHead.copyWith(
-                            color: Theme.of(context).extension<AppColors>()?.tertiary,
+                            color: Theme.of(context)
+                                .extension<AppColors>()
+                                ?.tertiary,
                           ),
                         ),
                       ],

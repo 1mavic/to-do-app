@@ -1,17 +1,12 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
-import 'package:ya_todo_app/core/data/api_client/api_client.dart';
-import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/list_repository_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
-import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/crud_todo_provider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/todo_repository_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filter_provider.dart';
@@ -43,7 +38,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients &&
+              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -64,7 +60,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
             heroTag: '3',
             key: UniqueKey(),
             onPressed: () {
-              ref.read(revisionProvider).changeRevision(17);
+              ref.read(revisionProvider).revision = 16;
             },
             backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
             child: const Icon(Icons.add),
@@ -89,8 +85,11 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                 final res1 = await ref.read(listRepositoryProvider).getList();
                 log(res1.toString());
                 // final list = res.list;
-                // final result = await ref.read(listRepositoryProvider).updateList(list);
-                final res = await ref.read(todoRepositoryProvider).deleteTodo("143fde4557-e8vb-12d3-aа56-426655440000");
+                // final result =
+                //await ref.read(listRepositoryProvider).updateList(list);
+                final res = await ref.read(todoRepositoryProvider).deleteTodo(
+                      '143fde4557-e8vb-12d3-aа56-426655440000',
+                    );
                 log(res.toString());
               } catch (e) {
                 log(e.toString());
@@ -118,7 +117,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
             elevation: 6,
             pinned: true,
             titleSpacing: 0,
-            backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+            backgroundColor:
+                Theme.of(context).extension<AppColors>()?.backPrimary,
             toolbarHeight: kToolBarHeight,
             collapsedHeight: kCollapsedHeight,
             expandedHeight: kExpandedHeight,
@@ -135,7 +135,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                     Text(
                       'Мои дела',
                       style: AppTextStyle.title.copyWith(
-                        color: Theme.of(context).extension<AppColors>()?.primary,
+                        color:
+                            Theme.of(context).extension<AppColors>()?.primary,
                       ),
                     ),
                     FilterButton(
@@ -161,7 +162,9 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                         Text(
                           S.of(context).myTodos,
                           style: AppTextStyle.largeTitle.copyWith(
-                            color: Theme.of(context).extension<AppColors>()?.primary,
+                            color: Theme.of(context)
+                                .extension<AppColors>()
+                                ?.primary,
                           ),
                         ),
                         const SizedBox(
@@ -175,7 +178,9 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                                   ref.watch(doneCounterProvider),
                                 ),
                             style: AppTextStyle.body.copyWith(
-                              color: Theme.of(context).extension<AppColors>()?.tertiary,
+                              color: Theme.of(context)
+                                  .extension<AppColors>()
+                                  ?.tertiary,
                             ),
                           ),
                         ),

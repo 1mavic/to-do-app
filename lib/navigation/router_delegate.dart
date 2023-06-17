@@ -49,7 +49,8 @@ class AppRouterDelegate extends RouterDelegate<RouteConfig>
   set canPop(bool canPop) => _canPop = canPop;
 
   @override
-  RouteConfig? get currentConfiguration => routeConfigs.isNotEmpty ? routeConfigs.last : null;
+  RouteConfig? get currentConfiguration =>
+      routeConfigs.isNotEmpty ? routeConfigs.last : null;
 
   @override
   Widget build(BuildContext context) {

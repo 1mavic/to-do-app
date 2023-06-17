@@ -16,6 +16,6 @@ _$_ListResponce _$$_ListResponceFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ListResponceToJson(_$_ListResponce instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'element': instance.todo.toJson(),
+      'element': instance.todo,
       'revision': instance.revision,
     };

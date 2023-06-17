@@ -133,8 +133,7 @@ class __$$_ListResponceCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$_ListResponce extends _ListResponce {
   const _$_ListResponce(
       this.status, @JsonKey(name: 'element') this.todo, this.revision)

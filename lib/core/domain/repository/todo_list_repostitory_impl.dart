@@ -2,10 +2,14 @@ import 'dart:convert';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
 import 'package:ya_todo_app/core/domain/models/responce_models/list_responce.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
-import 'package:ya_todo_app/core/domain/repository/todo_list_repositoryI.dart';
+import 'package:ya_todo_app/core/domain/repository/todo_list_repository_i.dart';
 
+/// list to-do repository implementation
 class ListRepositoryImpl implements ListRepositoryI {
-  const ListRepositoryImpl(this._apiClient);
+  /// list to-do repository implementation
+  const ListRepositoryImpl(
+    this._apiClient,
+  );
   final ApiClient _apiClient;
   @override
   Future<ListResponce> getList() async {

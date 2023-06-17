@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -5,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'api_exception.freezed.dart';
 part 'api_exception.g.dart';
 
+/// api exeption model
 @freezed
 class ApiException with _$ApiException implements Exception {
   const factory ApiException.defult(
@@ -61,7 +64,8 @@ class ApiException with _$ApiException implements Exception {
 
   const ApiException._();
 
-  factory ApiException.fromJson(Map<String, Object?> json) => _$ApiExceptionFromJson(json);
+  factory ApiException.fromJson(Map<String, Object?> json) =>
+      _$ApiExceptionFromJson(json);
 
   factory ApiException.byError(
     Object error,

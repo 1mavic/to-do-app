@@ -5,8 +5,12 @@ import 'package:ya_todo_app/core/domain/models/responce_models/todo_responce.dar
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/domain/repository/todo_repository.dart';
 
+/// TodoRepositoryI implemantation
 class TodoRepositoryImpl implements TodoRepositoryI {
-  const TodoRepositoryImpl(this._apiClient);
+  /// TodoRepositoryI implemantation
+  const TodoRepositoryImpl(
+    this._apiClient,
+  );
 
   final ApiClient _apiClient;
 

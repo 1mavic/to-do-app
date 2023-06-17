@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 
-class RevisionInterveptor extends Interceptor {
-  const RevisionInterveptor(
+/// dio intercapter for adding X-Last-Known-Revision header
+class RevisionInterceptor extends Interceptor {
+  /// dio intercapter for adding X-Last-Known-Revision header
+  const RevisionInterceptor(
     this._dataRevision,
   );
 
@@ -14,7 +16,7 @@ class RevisionInterveptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) {
     options.headers.addAll({
-      'X-Last-Known-Revision': _dataRevision.currentRevision,
+      'X-Last-Known-Revision': _dataRevision.revision,
     });
     return super.onRequest(options, handler);
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
@@ -35,7 +37,8 @@ class CreateTodoScreen extends ConsumerWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+            backgroundColor:
+                Theme.of(context).extension<AppColors>()?.backPrimary,
             automaticallyImplyLeading: false,
             titleSpacing: 8,
             leading: IconButton(
@@ -50,7 +53,7 @@ class CreateTodoScreen extends ConsumerWidget {
                 MyButtonWidget.blueBig(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      if (id == null) {
+                      if ((id ?? '').isEmpty) {
                         ref.read(todoListProvider.notifier).add(todo);
                       } else {
                         ref.read(todoListProvider.notifier).edit(todo);
@@ -78,11 +81,12 @@ class CreateTodoScreen extends ConsumerWidget {
                       key: _formKey,
                       child: MyTextFieldWidget(
                         initialText: todo.text,
-                        onChanged: (val) => ref.read(todoProvider(id).notifier).edit(
-                              ref.read(todoProvider(id)).copyWith(
-                                    text: val,
-                                  ),
-                            ),
+                        onChanged: (val) =>
+                            ref.read(todoProvider(id).notifier).edit(
+                                  ref.read(todoProvider(id)).copyWith(
+                                        text: val,
+                                      ),
+                                ),
                         validator: (value) {
                           if ((value ?? '').trim().isEmpty) {
                             return S.of(context).emptyFieldError;
@@ -128,10 +132,11 @@ class CreateTodoScreen extends ConsumerWidget {
                                   ),
                             );
                       },
-                      pickedDate: DateTime.fromMillisecondsSinceEpoch(
-                        // TODO(macegora): bang operator
-                        todo.deadline! * 1000,
-                      ),
+                      pickedDate: todo.deadline != null
+                          ? DateTime.fromMillisecondsSinceEpoch(
+                              todo.deadline ?? 0,
+                            )
+                          : null,
                     ),
                   ),
                   const SizedBox(
@@ -151,12 +156,17 @@ class CreateTodoScreen extends ConsumerWidget {
                         if (currentId == null) return;
                         final res = await showDialog<bool>(
                               context: context,
-                              builder: (context) => const RemoveAlertDialogWidget(),
+                              builder: (context) =>
+                                  const RemoveAlertDialogWidget(),
                             ) ??
                             false;
 
                         if (res == true && context.mounted) {
-                          ref.read(todoListProvider.notifier).remove(currentId);
+                          unawaited(
+                            ref
+                                .read(todoListProvider.notifier)
+                                .remove(currentId),
+                          );
                           await context.pop();
                         }
                       },

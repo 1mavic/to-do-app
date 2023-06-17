@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
-import 'package:ya_todo_app/core/di/di_container.dart';
 import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
 
 /// provider for apiclient
