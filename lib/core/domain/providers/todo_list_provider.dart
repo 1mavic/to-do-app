@@ -41,7 +41,7 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
     state = [
       ...state,
       todo.copyWith(
-        id: const Uuid().toString(),
+        id: const Uuid().v4(),
       ),
     ];
     unawaited(_localDb.saveData(state));

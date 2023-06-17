@@ -82,17 +82,21 @@ void main() {
 }
 
 /// application entry point
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   /// application entry point
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final routerDelegate = AppRouterDelegate(
-      diContainer.appLogger,
-    );
-    final routerInformationParser = AppRouteInformationParser();
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+  final routerDelegate = AppRouterDelegate(
+    diContainer.appLogger,
+  );
+  final routerInformationParser = AppRouteInformationParser();
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp.router(
       routeInformationParser: routerInformationParser,
       routerDelegate: routerDelegate,
