@@ -10,6 +10,10 @@ final todoListProvider = StateNotifierProvider<_TodoListNotifier, List<Todo>>(
   (ref) => _TodoListNotifier(ref.watch(localDbProvider)),
 );
 
+abstract class TodoListNotifierI extends StateNotifier<List<Todo>> {
+  TodoListNotifierI(super.state);
+}
+
 class _TodoListNotifier extends StateNotifier<List<Todo>> {
   _TodoListNotifier(this._localDb) : super(_localDb.getData());
 

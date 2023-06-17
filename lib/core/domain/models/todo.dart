@@ -31,7 +31,7 @@ class Todo extends HiveObject with _$Todo {
 
 // TODO(macegora): test todo
 final testTodo = Todo(
-  id: '123e4557-e89b-1243-aа56-4266a5446000',
+  id: '123e4557-e89b-1243-aа56-4266fd446000',
   text: "blablabla",
   priority: Priority.important,
   deadline: 1686982996,

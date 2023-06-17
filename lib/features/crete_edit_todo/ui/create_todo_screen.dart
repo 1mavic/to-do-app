@@ -4,7 +4,7 @@ import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/core/domain/providers/todo_list_provider.dart';
 import 'package:ya_todo_app/core/widgets/dialogs/remove_alert_dialog_widget.dart';
-import 'package:ya_todo_app/features/crete_edit_todo/domain/crud_todo_provider.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/crud_todo_provider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/date_picker_widget.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/importance_widget.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_button_widget.dart';

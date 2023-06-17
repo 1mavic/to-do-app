@@ -1,7 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 
 class RevisionInterveptor extends Interceptor {
-  const RevisionInterveptor();
+  const RevisionInterveptor(
+    this._dataRevision,
+  );
+
+  final DataRevision _dataRevision;
 
   @override
   void onRequest(
@@ -9,7 +14,7 @@ class RevisionInterveptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) {
     options.headers.addAll({
-      'X-Last-Known-Revision': 8,
+      'X-Last-Known-Revision': _dataRevision.currentRevision,
     });
     return super.onRequest(options, handler);
   }

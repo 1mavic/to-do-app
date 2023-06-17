@@ -9,13 +9,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/themes/app_themes.dart';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
+import 'package:ya_todo_app/core/data/api_client/queued_interceptor.dart';
+import 'package:ya_todo_app/core/data/api_client/revision_interceptor.dart';
 import 'package:ya_todo_app/core/data/local_data_source/hive_data_source.dart';
 import 'package:ya_todo_app/core/data/models/todo_data_model.dart';
+import 'package:ya_todo_app/core/data/repository/revision_repository.dart';
 import 'package:ya_todo_app/core/di/di_container.dart';
 import 'package:ya_todo_app/core/domain/models/priority.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/api_client_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
+import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
 
@@ -31,11 +35,26 @@ void main() {
         //   ],
         // );
         final localDb = HiveDataSource();
-        final apiClient = ApiClient();
+        final apiClient = ApiClient(
+          diContainer.appLogger,
+        );
         await localDb.initialize();
+
+        final dataRev = DataRevision();
         const baseUrl = String.fromEnvironment('URL');
         const token = String.fromEnvironment('token');
-        apiClient.init(baseUrl: baseUrl, token: token);
+        apiClient.init(
+          baseUrl: baseUrl,
+          token: token,
+          customInterceptors: [
+            RetryInterceptor(
+              RevisionRepository(apiClient),
+              dataRev,
+              apiClient,
+            ),
+            RevisionInterveptor(dataRev)
+          ],
+        );
         await SystemChrome.setPreferredOrientations([
           DeviceOrientation.portraitUp,
         ]);
@@ -47,6 +66,7 @@ void main() {
             overrides: [
               apiClientProvider.overrideWithValue(apiClient),
               localDbProvider.overrideWithValue(localDb),
+              revisionProvider.overrideWithValue(dataRev)
             ],
             child: const MyApp(),
           ),

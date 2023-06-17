@@ -20,9 +20,6 @@ class ListRepositoryImpl implements ListRepositoryI {
   @override
   Future<ListResponce> updateList(List<Todo> todos) async {
     final body = jsonEncode(ListResponce(null, todos, null).toJson());
-    _apiClient.client.options.headers.addAll({
-      'X-Last-Known-Revision': 8,
-    });
     final res = await _apiClient.client.patch<dynamic>(
       'list',
       data: body,

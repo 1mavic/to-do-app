@@ -10,6 +10,9 @@ import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/list_repository_provider.dart';
+import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/crud_todo_provider.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/todo_repository_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
@@ -58,6 +61,15 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
       floatingActionButton: Row(
         children: [
           FloatingActionButton(
+            heroTag: '3',
+            key: UniqueKey(),
+            onPressed: () {
+              ref.read(revisionProvider).changeRevision(17);
+            },
+            backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
+            child: const Icon(Icons.add),
+          ),
+          FloatingActionButton(
             key: UniqueKey(),
             heroTag: '2',
             onPressed: () async {
@@ -74,11 +86,12 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                 //   data: body,
                 //   // options: Options(headers: api.options.headers),
                 // );
-                final res = await ref.read(listRepositoryProvider).getList();
+                final res1 = await ref.read(listRepositoryProvider).getList();
+                log(res1.toString());
+                // final list = res.list;
+                // final result = await ref.read(listRepositoryProvider).updateList(list);
+                final res = await ref.read(todoRepositoryProvider).deleteTodo("143fde4557-e8vb-12d3-aа56-426655440000");
                 log(res.toString());
-                final list = res.list;
-                final result = await ref.read(listRepositoryProvider).updateList(list);
-                log(result.toString());
               } catch (e) {
                 log(e.toString());
               }

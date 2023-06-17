@@ -37,7 +37,7 @@ provider did faile
   }
 
   /// log custom data in console
-  void logCustomDate(Object obj) {
+  void logCustomData(Object obj) {
     log('''
     new log:
     $obj,

@@ -3,21 +3,31 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
 
 /// application api client
 class ApiClient {
   /// application api client
-  ApiClient();
+  ApiClient(this._appLogger);
+
+  final AppLogger _appLogger;
 
   /// initialyze api clietn with url and bearer token
-  void init({required String baseUrl, required String token}) {
+  void init({
+    required String baseUrl,
+    required String token,
+    List<Interceptor>? customInterceptors,
+  }) {
     _dio.options.baseUrl = baseUrl;
     _dio.options.headers = {
       'Authorization': 'Bearer $token',
       'ContentType': 'application/json',
     };
-    _dio.interceptors.add(
-      const _CustomInterceptors(),
+    _dio.interceptors.addAll(
+      [
+        ...customInterceptors ?? <Interceptor>[],
+        _CustomInterceptors(_appLogger),
+      ],
     );
   }
 
@@ -28,12 +38,14 @@ class ApiClient {
 }
 
 class _CustomInterceptors extends Interceptor {
-  const _CustomInterceptors();
+  const _CustomInterceptors(this._appLogger);
+
+  final AppLogger _appLogger;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     if (kDebugMode) {
-      log(
+      _appLogger.logCustomData(
         '''REQUEST[${options.data}] => PATH: ${options.path}''',
       );
     }
@@ -46,7 +58,7 @@ class _CustomInterceptors extends Interceptor {
     ResponseInterceptorHandler handler,
   ) {
     if (kDebugMode) {
-      log(
+      _appLogger.logCustomData(
         '''RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}''',
       );
     }
@@ -56,7 +68,7 @@ class _CustomInterceptors extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    log(
+    _appLogger.logCustomData(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
 
@@ -64,11 +76,11 @@ class _CustomInterceptors extends Interceptor {
   }
 }
 
-/// Must be top-level function
-Object _parseAndDecode(String response) {
-  try {
-    return jsonDecode(response) as Object;
-  } catch (e) {
-    rethrow;
-  }
-}
+// TODO(macegora): add parse in compute?
+// Object _parseAndDecode(String response) {
+//   try {
+//     return jsonDecode(response) as Object;
+//   } catch (e) {
+//     rethrow;
+//   }
+// }
