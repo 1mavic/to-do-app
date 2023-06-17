@@ -14,14 +14,28 @@ class Todo extends HiveObject with _$Todo {
   @HiveType(typeId: 1)
   factory Todo({
     /// id property. if null to do is not saved
-    @HiveField(0) int? id,
+    @HiveField(0) String? id,
     @HiveField(1) @Default('') String text,
-    @HiveField(2) @Default(Priority.no) Priority priority,
-    @HiveField(3) DateTime? deadline,
+    @HiveField(2) @JsonKey(name: 'importance') @Default(Priority.basic) Priority priority,
+    @HiveField(3) int? deadline,
     @HiveField(4) @Default(false) bool done,
+    @JsonKey(name: 'created_at') @HiveField(5) int? createdAt,
+    @JsonKey(name: 'changed_at') @HiveField(6) int? changedAt,
+    @JsonKey(name: 'last_updated_by') @HiveField(7) @Default('local_user') String updatedBy,
   }) = _Todo;
 
   Todo._();
 
   factory Todo.fromJson(Map<String, Object?> json) => _$TodoFromJson(json);
 }
+
+// TODO(macegora): test todo
+final testTodo = Todo(
+  id: '123e4557-e89b-1243-aа56-4266a5446000',
+  text: "blablabla",
+  priority: Priority.important,
+  deadline: 1686982996,
+  done: true,
+  createdAt: 1686982996,
+  changedAt: 1686982996,
+);

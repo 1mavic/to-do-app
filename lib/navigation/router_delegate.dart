@@ -49,8 +49,7 @@ class AppRouterDelegate extends RouterDelegate<RouteConfig>
   set canPop(bool canPop) => _canPop = canPop;
 
   @override
-  RouteConfig? get currentConfiguration =>
-      routeConfigs.isNotEmpty ? routeConfigs.last : null;
+  RouteConfig? get currentConfiguration => routeConfigs.isNotEmpty ? routeConfigs.last : null;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +129,7 @@ class PageBuilder {
         return MaterialPage(
           key: ValueKey('detail ${path.param}'),
           child: CreateTodoScreen(
-            id: int.tryParse(path.param ?? ''),
+            id: path.param ?? '',
           ),
         );
 

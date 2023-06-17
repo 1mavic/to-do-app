@@ -14,26 +14,26 @@ class PriorityAdapter extends TypeAdapter<Priority> {
   Priority read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return Priority.no;
+        return Priority.basic;
       case 1:
         return Priority.low;
       case 2:
-        return Priority.hight;
+        return Priority.important;
       default:
-        return Priority.no;
+        return Priority.basic;
     }
   }
 
   @override
   void write(BinaryWriter writer, Priority obj) {
     switch (obj) {
-      case Priority.no:
+      case Priority.basic:
         writer.writeByte(0);
         break;
       case Priority.low:
         writer.writeByte(1);
         break;
-      case Priority.hight:
+      case Priority.important:
         writer.writeByte(2);
         break;
     }

@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
 import 'package:ya_todo_app/core/data/local_data_source/local_data_source_i.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
@@ -19,14 +20,14 @@ class _TodoListNotifier extends StateNotifier<List<Todo>> {
     state = [
       ...state,
       todo.copyWith(
-        id: state.isEmpty ? 0 : (state.last.id ?? 0) + 1,
+        id: const Uuid().toString(),
       ),
     ];
     _localDb.saveData(state);
   }
 
   /// remove to do from list
-  void remove(int? id) {
+  void remove(String? id) {
     state = state
         .where(
           (element) => element.id != id,
@@ -36,7 +37,7 @@ class _TodoListNotifier extends StateNotifier<List<Todo>> {
   }
 
   /// change to do complete/not completed property
-  void toggle(int? id) {
+  void toggle(String? id) {
     state = [
       for (final todo in state)
         if (todo.id == id) todo.copyWith(done: !todo.done) else todo,

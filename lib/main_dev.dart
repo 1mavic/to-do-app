@@ -1,12 +1,20 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/themes/app_themes.dart';
+import 'package:ya_todo_app/core/data/api_client/api_client.dart';
+import 'package:ya_todo_app/core/data/local_data_source/hive_data_source.dart';
+import 'package:ya_todo_app/core/data/models/todo_data_model.dart';
 import 'package:ya_todo_app/core/di/di_container.dart';
+import 'package:ya_todo_app/core/domain/models/priority.dart';
+import 'package:ya_todo_app/core/domain/models/todo.dart';
+import 'package:ya_todo_app/core/domain/providers/api_client_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
@@ -16,20 +24,30 @@ void main() {
     runZonedGuarded(
       () async {
         WidgetsFlutterBinding.ensureInitialized();
-
-        final container = ProviderContainer(
-          observers: [
-            diContainer.appLogger,
-          ],
-        );
-        final prov = container.read(localDbProvider);
-        await prov.initialize();
+        HttpOverrides.global = MyHttpOverrides();
+        // final container = ProviderContainer(
+        //   observers: [
+        //     diContainer.appLogger,
+        //   ],
+        // );
+        final localDb = HiveDataSource();
+        final apiClient = ApiClient();
+        await localDb.initialize();
+        const baseUrl = String.fromEnvironment('URL');
+        const token = String.fromEnvironment('token');
+        apiClient.init(baseUrl: baseUrl, token: token);
         await SystemChrome.setPreferredOrientations([
           DeviceOrientation.portraitUp,
         ]);
         runApp(
-          UncontrolledProviderScope(
-            container: container,
+          ProviderScope(
+            observers: [
+              diContainer.appLogger,
+            ],
+            overrides: [
+              apiClientProvider.overrideWithValue(apiClient),
+              localDbProvider.overrideWithValue(localDb),
+            ],
             child: const MyApp(),
           ),
         );
@@ -75,5 +93,13 @@ class MyApp extends StatelessWidget {
       // routerDelegate: routerDelegate,
       // routeInformationParser: routerInformationParser,
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }

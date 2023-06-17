@@ -24,7 +24,7 @@ class CreateTodoScreen extends ConsumerWidget {
   });
 
   /// to do id to display. If null, creating new to do
-  final int? id;
+  final String? id;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(id));
@@ -35,8 +35,7 @@ class CreateTodoScreen extends ConsumerWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor:
-                Theme.of(context).extension<AppColors>()?.backPrimary,
+            backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
             automaticallyImplyLeading: false,
             titleSpacing: 8,
             leading: IconButton(
@@ -79,12 +78,11 @@ class CreateTodoScreen extends ConsumerWidget {
                       key: _formKey,
                       child: MyTextFieldWidget(
                         initialText: todo.text,
-                        onChanged: (val) =>
-                            ref.read(todoProvider(id).notifier).edit(
-                                  ref.read(todoProvider(id)).copyWith(
-                                        text: val,
-                                      ),
-                                ),
+                        onChanged: (val) => ref.read(todoProvider(id).notifier).edit(
+                              ref.read(todoProvider(id)).copyWith(
+                                    text: val,
+                                  ),
+                            ),
                         validator: (value) {
                           if ((value ?? '').trim().isEmpty) {
                             return S.of(context).emptyFieldError;
@@ -126,11 +124,14 @@ class CreateTodoScreen extends ConsumerWidget {
                       onDatePick: (newDate) {
                         ref.read(todoProvider(id).notifier).edit(
                               ref.read(todoProvider(id)).copyWith(
-                                    deadline: newDate,
+                                    deadline: newDate?.millisecondsSinceEpoch,
                                   ),
                             );
                       },
-                      pickedDate: todo.deadline,
+                      pickedDate: DateTime.fromMillisecondsSinceEpoch(
+                        // TODO(macegora): bang operator
+                        todo.deadline! * 1000,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -150,8 +151,7 @@ class CreateTodoScreen extends ConsumerWidget {
                         if (currentId == null) return;
                         final res = await showDialog<bool>(
                               context: context,
-                              builder: (context) =>
-                                  const RemoveAlertDialogWidget(),
+                              builder: (context) => const RemoveAlertDialogWidget(),
                             ) ??
                             false;
 

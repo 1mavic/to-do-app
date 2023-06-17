@@ -100,7 +100,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
         }
         return false;
       },
-      key: ValueKey<int?>(widget.todo.id),
+      key: ValueKey<String?>(widget.todo.id),
       child: ColoredBox(
         color: Theme.of(context).extension<AppColors>()!.backSecondary!,
         child: Padding(
@@ -122,17 +122,14 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                       borderRadius: BorderRadius.circular(3),
                     ),
                     activeColor: Colors.amber,
-                    fillColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                      return widget.todo.priority == Priority.hight
+                    fillColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+                      return widget.todo.priority == Priority.important
                           ? Theme.of(context).extension<AppColors>()!.red!
                           : Theme.of(context).extension<AppColors>()!.green!;
                     }),
                     value: widget.todo.done,
                     onChanged: (_) {
-                      ref
-                          .read(todoListProvider.notifier)
-                          .toggle(widget.todo.id);
+                      ref.read(todoListProvider.notifier).toggle(widget.todo.id);
                     },
                   ),
                 ),
@@ -141,7 +138,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                 width: 15,
               ),
               switch (widget.todo.priority) {
-                Priority.no => const SizedBox.shrink(),
+                Priority.basic => const SizedBox.shrink(),
                 Priority.low => SvgPicture.asset(
                     AppIcons.lowPriority,
                     colorFilter: ColorFilter.mode(
@@ -149,7 +146,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                       BlendMode.srcIn,
                     ),
                   ),
-                Priority.hight => SvgPicture.asset(
+                Priority.important => SvgPicture.asset(
                     AppIcons.highPriority,
                     colorFilter: ColorFilter.mode(
                       Theme.of(context).extension<AppColors>()!.red!,
@@ -158,7 +155,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                   ),
               },
               switch (widget.todo.priority) {
-                Priority.no => const SizedBox.shrink(),
+                Priority.basic => const SizedBox.shrink(),
                 _ => const SizedBox(width: 3),
               },
               Expanded(
@@ -173,11 +170,8 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                       Text(
                         widget.todo.text,
                         style: AppTextStyle.body.copyWith(
-                          decoration: widget.todo.done
-                              ? TextDecoration.lineThrough
-                              : null,
-                          color:
-                              Theme.of(context).extension<AppColors>()?.primary,
+                          decoration: widget.todo.done ? TextDecoration.lineThrough : null,
+                          color: Theme.of(context).extension<AppColors>()?.primary,
                         ),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
@@ -187,12 +181,11 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                           height: 4,
                         ),
                         Text(
-                          widget.todo.deadline
+                          // TODO(macegora): bang
+                          DateTime.fromMillisecondsSinceEpoch(widget.todo.deadline!)
                               .getShortFormat(Intl.getCurrentLocale()),
                           style: AppTextStyle.subHead.copyWith(
-                            color: Theme.of(context)
-                                .extension<AppColors>()
-                                ?.tertiary,
+                            color: Theme.of(context).extension<AppColors>()?.tertiary,
                           ),
                         ),
                       ],

@@ -10,9 +10,9 @@ class RouteConfig {
         param = null,
         isUnknown = false;
 
-  RouteConfig.detail(int? id)
+  RouteConfig.detail(String? id)
       : pageType = CreateTodoScreen,
-        param = (id ?? '').toString(),
+        param = id ?? '',
         isUnknown = false;
 
   final Type? pageType;
