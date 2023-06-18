@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/core/domain/providers/list_repository_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
-import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/todo_repository_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
@@ -81,16 +81,15 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                 //   data: body,
                 //   // options: Options(headers: api.options.headers),
                 // );
-                // final res1 =
-                //await ref.read(listRepositoryProvider).getList();
+                final res1 = await ref.read(listRepositoryProvider).getList();
                 // log(res1.toString());
                 // final list = res.list;
                 // final result =
                 //await ref.read(listRepositoryProvider).updateList(list);
-                final res = await ref.read(todoRepositoryProvider).deleteTodo(
-                      '123e4557-e89b-12d3-aа55-426655440000',
-                    );
-                log(res.toString());
+                // final res = await ref.read(todoRepositoryProvider).deleteTodo(
+                //       '123e4557-e89b-1243-aа56-4266a5446000',
+                //     );
+                // log(res.toString());
               } catch (e) {
                 log(e.toString());
               }

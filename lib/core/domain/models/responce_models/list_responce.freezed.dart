@@ -20,8 +20,10 @@ ListResponce _$ListResponceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ListResponce {
+  @JsonKey(includeIfNull: false)
   String? get status => throw _privateConstructorUsedError;
   List<Todo> get list => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   int? get revision => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +38,10 @@ abstract class $ListResponceCopyWith<$Res> {
           ListResponce value, $Res Function(ListResponce) then) =
       _$ListResponceCopyWithImpl<$Res, ListResponce>;
   @useResult
-  $Res call({String? status, List<Todo> list, int? revision});
+  $Res call(
+      {@JsonKey(includeIfNull: false) String? status,
+      List<Todo> list,
+      @JsonKey(includeIfNull: false) int? revision});
 }
 
 /// @nodoc
@@ -81,7 +86,10 @@ abstract class _$$_ListResponceCopyWith<$Res>
       __$$_ListResponceCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? status, List<Todo> list, int? revision});
+  $Res call(
+      {@JsonKey(includeIfNull: false) String? status,
+      List<Todo> list,
+      @JsonKey(includeIfNull: false) int? revision});
 }
 
 /// @nodoc
@@ -119,7 +127,8 @@ class __$$_ListResponceCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ListResponce extends _ListResponce {
-  const _$_ListResponce(this.status, final List<Todo> list, this.revision)
+  const _$_ListResponce(@JsonKey(includeIfNull: false) this.status,
+      final List<Todo> list, @JsonKey(includeIfNull: false) this.revision)
       : _list = list,
         super._();
 
@@ -127,6 +136,7 @@ class _$_ListResponce extends _ListResponce {
       _$$_ListResponceFromJson(json);
 
   @override
+  @JsonKey(includeIfNull: false)
   final String? status;
   final List<Todo> _list;
   @override
@@ -137,6 +147,7 @@ class _$_ListResponce extends _ListResponce {
   }
 
   @override
+  @JsonKey(includeIfNull: false)
   final int? revision;
 
   @override
@@ -176,18 +187,21 @@ class _$_ListResponce extends _ListResponce {
 
 abstract class _ListResponce extends ListResponce {
   const factory _ListResponce(
-          final String? status, final List<Todo> list, final int? revision) =
-      _$_ListResponce;
+      @JsonKey(includeIfNull: false) final String? status,
+      final List<Todo> list,
+      @JsonKey(includeIfNull: false) final int? revision) = _$_ListResponce;
   const _ListResponce._() : super._();
 
   factory _ListResponce.fromJson(Map<String, dynamic> json) =
       _$_ListResponce.fromJson;
 
   @override
+  @JsonKey(includeIfNull: false)
   String? get status;
   @override
   List<Todo> get list;
   @override
+  @JsonKey(includeIfNull: false)
   int? get revision;
   @override
   @JsonKey(ignore: true)

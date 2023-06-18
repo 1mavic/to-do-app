@@ -3,9 +3,15 @@ import 'package:ya_todo_app/core/domain/models/todo.dart';
 
 /// interface for to-do list api calls
 abstract class ListRepositoryI {
+  /// stream with responces
+  Stream<ListResponce> get responseStream;
+
   /// fetch list of all to-dos
-  Future<ListResponce> getList();
+  Future<void> getList();
 
   /// udate list of to-do
-  Future<ListResponce> updateList(List<Todo> todos);
+  Future<void> updateList(List<Todo> todos);
+
+  /// dispose repository
+  void dispose();
 }

@@ -8,9 +8,9 @@ part 'list_responce.g.dart';
 class ListResponce with _$ListResponce {
   /// model data for list to-do responce from api
   const factory ListResponce(
-    String? status,
+    @JsonKey(includeIfNull: false) String? status,
     List<Todo> list,
-    int? revision,
+    @JsonKey(includeIfNull: false) int? revision,
   ) = _ListResponce;
 
   const ListResponce._();

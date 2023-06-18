@@ -68,9 +68,18 @@ class ApiException with _$ApiException implements Exception {
       _$ApiExceptionFromJson(json);
 
   factory ApiException.byError(
-    Object error,
+    Object? error,
     StackTrace stackTrace,
   ) {
+    if (error == null) {
+      return ApiException.defult(
+        'unknonw error',
+        null,
+        null,
+        stackTrace.toString(),
+        DateTime.now(),
+      );
+    }
     if (error is SocketException) {
       return ApiException.noInternet(
         'no internet conection',
