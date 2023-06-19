@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
@@ -28,6 +30,7 @@ class ApiClient {
         _CustomInterceptors(_appLogger),
       ],
     );
+    _dio.transformer = BackgroundTransformer()..jsonDecodeCallback = _parseJson;
   }
 
   final Dio _dio = Dio();
@@ -75,11 +78,10 @@ class _CustomInterceptors extends Interceptor {
   }
 }
 
-// TODO(macegora): add parse in compute?
-// Object _parseAndDecode(String response) {
-//   try {
-//     return jsonDecode(response) as Object;
-//   } catch (e) {
-//     rethrow;
-//   }
-// }
+Map<String, dynamic> _parseAndDecode(String response) {
+  return jsonDecode(response) as Map<String, dynamic>;
+}
+
+Future<Map<String, dynamic>> _parseJson(String text) {
+  return compute(_parseAndDecode, text);
+}

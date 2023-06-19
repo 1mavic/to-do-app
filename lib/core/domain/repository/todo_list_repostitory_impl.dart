@@ -5,6 +5,7 @@ import 'package:ya_todo_app/core/domain/models/exceptions/api_exception.dart';
 import 'package:ya_todo_app/core/domain/models/responce_models/list_responce.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
+import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
 import 'package:ya_todo_app/core/domain/repository/todo_list_repository_i.dart';
 
 // TODO(macegora): when change getted revision number from server
@@ -47,7 +48,10 @@ class ListRepositoryImpl implements ListRepositoryI {
   }
 
   @override
-  Future<void> updateList(List<Todo> todos) async {
+  Future<void> updateList({
+    required List<Todo> todos,
+    bool afterSync = false,
+  }) async {
     try {
       final body = jsonEncode(ListResponce(null, todos, null).toJson());
       final result = await _apiClient.client.patch<dynamic>(
@@ -61,7 +65,9 @@ class ListRepositoryImpl implements ListRepositoryI {
       if (rev != null) {
         _dataRevision.revision = rev;
       }
-      _controller.add(data);
+      if (!afterSync) {
+        _controller.add(data);
+      }
     } catch (e, stackTrace) {
       final exc = ApiException.byError(e, stackTrace);
       _controller.addError(exc);

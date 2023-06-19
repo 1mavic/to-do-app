@@ -80,7 +80,12 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
       ),
     ];
     unawaited(_localDb.saveData(state));
-    unawaited(_listRepositoryI.updateList(state));
+    unawaited(
+      _listRepositoryI.updateList(
+        todos: state,
+        afterSync: true,
+      ),
+    );
   }
 
   /// remove to do from list
@@ -92,7 +97,12 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
         )
         .toList();
     unawaited(_localDb.saveData(state));
-    unawaited(_listRepositoryI.updateList(state));
+    unawaited(
+      _listRepositoryI.updateList(
+        todos: state,
+        afterSync: true,
+      ),
+    );
   }
 
   /// change to do complete/not completed property
@@ -109,7 +119,12 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
           todo,
     ];
     unawaited(_localDb.saveData(state));
-    unawaited(_listRepositoryI.updateList(state));
+    unawaited(
+      _listRepositoryI.updateList(
+        todos: state,
+        afterSync: true,
+      ),
+    );
   }
 
   /// edit to do
@@ -125,11 +140,40 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
           todo,
     ];
     unawaited(_localDb.saveData(state));
-    unawaited(_listRepositoryI.updateList(state));
+    unawaited(
+      _listRepositoryI.updateList(
+        todos: state,
+      ),
+    );
   }
 
+  // TODO(macegora): better merge of lists?
   void _dataFromApi(ListResponce response) {
-    log('new data from api: $response');
+    if (response.list.isEmpty) return;
+    final ids = response.list.map((e) => e.id).toList();
+    final addList =
+        state.where((element) => !ids.contains(element.id)).toList();
+    for (final apiTodo in response.list) {
+      final index = state.indexWhere((localTodo) => localTodo.id == apiTodo.id);
+      if (index != -1) {
+        if ((state[index].changedAt ?? 0) > (apiTodo.changedAt ?? 0)) {
+          addList.add(state[index]);
+        } else {
+          addList.add(apiTodo);
+        }
+      } else {
+        addList.add(apiTodo);
+      }
+    }
+    addList.sort((a, b) => (a.createdAt ?? 0).compareTo(b.createdAt ?? 0));
+    state = addList;
+    unawaited(_localDb.saveData(state));
+    unawaited(
+      _listRepositoryI.updateList(
+        todos: state,
+        afterSync: true,
+      ),
+    );
   }
 
   void _errorFromApi(ApiException exc) {

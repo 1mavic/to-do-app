@@ -10,7 +10,7 @@ abstract class ListRepositoryI {
   Future<void> getList();
 
   /// udate list of to-do
-  Future<void> updateList(List<Todo> todos);
+  Future<void> updateList({required List<Todo> todos, bool afterSync = false});
 
   /// dispose repository
   void dispose();

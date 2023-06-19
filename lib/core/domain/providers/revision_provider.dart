@@ -10,12 +10,4 @@ class DataRevision {
 
   /// current local revision number
   int revision = 0;
-
-  // /// get last updated rivision number
-  // int get currentRevision => _revision;
-
-  // /// set new  rivision number
-  // set currentRevision(int newResion) {
-  //   _revision = newResion;
-  // }
 }

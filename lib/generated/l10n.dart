@@ -219,6 +219,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Синхронизируем данные...`
+  String get syncData {
+    return Intl.message(
+      'Синхронизируем данные...',
+      name: 'syncData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

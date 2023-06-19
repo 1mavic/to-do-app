@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("Нет"),
         "ready": MessageLookupByLibrary.simpleMessage("ГОТОВО"),
         "remove": MessageLookupByLibrary.simpleMessage("УДАЛИТЬ"),
-        "save": MessageLookupByLibrary.simpleMessage("Сохранить")
+        "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
+        "syncData":
+            MessageLookupByLibrary.simpleMessage("Синхронизируем данные...")
       };
 }
