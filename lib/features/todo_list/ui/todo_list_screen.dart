@@ -71,110 +71,104 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
         backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
         child: const Icon(Icons.add),
       ),
-      body: Stack(
-        children: [
-          CustomScrollView(
-            controller: _controller,
-            slivers: [
-              SliverAppBar(
-                centerTitle: false,
-                elevation: 6,
-                pinned: true,
-                titleSpacing: 0,
-                backgroundColor:
-                    Theme.of(context).extension<AppColors>()?.backPrimary,
-                toolbarHeight: kToolBarHeight,
-                collapsedHeight: kCollapsedHeight,
-                expandedHeight: kExpandedHeight,
-                title: AnimatedOpacity(
-                  opacity: _expanded ? 1 : 0,
-                  duration: const Duration(milliseconds: 300),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: hPadding,
+      body: CustomScrollView(
+        controller: _controller,
+        slivers: [
+          SliverAppBar(
+            centerTitle: false,
+            elevation: 6,
+            pinned: true,
+            titleSpacing: 0,
+            backgroundColor:
+                Theme.of(context).extension<AppColors>()?.backPrimary,
+            toolbarHeight: kToolBarHeight,
+            collapsedHeight: kCollapsedHeight,
+            expandedHeight: kExpandedHeight,
+            title: AnimatedOpacity(
+              opacity: _expanded ? 1 : 0,
+              duration: const Duration(milliseconds: 300),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: hPadding,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      S.of(context).myTodos,
+                      style: AppTextStyle.title.copyWith(
+                        color:
+                            Theme.of(context).extension<AppColors>()?.primary,
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    FilterButton(
+                      filter: ref.watch(filterProvider),
+                      onPressed: () {
+                        ref.read(filterProvider.notifier).change();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Padding(
+                padding: const EdgeInsets.only(left: 60, right: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Мои дела',
-                          style: AppTextStyle.title.copyWith(
+                          S.of(context).myTodos,
+                          style: AppTextStyle.largeTitle.copyWith(
                             color: Theme.of(context)
                                 .extension<AppColors>()
                                 ?.primary,
                           ),
                         ),
-                        FilterButton(
-                          filter: ref.watch(filterProvider),
-                          onPressed: () {
-                            ref.read(filterProvider.notifier).change();
-                          },
+                        const SizedBox(
+                          height: 6,
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Padding(
-                    padding: const EdgeInsets.only(left: 60, right: 10),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              S.of(context).myTodos,
-                              style: AppTextStyle.largeTitle.copyWith(
-                                color: Theme.of(context)
-                                    .extension<AppColors>()
-                                    ?.primary,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            AnimatedOpacity(
-                              duration: const Duration(milliseconds: 400),
-                              opacity:
-                                  ref.watch(doneCounterProvider) > 0 ? 1 : 0,
-                              child: Text(
-                                S.of(context).done(
-                                      ref.watch(doneCounterProvider),
-                                    ),
-                                style: AppTextStyle.body.copyWith(
-                                  color: Theme.of(context)
-                                      .extension<AppColors>()
-                                      ?.tertiary,
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 400),
+                          opacity: ref.watch(doneCounterProvider) > 0 ? 1 : 0,
+                          child: Text(
+                            S.of(context).done(
+                                  ref.watch(doneCounterProvider),
                                 ),
-                              ),
+                            style: AppTextStyle.body.copyWith(
+                              color: Theme.of(context)
+                                  .extension<AppColors>()
+                                  ?.tertiary,
                             ),
-                          ],
-                        ),
-                        const Spacer(),
-                        FilterButton(
-                          filter: ref.watch(filterProvider),
-                          onPressed: () {
-                            ref.read(filterProvider.notifier).change();
-                          },
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    const Spacer(),
+                    FilterButton(
+                      filter: ref.watch(filterProvider),
+                      onPressed: () {
+                        ref.read(filterProvider.notifier).change();
+                      },
+                    ),
+                  ],
                 ),
+              ),
+            ),
 
-                // bottom: ,
+            // bottom: ,
+          ),
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 10),
+            sliver: SliverToBoxAdapter(
+              child: CardWidget(
+                child: _ListWidget(),
               ),
-              const SliverPadding(
-                padding: EdgeInsets.only(top: 10),
-                sliver: SliverToBoxAdapter(
-                  child: CardWidget(
-                    child: _ListWidget(),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

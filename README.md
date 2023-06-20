@@ -29,7 +29,7 @@ sh build_apk_release.sh
 * filter on list of todos. show all or only not completed
 * todo local storage
 * Navigator 2.0
-* api 
+* api
 
 ### Libraries & Tools Used
 

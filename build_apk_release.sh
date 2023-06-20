@@ -1,5 +1,5 @@
 echo 'Starting apk release build'
 fvm flutter clean
 fvm flutter pub get
-fvm flutter build apk --release --target lib/main_dev.dart --dart-define URL=https://beta.mrdekk.ru/todobackend/ --dart-define token=septifolious
+fvm flutter build apk --release -t lib/main_dev.dart --dart-define URL={url} --dart-define token={token}
 echo 'apk release build done'
