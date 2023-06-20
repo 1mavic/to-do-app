@@ -18,7 +18,7 @@ class AppRouteInformationParser extends RouteInformationParser<RouteConfig> {
       final remaining = uri.pathSegments.last;
       final first = uri.pathSegments.first;
       if (first == 'detail') {
-        return RouteConfig.detail(int.tryParse(remaining));
+        return RouteConfig.detail(remaining);
       }
 
       return RouteConfig.list();

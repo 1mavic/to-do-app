@@ -130,7 +130,7 @@ class PageBuilder {
         return MaterialPage(
           key: ValueKey('detail ${path.param}'),
           child: CreateTodoScreen(
-            id: int.tryParse(path.param ?? ''),
+            id: path.param ?? '',
           ),
         );
 

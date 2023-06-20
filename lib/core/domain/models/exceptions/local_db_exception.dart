@@ -1,10 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ya_todo_app/const/app_strings.dart';
+import 'package:ya_todo_app/core/domain/models/exceptions/app_exception.dart';
 part 'local_db_exception.freezed.dart';
 part 'local_db_exception.g.dart';
 
 /// Exception class for local db
 @freezed
-class LocalDdException with _$LocalDdException implements Exception {
+class LocalDdException with _$LocalDdException implements AppException {
   /// error on local db initialization
   const factory LocalDdException.initException({
     required String stackTrace,
@@ -31,4 +33,11 @@ class LocalDdException with _$LocalDdException implements Exception {
   /// from json
   factory LocalDdException.fromJson(Map<String, Object?> json) =>
       _$LocalDdExceptionFromJson(json);
+
+  @override
+  String get errorMsg => map(
+        initException: (_) => ErrorStrings.dbInit,
+        readException: (_) => ErrorStrings.dbReadWrite,
+        writeException: (_) => ErrorStrings.dbReadWrite,
+      );
 }

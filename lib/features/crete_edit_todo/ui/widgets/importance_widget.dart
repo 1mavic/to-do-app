@@ -45,11 +45,11 @@ class PriorityPickerWidget extends ConsumerWidget {
             onSelected: onChange,
             itemBuilder: (BuildContext context) => <PopupMenuEntry<Priority>>[
               PopupMenuItem<Priority>(
-                value: Priority.no,
+                value: Priority.basic,
                 textStyle: Theme.of(context).popupMenuTheme.textStyle?.copyWith(
                       color: Theme.of(context).extension<AppColors>()?.primary,
                     ),
-                child: Text(Priority.no.text(context)),
+                child: Text(Priority.basic.text(context)),
               ),
               PopupMenuItem<Priority>(
                 value: Priority.low,
@@ -59,11 +59,11 @@ class PriorityPickerWidget extends ConsumerWidget {
                 child: Text(Priority.low.text(context)),
               ),
               PopupMenuItem<Priority>(
-                value: Priority.hight,
+                value: Priority.important,
                 textStyle: Theme.of(context).popupMenuTheme.textStyle?.copyWith(
                       color: Theme.of(context).extension<AppColors>()?.red,
                     ),
-                child: Text(Priority.hight.text(context)),
+                child: Text(Priority.important.text(context)),
               ),
             ],
             child: Text(

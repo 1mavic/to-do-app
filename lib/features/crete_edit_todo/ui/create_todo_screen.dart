@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/core/domain/providers/todo_list_provider.dart';
 import 'package:ya_todo_app/core/widgets/dialogs/remove_alert_dialog_widget.dart';
-import 'package:ya_todo_app/features/crete_edit_todo/domain/crud_todo_provider.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/domain/providers/crud_todo_provider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/date_picker_widget.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/importance_widget.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_button_widget.dart';
@@ -24,7 +26,7 @@ class CreateTodoScreen extends ConsumerWidget {
   });
 
   /// to do id to display. If null, creating new to do
-  final int? id;
+  final String? id;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(id));
@@ -51,7 +53,7 @@ class CreateTodoScreen extends ConsumerWidget {
                 MyButtonWidget.blueBig(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      if (id == null) {
+                      if ((id ?? '').isEmpty) {
                         ref.read(todoListProvider.notifier).add(todo);
                       } else {
                         ref.read(todoListProvider.notifier).edit(todo);
@@ -126,11 +128,15 @@ class CreateTodoScreen extends ConsumerWidget {
                       onDatePick: (newDate) {
                         ref.read(todoProvider(id).notifier).edit(
                               ref.read(todoProvider(id)).copyWith(
-                                    deadline: newDate,
+                                    deadline: newDate?.millisecondsSinceEpoch,
                                   ),
                             );
                       },
-                      pickedDate: todo.deadline,
+                      pickedDate: todo.deadline != null
+                          ? DateTime.fromMillisecondsSinceEpoch(
+                              todo.deadline ?? 0,
+                            )
+                          : null,
                     ),
                   ),
                   const SizedBox(
@@ -146,8 +152,7 @@ class CreateTodoScreen extends ConsumerWidget {
                     ),
                     child: MyButtonWidget.red(
                       onPressed: () async {
-                        final currentId = id;
-                        if (currentId == null) return;
+                        final currentId = todo.id;
                         final res = await showDialog<bool>(
                               context: context,
                               builder: (context) =>
@@ -156,11 +161,15 @@ class CreateTodoScreen extends ConsumerWidget {
                             false;
 
                         if (res == true && context.mounted) {
-                          ref.read(todoListProvider.notifier).remove(currentId);
+                          unawaited(
+                            ref
+                                .read(todoListProvider.notifier)
+                                .remove(currentId),
+                          );
                           await context.pop();
                         }
                       },
-                      disabled: id == null,
+                      disabled: (todo.id ?? '').isEmpty,
                       text: S.of(context).delete,
                       icon: Icons.delete,
                     ),

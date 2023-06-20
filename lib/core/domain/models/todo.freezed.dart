@@ -22,15 +22,25 @@ Todo _$TodoFromJson(Map<String, dynamic> json) {
 mixin _$Todo {
   /// id property. if null to do is not saved
   @HiveField(0)
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @HiveField(1)
   String get text => throw _privateConstructorUsedError;
   @HiveField(2)
+  @JsonKey(name: 'importance')
   Priority get priority => throw _privateConstructorUsedError;
   @HiveField(3)
-  DateTime? get deadline => throw _privateConstructorUsedError;
+  int? get deadline => throw _privateConstructorUsedError;
   @HiveField(4)
   bool get done => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  @HiveField(5)
+  int? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'changed_at')
+  @HiveField(6)
+  int? get changedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_updated_by')
+  @HiveField(7)
+  String get updatedBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,11 +53,14 @@ abstract class $TodoCopyWith<$Res> {
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
   $Res call(
-      {@HiveField(0) int? id,
+      {@HiveField(0) String? id,
       @HiveField(1) String text,
-      @HiveField(2) Priority priority,
-      @HiveField(3) DateTime? deadline,
-      @HiveField(4) bool done});
+      @HiveField(2) @JsonKey(name: 'importance') Priority priority,
+      @HiveField(3) int? deadline,
+      @HiveField(4) bool done,
+      @JsonKey(name: 'created_at') @HiveField(5) int? createdAt,
+      @JsonKey(name: 'changed_at') @HiveField(6) int? changedAt,
+      @JsonKey(name: 'last_updated_by') @HiveField(7) String updatedBy});
 }
 
 /// @nodoc
@@ -68,12 +81,15 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
     Object? priority = null,
     Object? deadline = freezed,
     Object? done = null,
+    Object? createdAt = freezed,
+    Object? changedAt = freezed,
+    Object? updatedBy = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -85,11 +101,23 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
       deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int?,
       done: null == done
           ? _value.done
           : done // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as int?,
+      changedAt: freezed == changedAt
+          ? _value.changedAt
+          : changedAt // ignore: cast_nullable_to_non_nullable
+              as int?,
+      updatedBy: null == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -101,11 +129,14 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0) int? id,
+      {@HiveField(0) String? id,
       @HiveField(1) String text,
-      @HiveField(2) Priority priority,
-      @HiveField(3) DateTime? deadline,
-      @HiveField(4) bool done});
+      @HiveField(2) @JsonKey(name: 'importance') Priority priority,
+      @HiveField(3) int? deadline,
+      @HiveField(4) bool done,
+      @JsonKey(name: 'created_at') @HiveField(5) int? createdAt,
+      @JsonKey(name: 'changed_at') @HiveField(6) int? changedAt,
+      @JsonKey(name: 'last_updated_by') @HiveField(7) String updatedBy});
 }
 
 /// @nodoc
@@ -122,12 +153,15 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
     Object? priority = null,
     Object? deadline = freezed,
     Object? done = null,
+    Object? createdAt = freezed,
+    Object? changedAt = freezed,
+    Object? updatedBy = null,
   }) {
     return _then(_$_Todo(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -139,11 +173,23 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
       deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as int?,
       done: null == done
           ? _value.done
           : done // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as int?,
+      changedAt: freezed == changedAt
+          ? _value.changedAt
+          : changedAt // ignore: cast_nullable_to_non_nullable
+              as int?,
+      updatedBy: null == updatedBy
+          ? _value.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -153,11 +199,26 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 @HiveType(typeId: 1)
 class _$_Todo extends _Todo {
   _$_Todo(
-      {@HiveField(0) this.id,
-      @HiveField(1) this.text = '',
-      @HiveField(2) this.priority = Priority.no,
-      @HiveField(3) this.deadline,
-      @HiveField(4) this.done = false})
+      {@HiveField(0)
+          this.id,
+      @HiveField(1)
+          this.text = '',
+      @HiveField(2)
+      @JsonKey(name: 'importance')
+          this.priority = Priority.basic,
+      @HiveField(3)
+          this.deadline,
+      @HiveField(4)
+          this.done = false,
+      @JsonKey(name: 'created_at')
+      @HiveField(5)
+          this.createdAt,
+      @JsonKey(name: 'changed_at')
+      @HiveField(6)
+          this.changedAt,
+      @JsonKey(name: 'last_updated_by')
+      @HiveField(7)
+          this.updatedBy = 'local_user'})
       : super._();
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
@@ -165,26 +226,38 @@ class _$_Todo extends _Todo {
   /// id property. if null to do is not saved
   @override
   @HiveField(0)
-  final int? id;
+  final String? id;
   @override
   @JsonKey()
   @HiveField(1)
   final String text;
   @override
-  @JsonKey()
   @HiveField(2)
+  @JsonKey(name: 'importance')
   final Priority priority;
   @override
   @HiveField(3)
-  final DateTime? deadline;
+  final int? deadline;
   @override
   @JsonKey()
   @HiveField(4)
   final bool done;
+  @override
+  @JsonKey(name: 'created_at')
+  @HiveField(5)
+  final int? createdAt;
+  @override
+  @JsonKey(name: 'changed_at')
+  @HiveField(6)
+  final int? changedAt;
+  @override
+  @JsonKey(name: 'last_updated_by')
+  @HiveField(7)
+  final String updatedBy;
 
   @override
   String toString() {
-    return 'Todo(id: $id, text: $text, priority: $priority, deadline: $deadline, done: $done)';
+    return 'Todo(id: $id, text: $text, priority: $priority, deadline: $deadline, done: $done, createdAt: $createdAt, changedAt: $changedAt, updatedBy: $updatedBy)';
   }
 
   @override
@@ -198,13 +271,19 @@ class _$_Todo extends _Todo {
                 other.priority == priority) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
-            (identical(other.done, done) || other.done == done));
+            (identical(other.done, done) || other.done == done) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.changedAt, changedAt) ||
+                other.changedAt == changedAt) &&
+            (identical(other.updatedBy, updatedBy) ||
+                other.updatedBy == updatedBy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, text, priority, deadline, done);
+  int get hashCode => Object.hash(runtimeType, id, text, priority, deadline,
+      done, createdAt, changedAt, updatedBy);
 
   @JsonKey(ignore: true)
   @override
@@ -222,11 +301,26 @@ class _$_Todo extends _Todo {
 
 abstract class _Todo extends Todo {
   factory _Todo(
-      {@HiveField(0) final int? id,
-      @HiveField(1) final String text,
-      @HiveField(2) final Priority priority,
-      @HiveField(3) final DateTime? deadline,
-      @HiveField(4) final bool done}) = _$_Todo;
+      {@HiveField(0)
+          final String? id,
+      @HiveField(1)
+          final String text,
+      @HiveField(2)
+      @JsonKey(name: 'importance')
+          final Priority priority,
+      @HiveField(3)
+          final int? deadline,
+      @HiveField(4)
+          final bool done,
+      @JsonKey(name: 'created_at')
+      @HiveField(5)
+          final int? createdAt,
+      @JsonKey(name: 'changed_at')
+      @HiveField(6)
+          final int? changedAt,
+      @JsonKey(name: 'last_updated_by')
+      @HiveField(7)
+          final String updatedBy}) = _$_Todo;
   _Todo._() : super._();
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
@@ -235,19 +329,32 @@ abstract class _Todo extends Todo {
 
   /// id property. if null to do is not saved
   @HiveField(0)
-  int? get id;
+  String? get id;
   @override
   @HiveField(1)
   String get text;
   @override
   @HiveField(2)
+  @JsonKey(name: 'importance')
   Priority get priority;
   @override
   @HiveField(3)
-  DateTime? get deadline;
+  int? get deadline;
   @override
   @HiveField(4)
   bool get done;
+  @override
+  @JsonKey(name: 'created_at')
+  @HiveField(5)
+  int? get createdAt;
+  @override
+  @JsonKey(name: 'changed_at')
+  @HiveField(6)
+  int? get changedAt;
+  @override
+  @JsonKey(name: 'last_updated_by')
+  @HiveField(7)
+  String get updatedBy;
   @override
   @JsonKey(ignore: true)
   _$$_TodoCopyWith<_$_Todo> get copyWith => throw _privateConstructorUsedError;

@@ -11,23 +11,23 @@ part 'priority.g.dart';
 @HiveType(typeId: 2)
 enum Priority {
   @HiveField(0)
-  no,
+  basic,
   @HiveField(1)
   low,
   @HiveField(2)
-  hight;
+  important;
 
   /// get text string for priority
   String text(BuildContext context) => switch (this) {
-        no => S.of(context).no,
+        basic => S.of(context).no,
         low => S.of(context).low,
-        hight => S.of(context).hight,
+        important => S.of(context).hight,
       };
 
   /// get display text color for priority
   Color? textColor(BuildContext context) => switch (this) {
-        no => Theme.of(context).extension<AppColors>()?.tertiary,
+        basic => Theme.of(context).extension<AppColors>()?.tertiary,
         low => Theme.of(context).extension<AppColors>()?.primary,
-        hight => Theme.of(context).extension<AppColors>()?.red,
+        important => Theme.of(context).extension<AppColors>()?.red,
       };
 }
