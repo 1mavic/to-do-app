@@ -3,8 +3,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
+import 'package:ya_todo_app/core/domain/models/exceptions/app_exception.dart';
+import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
 
-/// serivec to show unified ovrlays
+/// serivec to show unified overlays
 class OverlayService {
   OverlayState? _overlayState;
   OverlayEntry? _entry;
@@ -12,14 +14,15 @@ class OverlayService {
   /// duration of overlay presence on screen
   final _overlayDuration = const Duration(seconds: 10);
 
-  /// show camp overlay widget with text and icon
+  /// show  overlay widget with text
   Future<void> showTextModal(
-    BuildContext context,
     String text,
   ) async {
     if (_entry != null) {
       removeOverlay();
     }
+    final context = mainScreenKey.currentContext;
+    if (context == null) return;
     _overlayState = Overlay.of(context);
     _entry = OverlayEntry(
       builder: (context) => _TextOverlayWidget(
@@ -30,7 +33,28 @@ class OverlayService {
     _overlayState?.insert(_entry!);
     await Future<void>.delayed(const Duration(seconds: 10));
     _close();
-    // .then((_) => _close());
+  }
+
+  /// show overlay with error
+  Future<void> showErrorModal(
+    AppException exception,
+  ) async {
+    if (_entry != null) {
+      removeOverlay();
+    }
+    final context = mainScreenKey.currentContext;
+    if (context == null) return;
+    _overlayState = Overlay.of(context);
+    _entry = OverlayEntry(
+      builder: (context) => _TextOverlayWidget(
+        text: exception.errorMsg,
+        duration: _overlayDuration,
+        error: true,
+      ),
+    );
+    _overlayState?.insert(_entry!);
+    await Future<void>.delayed(const Duration(seconds: 10));
+    _close();
   }
 
   void _close() {
@@ -51,6 +75,7 @@ class _TextOverlayWidget extends StatefulWidget {
   const _TextOverlayWidget({
     required this.text,
     required this.duration,
+    this.error = false,
   });
 
   /// text to display in snackbar
@@ -58,6 +83,9 @@ class _TextOverlayWidget extends StatefulWidget {
 
   /// duration of overlay presence on screen
   final Duration duration;
+
+  /// is message contains error
+  final bool error;
   @override
   State<_TextOverlayWidget> createState() => _TextOverlayWidgetState();
 }
@@ -128,8 +156,10 @@ class _TextOverlayWidgetState extends State<_TextOverlayWidget>
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                 child: ColoredBox(
-                  color: Theme.of(context).extension<AppColors>()?.gray ??
-                      Colors.grey,
+                  color: widget.error
+                      ? Colors.red.shade200
+                      : Theme.of(context).extension<AppColors>()?.gray ??
+                          Colors.grey,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 14,

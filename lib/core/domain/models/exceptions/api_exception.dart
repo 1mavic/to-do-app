@@ -4,12 +4,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ya_todo_app/const/app_strings.dart';
+import 'package:ya_todo_app/core/domain/models/exceptions/app_exception.dart';
 part 'api_exception.freezed.dart';
 part 'api_exception.g.dart';
 
 /// api exeption model
 @freezed
-class ApiException with _$ApiException implements Exception {
+class ApiException with _$ApiException implements AppException {
   const factory ApiException.defult(
     String? message,
     String? response,
@@ -73,7 +75,7 @@ class ApiException with _$ApiException implements Exception {
   ) {
     if (error == null) {
       return ApiException.defult(
-        'unknonw error',
+        ErrorStrings.unknowError,
         null,
         null,
         stackTrace.toString(),
@@ -82,14 +84,14 @@ class ApiException with _$ApiException implements Exception {
     }
     if (error is SocketException) {
       return ApiException.noInternet(
-        'no internet conection',
+        ErrorStrings.noInternet,
         stackTrace.toString(),
         DateTime.now(),
       );
     }
     if (error is FormatException) {
       return ApiException.format(
-        'format exception',
+        ErrorStrings.formatExc,
         stackTrace.toString(),
         DateTime.now(),
       );
@@ -101,14 +103,15 @@ class ApiException with _$ApiException implements Exception {
         DioExceptionType.connectionTimeout,
       ].contains(error.type)) {
         return ApiException.timeOut(
-          'time out except',
+          ErrorStrings.timeOut,
           stackTrace.toString(),
           DateTime.now(),
         );
       }
-      if (error.type == DioExceptionType.connectionError) {
+      if (error.type == DioExceptionType.connectionError ||
+          error.error is SocketException) {
         return ApiException.noInternet(
-          'no internet conection',
+          ErrorStrings.noInternet,
           stackTrace.toString(),
           DateTime.now(),
         );
@@ -145,7 +148,7 @@ class ApiException with _$ApiException implements Exception {
 
           default:
             return ApiException.defult(
-              'unknonw error with bad request',
+              ErrorStrings.unknowError,
               error.response.toString(),
               error.response?.statusCode,
               stackTrace.toString(),
@@ -155,11 +158,14 @@ class ApiException with _$ApiException implements Exception {
       }
     }
     return ApiException.defult(
-      'unknonw error',
+      ErrorStrings.unknowError,
       null,
       null,
       stackTrace.toString(),
       DateTime.now(),
     );
   }
+
+  @override
+  String get errorMsg => message ?? ErrorStrings.unknowError;
 }

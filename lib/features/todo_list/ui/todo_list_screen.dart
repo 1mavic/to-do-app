@@ -16,6 +16,9 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
 
+/// key for main to-do list screen widget
+final mainScreenKey = GlobalKey();
+
 /// widget with all to do list
 class TodoListWidget extends ConsumerStatefulWidget {
   /// widget with all to do list
@@ -52,15 +55,14 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
   Widget build(BuildContext context) {
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
-        ref
-            .read(overlayProvider)
-            .showTextModal(context, S.of(context).syncData);
+        ref.read(overlayProvider).showTextModal(S.of(context).syncData);
       } else if ((previous?.syncInProcess ?? false) == true &&
           next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });
     return Scaffold(
+      key: mainScreenKey,
       backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -16,6 +16,7 @@ import 'package:ya_todo_app/core/di/di_container.dart';
 import 'package:ya_todo_app/core/domain/providers/api_client_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
+import 'package:ya_todo_app/core/widgets/fatal_error_screen.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
 
@@ -25,11 +26,6 @@ void main() {
       () async {
         WidgetsFlutterBinding.ensureInitialized();
         HttpOverrides.global = MyHttpOverrides();
-        // final container = ProviderContainer(
-        //   observers: [
-        //     diContainer.appLogger,
-        //   ],
-        // );
         final localDb = HiveDataSource();
         final apiClient = ApiClient(
           diContainer.appLogger,
@@ -39,6 +35,13 @@ void main() {
         final dataRev = DataRevision();
         const baseUrl = String.fromEnvironment('URL');
         const token = String.fromEnvironment('token');
+        if (baseUrl.isEmpty) {
+          runApp(
+            const FatalErrorScreen(),
+          );
+          return;
+        }
+
         apiClient.init(
           baseUrl: baseUrl,
           token: token,

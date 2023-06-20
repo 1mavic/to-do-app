@@ -9,7 +9,9 @@ import 'package:ya_todo_app/core/domain/models/responce_models/list_responce.dar
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/list_repository_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
+import 'package:ya_todo_app/core/domain/providers/overlay_service_provider.dart';
 import 'package:ya_todo_app/core/domain/repository/todo_list_repository_i.dart';
+import 'package:ya_todo_app/core/widgets/overlay_service.dart';
 
 /// provider for TodoListNotifier
 /// contains list of to dos
@@ -17,6 +19,7 @@ final todoListProvider = StateNotifierProvider<_TodoListNotifier, List<Todo>>(
   (ref) => _TodoListNotifier(
     ref.watch(localDbProvider),
     ref.watch(listRepositoryProvider),
+    ref.watch(overlayProvider),
   ),
 );
 
@@ -43,8 +46,11 @@ abstract class TodoListNotifierI {
 
 class _TodoListNotifier extends StateNotifier<List<Todo>>
     implements TodoListNotifierI {
-  _TodoListNotifier(this._localDb, this._listRepositoryI)
-      : super(_localDb.getData()) {
+  _TodoListNotifier(
+    this._localDb,
+    this._listRepositoryI,
+    this._overlayService,
+  ) : super(_localDb.getData()) {
     _streamSub = _listRepositoryI.responseStream.listen(
       _dataFromApi,
       onError: (Object? e) {
@@ -66,6 +72,7 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
 
   final LocalDataSourceI _localDb;
   final ListRepositoryI _listRepositoryI;
+  final OverlayService _overlayService;
 
   late final StreamSubscription<ListResponce> _streamSub;
 
@@ -177,7 +184,7 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
   }
 
   void _errorFromApi(ApiException exc) {
-    log('error in todo list provider from api: ${exc.message}');
+    _overlayService.showErrorModal(exc);
   }
 
   @override
