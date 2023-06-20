@@ -147,7 +147,7 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
     );
   }
 
-  // TODO(macegora): better merge of lists?
+  // TODO(macegora): better alg for merging lists
   void _dataFromApi(ListResponce response) {
     if (response.list.isEmpty) return;
     final ids = response.list.map((e) => e.id).toList();

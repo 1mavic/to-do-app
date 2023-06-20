@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
-import 'package:ya_todo_app/core/domain/providers/list_repository_provider.dart';
-import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
+import 'package:ya_todo_app/core/domain/providers/overlay_service_provider.dart';
+import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
@@ -14,7 +12,7 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/filter_button.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
-import 'package:ya_todo_app/features/todo_list/ui/widgets/sync_widget.dart';
+// import 'package:ya_todo_app/features/todo_list/ui/widgets/sync_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
 
@@ -52,54 +50,24 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(syncProvider, (previous, next) {
+      if (previous?.syncInProcess == false && next.syncInProcess == true) {
+        ref
+            .read(overlayProvider)
+            .showTextModal(context, S.of(context).syncData);
+      } else if ((previous?.syncInProcess ?? false) == true &&
+          next.syncInProcess == false) {
+        ref.read(overlayProvider).removeOverlay();
+      }
+    });
     return Scaffold(
       backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            key: UniqueKey(),
-            heroTag: '2',
-            onPressed: () async {
-              // context.navigateTo(RouteConfig.detail(null));
-
-              try {
-                // final api = ApiClient().client;
-                // api.options.headers.addAll({'X-Last-Known-Revision': 7});
-                // final body = jsonEncode({'element': testTodo.toJson()});
-                // log(body);
-                // // final res = await api.get('list');
-                // final res = await api.post(
-                //   'list',
-                //   data: body,
-                //   // options: Options(headers: api.options.headers),
-                // );
-                final res1 = await ref.read(listRepositoryProvider).getList();
-                // log(res1.toString());
-                // final list = res.list;
-                // final result =
-                //await ref.read(listRepositoryProvider).updateList(list);
-                // final res = await ref.read(todoRepositoryProvider).deleteTodo(
-                //       '123e4557-e89b-1243-aа56-4266a5446000',
-                //     );
-                // log(res.toString());
-              } catch (e) {
-                log(e.toString());
-              }
-            },
-            backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
-            child: const Icon(Icons.textsms_sharp),
-          ),
-          FloatingActionButton(
-            heroTag: '1',
-            key: UniqueKey(),
-            onPressed: () {
-              context.navigateTo(RouteConfig.detail(null));
-            },
-            backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
-            child: const Icon(Icons.add),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.navigateTo(RouteConfig.detail(null));
+        },
+        backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
+        child: const Icon(Icons.add),
       ),
       body: Stack(
         children: [
@@ -206,11 +174,6 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
               ),
             ],
           ),
-          Positioned(
-            bottom: 70,
-            left: 20,
-            child: SyncWidget(),
-          )
         ],
       ),
     );

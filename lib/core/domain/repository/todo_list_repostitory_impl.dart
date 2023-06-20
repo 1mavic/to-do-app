@@ -8,19 +8,19 @@ import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
 import 'package:ya_todo_app/core/domain/repository/todo_list_repository_i.dart';
 
-// TODO(macegora): when change getted revision number from server
-
 /// list to-do repository implementation
 class ListRepositoryImpl implements ListRepositoryI {
   /// list to-do repository implementation
   ListRepositoryImpl(
     this._apiClient,
     this._dataRevision,
+    this._syncNotifier,
   ) {
     _controller = StreamController<ListResponce>();
   }
   final ApiClient _apiClient;
   final DataRevision _dataRevision;
+  final SyncNotifier _syncNotifier;
 
   @override
   Stream<ListResponce> get responseStream => _controller.stream;
@@ -41,9 +41,11 @@ class ListRepositoryImpl implements ListRepositoryI {
         _dataRevision.revision = rev;
       }
       _controller.add(data);
+      _syncNotifier.done();
     } catch (e, stackTrace) {
       final exc = ApiException.byError(e, stackTrace);
       _controller.addError(exc);
+      _syncNotifier.done();
     }
   }
 
@@ -53,6 +55,7 @@ class ListRepositoryImpl implements ListRepositoryI {
     bool afterSync = false,
   }) async {
     try {
+      _syncNotifier.inProcess();
       final body = jsonEncode(ListResponce(null, todos, null).toJson());
       final result = await _apiClient.client.patch<dynamic>(
         'list',
@@ -68,9 +71,11 @@ class ListRepositoryImpl implements ListRepositoryI {
       if (!afterSync) {
         _controller.add(data);
       }
+      _syncNotifier.done();
     } catch (e, stackTrace) {
       final exc = ApiException.byError(e, stackTrace);
       _controller.addError(exc);
+      _syncNotifier.done();
     }
   }
 

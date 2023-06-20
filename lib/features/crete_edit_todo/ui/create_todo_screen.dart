@@ -152,8 +152,7 @@ class CreateTodoScreen extends ConsumerWidget {
                     ),
                     child: MyButtonWidget.red(
                       onPressed: () async {
-                        final currentId = id;
-                        if (currentId == null) return;
+                        final currentId = todo.id;
                         final res = await showDialog<bool>(
                               context: context,
                               builder: (context) =>
@@ -170,7 +169,7 @@ class CreateTodoScreen extends ConsumerWidget {
                           await context.pop();
                         }
                       },
-                      disabled: id == null,
+                      disabled: (todo.id ?? '').isEmpty,
                       text: S.of(context).delete,
                       icon: Icons.delete,
                     ),
