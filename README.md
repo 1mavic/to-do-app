@@ -22,6 +22,10 @@ fvm flutter run --target lib/main_dev.dart --dart-define URL=$url --dart-define 
 
 sh build_apk_release.sh
 
+## open create todo with deeplink
+
+adb shell 'am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d "https://beta.mrdekk.ru/detail"' com.example.ya_todo_app
+
 ## Features:
 * CRUD with TODO
 * swipes for mark todo done or delete
@@ -30,6 +34,7 @@ sh build_apk_release.sh
 * todo local storage
 * Navigator 2.0
 * api
+* deeplink on create todo screen
 
 ### Libraries & Tools Used
 

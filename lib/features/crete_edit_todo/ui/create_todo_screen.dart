@@ -43,7 +43,9 @@ class CreateTodoScreen extends ConsumerWidget {
             titleSpacing: 8,
             leading: IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () async => context.pop(),
+              onPressed: () {
+                context.pop();
+              },
               splashRadius: 0.1,
               color: Theme.of(context).extension<AppColors>()?.primary,
             ),

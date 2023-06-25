@@ -99,6 +99,11 @@ class AppRouterDelegate extends RouterDelegate<RouteConfig>
         return pathsHolder;
       }
     }
+    if (routes.isEmpty && newRoute.pageType == CreateTodoScreen) {
+      pathsHolder.add(RouteConfig.list());
+      pathsHolder.add(newRoute);
+      return pathsHolder;
+    }
 
     pathsHolder.add(newRoute);
 

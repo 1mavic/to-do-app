@@ -14,11 +14,15 @@ class AppRouteInformationParser extends RouteInformationParser<RouteConfig> {
       RouteConfig.list();
     }
     final uri = Uri.parse(routeInformation.location!);
-    if (uri.pathSegments.length == 2) {
+    if (uri.pathSegments.isNotEmpty) {
       final remaining = uri.pathSegments.last;
       final first = uri.pathSegments.first;
       if (first == 'detail') {
-        return RouteConfig.detail(remaining);
+        if (uri.pathSegments.length == 1) {
+          return RouteConfig.detail(null);
+        } else {
+          return RouteConfig.detail(remaining);
+        }
       }
 
       return RouteConfig.list();
