@@ -23,8 +23,12 @@ fvm flutter run --target lib/main_dev.dart --dart-define URL=$url --dart-define 
 sh build_apk_release.sh
 
 ## open create todo with deeplink
-
+ 
+Android 
 adb shell 'am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d "https://beta.mrdekk.ru/detail"' com.example.ya_todo_app
+
+IOS
+xcrun simctl openurl booted mrdekk://beta.mrdekk.ru/detail
 
 ## Features:
 * CRUD with TODO
