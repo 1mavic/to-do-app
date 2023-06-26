@@ -153,33 +153,8 @@ class DataServiceManager {
 
   void _dataFromApi(ListResponce response) async {
     final apiList = response.list;
-    final diffResult =
-        await _diffUseCase.call(local: _currentList, api: apiList);
+    final diffResult = await _diffUseCase.call(local: _currentList, api: apiList);
     if (diffResult) {}
-    // if (response.list.isEmpty) return;
-    // final ids = response.list.map((e) => e.id).toList();
-    // final addList = state.where((element) => !ids.contains(element.id)).toList();
-    // for (final apiTodo in response.list) {
-    //   final index = state.indexWhere((localTodo) => localTodo.id == apiTodo.id);
-    //   if (index != -1) {
-    //     if ((state[index].changedAt ?? 0) > (apiTodo.changedAt ?? 0)) {
-    //       addList.add(state[index]);
-    //     } else {
-    //       addList.add(apiTodo);
-    //     }
-    //   } else {
-    //     addList.add(apiTodo);
-    //   }
-    // }
-    // addList.sort((a, b) => (a.createdAt ?? 0).compareTo(b.createdAt ?? 0));
-    // state = addList;
-    // unawaited(_localDb.saveData(state));
-    // unawaited(
-    //   _listRepositoryI.updateList(
-    //     todos: state,
-    //     afterSync: true,
-    //   ),
-    // );
   }
 
   void _errorFromApi(ApiException exc) {

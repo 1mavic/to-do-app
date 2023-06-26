@@ -8,6 +8,7 @@ import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/done_counter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filter_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
+import 'package:ya_todo_app/features/todo_list/ui/widgets/animated_banner.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/filter_button.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
@@ -39,8 +40,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients &&
-              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -56,8 +56,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
-      } else if ((previous?.syncInProcess ?? false) == true &&
-          next.syncInProcess == false) {
+      } else if ((previous?.syncInProcess ?? false) == true && next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });
@@ -71,104 +70,107 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
         backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
         child: const Icon(Icons.add),
       ),
-      body: CustomScrollView(
-        controller: _controller,
-        slivers: [
-          SliverAppBar(
-            centerTitle: false,
-            elevation: 6,
-            pinned: true,
-            titleSpacing: 0,
-            backgroundColor:
-                Theme.of(context).extension<AppColors>()?.backPrimary,
-            toolbarHeight: kToolBarHeight,
-            collapsedHeight: kCollapsedHeight,
-            expandedHeight: kExpandedHeight,
-            title: AnimatedOpacity(
-              opacity: _expanded ? 1 : 0,
-              duration: const Duration(milliseconds: 300),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: hPadding,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      S.of(context).myTodos,
-                      style: AppTextStyle.title.copyWith(
-                        color:
-                            Theme.of(context).extension<AppColors>()?.primary,
-                      ),
+      body: Stack(
+        children: [
+          CustomScrollView(
+            controller: _controller,
+            slivers: [
+              SliverAppBar(
+                centerTitle: false,
+                elevation: 6,
+                pinned: true,
+                titleSpacing: 0,
+                backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+                toolbarHeight: kToolBarHeight,
+                collapsedHeight: kCollapsedHeight,
+                expandedHeight: kExpandedHeight,
+                title: AnimatedOpacity(
+                  opacity: _expanded ? 1 : 0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: hPadding,
                     ),
-                    FilterButton(
-                      filter: ref.watch(filterProvider),
-                      onPressed: () {
-                        ref.read(filterProvider.notifier).change();
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Padding(
-                padding: const EdgeInsets.only(left: 60, right: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           S.of(context).myTodos,
-                          style: AppTextStyle.largeTitle.copyWith(
-                            color: Theme.of(context)
-                                .extension<AppColors>()
-                                ?.primary,
+                          style: AppTextStyle.title.copyWith(
+                            color: Theme.of(context).extension<AppColors>()?.primary,
                           ),
                         ),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        AnimatedOpacity(
-                          duration: const Duration(milliseconds: 400),
-                          opacity: ref.watch(doneCounterProvider) > 0 ? 1 : 0,
-                          child: Text(
-                            S.of(context).done(
-                                  ref.watch(doneCounterProvider),
-                                ),
-                            style: AppTextStyle.body.copyWith(
-                              color: Theme.of(context)
-                                  .extension<AppColors>()
-                                  ?.tertiary,
-                            ),
-                          ),
+                        FilterButton(
+                          filter: ref.watch(filterProvider),
+                          onPressed: () {
+                            ref.read(filterProvider.notifier).change();
+                          },
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    FilterButton(
-                      filter: ref.watch(filterProvider),
-                      onPressed: () {
-                        ref.read(filterProvider.notifier).change();
-                      },
+                  ),
+                ),
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Padding(
+                    padding: const EdgeInsets.only(left: 60, right: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              S.of(context).myTodos,
+                              style: AppTextStyle.largeTitle.copyWith(
+                                color: Theme.of(context).extension<AppColors>()?.primary,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            AnimatedOpacity(
+                              duration: const Duration(milliseconds: 400),
+                              opacity: ref.watch(doneCounterProvider) > 0 ? 1 : 0,
+                              child: Text(
+                                S.of(context).done(
+                                      ref.watch(doneCounterProvider),
+                                    ),
+                                style: AppTextStyle.body.copyWith(
+                                  color: Theme.of(context).extension<AppColors>()?.tertiary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        FilterButton(
+                          filter: ref.watch(filterProvider),
+                          onPressed: () {
+                            ref.read(filterProvider.notifier).change();
+                          },
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                ),
+
+                // bottom: ,
+              ),
+              const SliverPadding(
+                padding: EdgeInsets.only(top: 10),
+                sliver: SliverToBoxAdapter(
+                  child: CardWidget(
+                    child: _ListWidget(),
+                  ),
                 ),
               ),
-            ),
-
-            // bottom: ,
+            ],
           ),
-          const SliverPadding(
-            padding: EdgeInsets.only(top: 10),
-            sliver: SliverToBoxAdapter(
-              child: CardWidget(
-                child: _ListWidget(),
-              ),
-            ),
+          const Positioned(
+            top: 50,
+            right: 20,
+            child: AnimatedBannerWidget(),
           ),
         ],
       ),
@@ -181,7 +183,20 @@ class _ListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(filteredListProvider);
+    final list1 = ref.watch(filteredListProvider);
+    final list = [
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+      ...list1,
+    ];
     return ListView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
