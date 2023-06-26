@@ -32,6 +32,8 @@ ApiException _$ApiExceptionFromJson(Map<String, dynamic> json) {
       return _NotFoundApiException.fromJson(json);
     case 'internalServerError':
       return _InternalApiException.fromJson(json);
+    case 'requestCancel':
+      return _CancelRequestException.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'ApiException',
@@ -42,8 +44,6 @@ ApiException _$ApiExceptionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ApiException {
   String? get message => throw _privateConstructorUsedError;
-  String? get stackTrace => throw _privateConstructorUsedError;
-  DateTime? get timeStamp => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
@@ -70,6 +70,7 @@ mixin _$ApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -93,6 +94,7 @@ mixin _$ApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -116,6 +118,7 @@ mixin _$ApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,6 +132,7 @@ mixin _$ApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -141,6 +145,7 @@ mixin _$ApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -153,6 +158,7 @@ mixin _$ApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -168,7 +174,7 @@ abstract class $ApiExceptionCopyWith<$Res> {
           ApiException value, $Res Function(ApiException) then) =
       _$ApiExceptionCopyWithImpl<$Res, ApiException>;
   @useResult
-  $Res call({String? message, String? stackTrace, DateTime? timeStamp});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -185,22 +191,12 @@ class _$ApiExceptionCopyWithImpl<$Res, $Val extends ApiException>
   @override
   $Res call({
     Object? message = freezed,
-    Object? stackTrace = freezed,
-    Object? timeStamp = freezed,
   }) {
     return _then(_value.copyWith(
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      stackTrace: freezed == stackTrace
-          ? _value.stackTrace
-          : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
-      timeStamp: freezed == timeStamp
-          ? _value.timeStamp
-          : timeStamp // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -348,6 +344,7 @@ class _$_DefaultApiException extends _DefaultApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return defult(message, response, code, stackTrace, timeStamp);
   }
@@ -374,6 +371,7 @@ class _$_DefaultApiException extends _DefaultApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return defult?.call(message, response, code, stackTrace, timeStamp);
   }
@@ -400,6 +398,7 @@ class _$_DefaultApiException extends _DefaultApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (defult != null) {
@@ -419,6 +418,7 @@ class _$_DefaultApiException extends _DefaultApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return defult(this);
   }
@@ -434,6 +434,7 @@ class _$_DefaultApiException extends _DefaultApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return defult?.call(this);
   }
@@ -449,6 +450,7 @@ class _$_DefaultApiException extends _DefaultApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (defult != null) {
@@ -481,9 +483,7 @@ abstract class _DefaultApiException extends ApiException {
   String? get message;
   String? get response;
   int? get code;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -610,6 +610,7 @@ class _$_NoInternetApiException extends _NoInternetApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return noInternet(message, stackTrace, timeStamp);
   }
@@ -636,6 +637,7 @@ class _$_NoInternetApiException extends _NoInternetApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return noInternet?.call(message, stackTrace, timeStamp);
   }
@@ -662,6 +664,7 @@ class _$_NoInternetApiException extends _NoInternetApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (noInternet != null) {
@@ -681,6 +684,7 @@ class _$_NoInternetApiException extends _NoInternetApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return noInternet(this);
   }
@@ -696,6 +700,7 @@ class _$_NoInternetApiException extends _NoInternetApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return noInternet?.call(this);
   }
@@ -711,6 +716,7 @@ class _$_NoInternetApiException extends _NoInternetApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (noInternet != null) {
@@ -739,9 +745,7 @@ abstract class _NoInternetApiException extends ApiException {
 
   @override
   String? get message;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -868,6 +872,7 @@ class _$_FormatApiException extends _FormatApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return format(message, stackTrace, timeStamp);
   }
@@ -894,6 +899,7 @@ class _$_FormatApiException extends _FormatApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return format?.call(message, stackTrace, timeStamp);
   }
@@ -920,6 +926,7 @@ class _$_FormatApiException extends _FormatApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (format != null) {
@@ -939,6 +946,7 @@ class _$_FormatApiException extends _FormatApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return format(this);
   }
@@ -954,6 +962,7 @@ class _$_FormatApiException extends _FormatApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return format?.call(this);
   }
@@ -969,6 +978,7 @@ class _$_FormatApiException extends _FormatApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (format != null) {
@@ -997,9 +1007,7 @@ abstract class _FormatApiException extends ApiException {
 
   @override
   String? get message;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1126,6 +1134,7 @@ class _$_TimeOutApiException extends _TimeOutApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return timeOut(message, stackTrace, timeStamp);
   }
@@ -1152,6 +1161,7 @@ class _$_TimeOutApiException extends _TimeOutApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return timeOut?.call(message, stackTrace, timeStamp);
   }
@@ -1178,6 +1188,7 @@ class _$_TimeOutApiException extends _TimeOutApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (timeOut != null) {
@@ -1197,6 +1208,7 @@ class _$_TimeOutApiException extends _TimeOutApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return timeOut(this);
   }
@@ -1212,6 +1224,7 @@ class _$_TimeOutApiException extends _TimeOutApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return timeOut?.call(this);
   }
@@ -1227,6 +1240,7 @@ class _$_TimeOutApiException extends _TimeOutApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (timeOut != null) {
@@ -1255,9 +1269,7 @@ abstract class _TimeOutApiException extends ApiException {
 
   @override
   String? get message;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1399,6 +1411,7 @@ class _$_BarRequestApiException extends _BarRequestApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return badRequest(message, response, stackTrace, timeStamp);
   }
@@ -1425,6 +1438,7 @@ class _$_BarRequestApiException extends _BarRequestApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return badRequest?.call(message, response, stackTrace, timeStamp);
   }
@@ -1451,6 +1465,7 @@ class _$_BarRequestApiException extends _BarRequestApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -1470,6 +1485,7 @@ class _$_BarRequestApiException extends _BarRequestApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return badRequest(this);
   }
@@ -1485,6 +1501,7 @@ class _$_BarRequestApiException extends _BarRequestApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return badRequest?.call(this);
   }
@@ -1500,6 +1517,7 @@ class _$_BarRequestApiException extends _BarRequestApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -1530,9 +1548,7 @@ abstract class _BarRequestApiException extends ApiException {
   @override
   String? get message;
   String? get response;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1658,6 +1674,7 @@ class _$_AuthApiException extends _AuthApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return notAuthorized(message, stackTrace, timeStamp);
   }
@@ -1684,6 +1701,7 @@ class _$_AuthApiException extends _AuthApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return notAuthorized?.call(message, stackTrace, timeStamp);
   }
@@ -1710,6 +1728,7 @@ class _$_AuthApiException extends _AuthApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (notAuthorized != null) {
@@ -1729,6 +1748,7 @@ class _$_AuthApiException extends _AuthApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return notAuthorized(this);
   }
@@ -1744,6 +1764,7 @@ class _$_AuthApiException extends _AuthApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return notAuthorized?.call(this);
   }
@@ -1759,6 +1780,7 @@ class _$_AuthApiException extends _AuthApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (notAuthorized != null) {
@@ -1787,9 +1809,7 @@ abstract class _AuthApiException extends ApiException {
 
   @override
   String? get message;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1931,6 +1951,7 @@ class _$_NotFoundApiException extends _NotFoundApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return notFound(message, response, stackTrace, timeStamp);
   }
@@ -1957,6 +1978,7 @@ class _$_NotFoundApiException extends _NotFoundApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return notFound?.call(message, response, stackTrace, timeStamp);
   }
@@ -1983,6 +2005,7 @@ class _$_NotFoundApiException extends _NotFoundApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -2002,6 +2025,7 @@ class _$_NotFoundApiException extends _NotFoundApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return notFound(this);
   }
@@ -2017,6 +2041,7 @@ class _$_NotFoundApiException extends _NotFoundApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return notFound?.call(this);
   }
@@ -2032,6 +2057,7 @@ class _$_NotFoundApiException extends _NotFoundApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -2062,9 +2088,7 @@ abstract class _NotFoundApiException extends ApiException {
   @override
   String? get message;
   String? get response;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -2191,6 +2215,7 @@ class _$_InternalApiException extends _InternalApiException {
     required TResult Function(
             String? message, String? stackTrace, DateTime? timeStamp)
         internalServerError,
+    required TResult Function(String? message) requestCancel,
   }) {
     return internalServerError(message, stackTrace, timeStamp);
   }
@@ -2217,6 +2242,7 @@ class _$_InternalApiException extends _InternalApiException {
         notFound,
     TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult? Function(String? message)? requestCancel,
   }) {
     return internalServerError?.call(message, stackTrace, timeStamp);
   }
@@ -2243,6 +2269,7 @@ class _$_InternalApiException extends _InternalApiException {
         notFound,
     TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
         internalServerError,
+    TResult Function(String? message)? requestCancel,
     required TResult orElse(),
   }) {
     if (internalServerError != null) {
@@ -2262,6 +2289,7 @@ class _$_InternalApiException extends _InternalApiException {
     required TResult Function(_AuthApiException value) notAuthorized,
     required TResult Function(_NotFoundApiException value) notFound,
     required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
   }) {
     return internalServerError(this);
   }
@@ -2277,6 +2305,7 @@ class _$_InternalApiException extends _InternalApiException {
     TResult? Function(_AuthApiException value)? notAuthorized,
     TResult? Function(_NotFoundApiException value)? notFound,
     TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
   }) {
     return internalServerError?.call(this);
   }
@@ -2292,6 +2321,7 @@ class _$_InternalApiException extends _InternalApiException {
     TResult Function(_AuthApiException value)? notAuthorized,
     TResult Function(_NotFoundApiException value)? notFound,
     TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
     required TResult orElse(),
   }) {
     if (internalServerError != null) {
@@ -2320,12 +2350,249 @@ abstract class _InternalApiException extends ApiException {
 
   @override
   String? get message;
-  @override
   String? get stackTrace;
-  @override
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
   _$$_InternalApiExceptionCopyWith<_$_InternalApiException> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_CancelRequestExceptionCopyWith<$Res>
+    implements $ApiExceptionCopyWith<$Res> {
+  factory _$$_CancelRequestExceptionCopyWith(_$_CancelRequestException value,
+          $Res Function(_$_CancelRequestException) then) =
+      __$$_CancelRequestExceptionCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? message});
+}
+
+/// @nodoc
+class __$$_CancelRequestExceptionCopyWithImpl<$Res>
+    extends _$ApiExceptionCopyWithImpl<$Res, _$_CancelRequestException>
+    implements _$$_CancelRequestExceptionCopyWith<$Res> {
+  __$$_CancelRequestExceptionCopyWithImpl(_$_CancelRequestException _value,
+      $Res Function(_$_CancelRequestException) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$_CancelRequestException(
+      freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_CancelRequestException extends _CancelRequestException {
+  const _$_CancelRequestException(this.message, {final String? $type})
+      : $type = $type ?? 'requestCancel',
+        super._();
+
+  factory _$_CancelRequestException.fromJson(Map<String, dynamic> json) =>
+      _$$_CancelRequestExceptionFromJson(json);
+
+  @override
+  final String? message;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ApiException.requestCancel(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CancelRequestException &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CancelRequestExceptionCopyWith<_$_CancelRequestException> get copyWith =>
+      __$$_CancelRequestExceptionCopyWithImpl<_$_CancelRequestException>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? message, String? response, int? code,
+            String? stackTrace, DateTime? timeStamp)
+        defult,
+    required TResult Function(
+            String? message, String? stackTrace, DateTime? timeStamp)
+        noInternet,
+    required TResult Function(
+            String? message, String? stackTrace, DateTime? timeStamp)
+        format,
+    required TResult Function(
+            String? message, String? stackTrace, DateTime? timeStamp)
+        timeOut,
+    required TResult Function(String? message, String? response,
+            String? stackTrace, DateTime? timeStamp)
+        badRequest,
+    required TResult Function(
+            String? message, String? stackTrace, DateTime? timeStamp)
+        notAuthorized,
+    required TResult Function(String? message, String? response,
+            String? stackTrace, DateTime? timeStamp)
+        notFound,
+    required TResult Function(
+            String? message, String? stackTrace, DateTime? timeStamp)
+        internalServerError,
+    required TResult Function(String? message) requestCancel,
+  }) {
+    return requestCancel(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message, String? response, int? code,
+            String? stackTrace, DateTime? timeStamp)?
+        defult,
+    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        noInternet,
+    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        format,
+    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        timeOut,
+    TResult? Function(String? message, String? response, String? stackTrace,
+            DateTime? timeStamp)?
+        badRequest,
+    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        notAuthorized,
+    TResult? Function(String? message, String? response, String? stackTrace,
+            DateTime? timeStamp)?
+        notFound,
+    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        internalServerError,
+    TResult? Function(String? message)? requestCancel,
+  }) {
+    return requestCancel?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message, String? response, int? code,
+            String? stackTrace, DateTime? timeStamp)?
+        defult,
+    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        noInternet,
+    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        format,
+    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        timeOut,
+    TResult Function(String? message, String? response, String? stackTrace,
+            DateTime? timeStamp)?
+        badRequest,
+    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        notAuthorized,
+    TResult Function(String? message, String? response, String? stackTrace,
+            DateTime? timeStamp)?
+        notFound,
+    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+        internalServerError,
+    TResult Function(String? message)? requestCancel,
+    required TResult orElse(),
+  }) {
+    if (requestCancel != null) {
+      return requestCancel(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DefaultApiException value) defult,
+    required TResult Function(_NoInternetApiException value) noInternet,
+    required TResult Function(_FormatApiException value) format,
+    required TResult Function(_TimeOutApiException value) timeOut,
+    required TResult Function(_BarRequestApiException value) badRequest,
+    required TResult Function(_AuthApiException value) notAuthorized,
+    required TResult Function(_NotFoundApiException value) notFound,
+    required TResult Function(_InternalApiException value) internalServerError,
+    required TResult Function(_CancelRequestException value) requestCancel,
+  }) {
+    return requestCancel(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DefaultApiException value)? defult,
+    TResult? Function(_NoInternetApiException value)? noInternet,
+    TResult? Function(_FormatApiException value)? format,
+    TResult? Function(_TimeOutApiException value)? timeOut,
+    TResult? Function(_BarRequestApiException value)? badRequest,
+    TResult? Function(_AuthApiException value)? notAuthorized,
+    TResult? Function(_NotFoundApiException value)? notFound,
+    TResult? Function(_InternalApiException value)? internalServerError,
+    TResult? Function(_CancelRequestException value)? requestCancel,
+  }) {
+    return requestCancel?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DefaultApiException value)? defult,
+    TResult Function(_NoInternetApiException value)? noInternet,
+    TResult Function(_FormatApiException value)? format,
+    TResult Function(_TimeOutApiException value)? timeOut,
+    TResult Function(_BarRequestApiException value)? badRequest,
+    TResult Function(_AuthApiException value)? notAuthorized,
+    TResult Function(_NotFoundApiException value)? notFound,
+    TResult Function(_InternalApiException value)? internalServerError,
+    TResult Function(_CancelRequestException value)? requestCancel,
+    required TResult orElse(),
+  }) {
+    if (requestCancel != null) {
+      return requestCancel(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CancelRequestExceptionToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CancelRequestException extends ApiException {
+  const factory _CancelRequestException(final String? message) =
+      _$_CancelRequestException;
+  const _CancelRequestException._() : super._();
+
+  factory _CancelRequestException.fromJson(Map<String, dynamic> json) =
+      _$_CancelRequestException.fromJson;
+
+  @override
+  String? get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CancelRequestExceptionCopyWith<_$_CancelRequestException> get copyWith =>
       throw _privateConstructorUsedError;
 }

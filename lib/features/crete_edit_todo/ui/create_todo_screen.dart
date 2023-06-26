@@ -163,11 +163,7 @@ class CreateTodoScreen extends ConsumerWidget {
                             false;
 
                         if (res == true && context.mounted) {
-                          unawaited(
-                            ref
-                                .read(todoListProvider.notifier)
-                                .remove(currentId),
-                          );
+                          ref.read(todoListProvider.notifier).remove(currentId);
                           await context.pop();
                         }
                       },

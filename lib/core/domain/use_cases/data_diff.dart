@@ -5,7 +5,8 @@ import 'package:ya_todo_app/core/domain/models/todo.dart';
 class DataDiff {
   const DataDiff();
 
-  Future<bool> call({required List<Todo> local, required List<Todo> api}) async {
+  Future<bool> call(
+      {required List<Todo> local, required List<Todo> api}) async {
     return await compute(_getDiff, (local, api));
   }
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
 import 'package:ya_todo_app/core/domain/models/exceptions/api_exception.dart';
 import 'package:ya_todo_app/core/domain/models/responce_models/list_responce.dart';
@@ -53,6 +54,7 @@ class ListRepositoryImpl implements ListRepositoryI {
   Future<void> updateList({
     required List<Todo> todos,
     bool afterSync = false,
+    CancelToken? cancelToken,
   }) async {
     try {
       _syncNotifier.inProcess();
@@ -60,6 +62,7 @@ class ListRepositoryImpl implements ListRepositoryI {
       final result = await _apiClient.client.patch<dynamic>(
         'list',
         data: body,
+        cancelToken: cancelToken,
       );
       final data = ListResponce.fromJson(
         result.data as Map<String, dynamic>,
@@ -74,7 +77,10 @@ class ListRepositoryImpl implements ListRepositoryI {
       _syncNotifier.done();
     } catch (e, stackTrace) {
       final exc = ApiException.byError(e, stackTrace);
-      _controller.addError(exc);
+      exc.maybeMap(
+        orElse: () => _controller.addError(exc),
+        requestCancel: (_) {},
+      );
       _syncNotifier.done();
     }
   }
