@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:ya_todo_app/core/data/local_data_source/local_data_source_i.dart';
 import 'package:ya_todo_app/core/domain/models/exceptions/api_exception.dart';
+import 'package:ya_todo_app/core/domain/models/exceptions/local_db_exception.dart';
+import 'package:ya_todo_app/core/domain/models/exceptions/unexpected_exception.dart';
 import 'package:ya_todo_app/core/domain/models/responce_models/list_responce.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/list_repository_provider.dart';
@@ -43,13 +45,12 @@ abstract class TodoListNotifierI {
   void dispose();
 }
 
-class _TodoListNotifier extends StateNotifier<List<Todo>>
-    implements TodoListNotifierI {
+class _TodoListNotifier extends StateNotifier<List<Todo>> implements TodoListNotifierI {
   _TodoListNotifier(
     this._localDb,
     this._listRepositoryI,
     this._overlayService,
-  ) : super(_localDb.getData()) {
+  ) : super(_init(_localDb, _overlayService)) {
     _streamSub = _listRepositoryI.responseStream.listen(
       _dataFromApi,
       onError: (Object? e) {
@@ -74,6 +75,21 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
   final OverlayService _overlayService;
 
   late final StreamSubscription<ListResponce> _streamSub;
+
+  static List<Todo> _init(LocalDataSourceI dataSource, OverlayService overlayService) {
+    try {
+      return dataSource.getData();
+    } on LocalDdException catch (e) {
+      overlayService.showErrorModal(e);
+      return [];
+    } catch (e, stackTrace) {
+      overlayService.showErrorModal(UnexpectedException(
+        stackTrace: stackTrace.toString(),
+        timeStamp: DateTime.now(),
+      ));
+      return [];
+    }
+  }
 
   @override
   Future<void> add(Todo todo) async {
@@ -157,8 +173,7 @@ class _TodoListNotifier extends StateNotifier<List<Todo>>
   void _dataFromApi(ListResponce response) {
     if (response.list.isEmpty) return;
     final ids = response.list.map((e) => e.id).toList();
-    final addList =
-        state.where((element) => !ids.contains(element.id)).toList();
+    final addList = state.where((element) => !ids.contains(element.id)).toList();
     for (final apiTodo in response.list) {
       final index = state.indexWhere((localTodo) => localTodo.id == apiTodo.id);
       if (index != -1) {
