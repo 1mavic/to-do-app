@@ -58,6 +58,6 @@ flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --da
 
 ### Application screenshots
 <img src="https://github.com/1mavic/to-do-app/blob/master/screen_shots/Simulator%20Screen%20Shot%20-%20Iphone%2011%20pro%20-%202023-07-02%20at%2005.03.29.png?raw=true"/>
-<img src="https://drive.google.com/file/d/1F-bXR4x-O8O6b2Ax9GNFffmKIuyzfZDM/view?usp=sharing"/>
-<img src="https://drive.google.com/file/d/1HLxN3znr5IGGNxfD1znI570CZsbWiCZH/view?usp=sharing"/>
-<img src="https://drive.google.com/file/d/1zj8iyDDRMnM-_vhSmHeqvOZPbOpzCV4X/view?usp=sharing"/>
+<img src="https://github.com/1mavic/to-do-app/blob/master/screen_shots/Simulator%20Screen%20Shot%20-%20Iphone%2011%20pro%20-%202023-07-02%20at%2005.03.49.png?raw=true"/>
+<img src="https://github.com/1mavic/to-do-app/blob/master/screen_shots/Simulator%20Screen%20Shot%20-%20Iphone%2011%20pro%20-%202023-07-02%20at%2005.05.05.png?raw=true"/>
+<img src="https://github.com/1mavic/to-do-app/blob/master/screen_shots/Simulator%20Screen%20Shot%20-%20Iphone%2011%20pro%20-%202023-07-02%20at%2005.05.12.png?raw=true"/>
