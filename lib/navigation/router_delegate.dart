@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
@@ -98,6 +96,11 @@ class AppRouterDelegate extends RouterDelegate<RouteConfig>
         }
         return pathsHolder;
       }
+    }
+    if (routes.isEmpty && newRoute.pageType == CreateTodoScreen) {
+      pathsHolder.add(RouteConfig.list());
+      pathsHolder.add(newRoute);
+      return pathsHolder;
     }
 
     pathsHolder.add(newRoute);

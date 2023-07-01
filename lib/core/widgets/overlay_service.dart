@@ -167,11 +167,14 @@ class _TextOverlayWidgetState extends State<_TextOverlayWidget>
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          widget.text,
-                          textAlign: TextAlign.center,
+                        Flexible(
+                          child: Text(
+                            widget.text,
+                            textAlign: TextAlign.start,
+                          ),
                         ),
                       ],
                     ),

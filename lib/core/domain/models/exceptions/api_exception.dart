@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -64,6 +62,9 @@ class ApiException with _$ApiException implements AppException {
     DateTime? timeStamp,
   ) = _InternalApiException;
 
+  const factory ApiException.requestCancel(String? message) =
+      _CancelRequestException;
+
   const ApiException._();
 
   factory ApiException.fromJson(Map<String, Object?> json) =>
@@ -97,6 +98,9 @@ class ApiException with _$ApiException implements AppException {
       );
     }
     if (error is DioException) {
+      if (error.type == DioExceptionType.cancel) {
+        return const ApiException.requestCancel(null);
+      }
       if ([
         DioExceptionType.sendTimeout,
         DioExceptionType.receiveTimeout,

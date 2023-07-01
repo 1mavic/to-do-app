@@ -82,7 +82,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
       },
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
-          await ref.read(todoListProvider.notifier).toggle(widget.todo.id);
+          ref.read(todoListProvider.notifier).toggle(widget.todo.id);
           return false;
         } else if (direction == DismissDirection.endToStart) {
           final res = await showDialog<bool>(
@@ -92,7 +92,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
               false;
 
           if (res == true) {
-            await ref.read(todoListProvider.notifier).remove(widget.todo.id);
+            ref.read(todoListProvider.notifier).remove(widget.todo.id);
             return true;
           }
 
@@ -118,6 +118,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                     unselectedWidgetColor: Colors.green,
                   ),
                   child: Checkbox(
+                    key: const ValueKey<String>('check-box'),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3),
                     ),

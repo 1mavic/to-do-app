@@ -19,12 +19,14 @@ class RemoveAlertDialogWidget extends StatelessWidget {
       ),
       actions: [
         MyButtonWidget.blue(
+          key: const ValueKey<String>('cancel-confirm'),
           text: S.of(context).cancel,
           onPressed: () {
             Navigator.of(context).pop(false);
           },
         ),
         MyButtonWidget.red(
+          key: const ValueKey<String>('remove-confirm'),
           text: S.of(context).remove,
           onPressed: () {
             Navigator.of(context).pop(true);

@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ya_todo_app/core/domain/models/priority.dart';

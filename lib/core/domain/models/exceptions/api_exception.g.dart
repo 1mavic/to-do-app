@@ -171,3 +171,17 @@ Map<String, dynamic> _$$_InternalApiExceptionToJson(
       'timeStamp': instance.timeStamp?.toIso8601String(),
       'runtimeType': instance.$type,
     };
+
+_$_CancelRequestException _$$_CancelRequestExceptionFromJson(
+        Map<String, dynamic> json) =>
+    _$_CancelRequestException(
+      json['message'] as String?,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$_CancelRequestExceptionToJson(
+        _$_CancelRequestException instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'runtimeType': instance.$type,
+    };

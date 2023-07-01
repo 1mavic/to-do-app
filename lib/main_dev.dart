@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +24,6 @@ void main() {
     runZonedGuarded(
       () async {
         WidgetsFlutterBinding.ensureInitialized();
-        HttpOverrides.global = MyHttpOverrides();
         final localDb = HiveDataSource();
         final apiClient = ApiClient(
           diContainer.appLogger,
@@ -116,15 +114,5 @@ class _MyAppState extends State<MyApp> {
       // routerDelegate: routerDelegate,
       // routeInformationParser: routerInformationParser,
     );
-  }
-}
-
-/// http overrride for bad cartificate
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
   }
 }

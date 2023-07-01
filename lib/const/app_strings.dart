@@ -21,4 +21,7 @@ abstract class ErrorStrings {
 
   /// timeout exception
   static const timeOut = 'Таймаут ответа.';
+
+  /// timeout exception
+  static const unexpectedException = 'Произошла ошибка. повторите действие.';
 }

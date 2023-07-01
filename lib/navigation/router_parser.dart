@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
@@ -14,11 +12,15 @@ class AppRouteInformationParser extends RouteInformationParser<RouteConfig> {
       RouteConfig.list();
     }
     final uri = Uri.parse(routeInformation.location!);
-    if (uri.pathSegments.length == 2) {
+    if (uri.pathSegments.isNotEmpty) {
       final remaining = uri.pathSegments.last;
       final first = uri.pathSegments.first;
       if (first == 'detail') {
-        return RouteConfig.detail(remaining);
+        if (uri.pathSegments.length == 1) {
+          return RouteConfig.detail(null);
+        } else {
+          return RouteConfig.detail(remaining);
+        }
       }
 
       return RouteConfig.list();

@@ -12,7 +12,7 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
 ## apk file
-[download apk](https://drive.google.com/file/d/1SOF4OR7ZUprD64pUh2n5-Dv9KHLbhKJL/view?usp=sharing)
+[download apk](https://drive.google.com/file/d/1P8nb5sfJNYCmDtBUXU7WeV_m3gAiZnYq/view?usp=sharing)
 
 ## run
 
@@ -22,14 +22,30 @@ fvm flutter run --target lib/main_dev.dart --dart-define URL=$url --dart-define 
 
 sh build_apk_release.sh
 
+## open create todo with deeplink
+ 
+Android 
+adb shell 'am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d "https://beta.mrdekk.ru/detail"' com.example.ya_todo_app
+
+IOS
+xcrun simctl openurl booted mrdekk://beta.mrdekk.ru/detail
+
+## run integration test
+
+flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --dart-define token={$token}
+
+
 ## Features:
 * CRUD with TODO
 * swipes for mark todo done or delete
 * light and dark themes
 * filter on list of todos. show all or only not completed
 * todo local storage
-* Navigator 2.0
+* navigator 2.0
 * api
+* deeplink on create todo screen
+* unit tests
+* integration test on CRUD flow
 
 ### Libraries & Tools Used
 

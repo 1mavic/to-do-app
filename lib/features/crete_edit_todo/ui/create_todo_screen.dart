@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
@@ -43,7 +41,9 @@ class CreateTodoScreen extends ConsumerWidget {
             titleSpacing: 8,
             leading: IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () async => context.pop(),
+              onPressed: () {
+                context.pop();
+              },
               splashRadius: 0.1,
               color: Theme.of(context).extension<AppColors>()?.primary,
             ),
@@ -51,6 +51,7 @@ class CreateTodoScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 MyButtonWidget.blueBig(
+                  key: const ValueKey<String>('save-button'),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       if ((id ?? '').isEmpty) {
@@ -80,6 +81,7 @@ class CreateTodoScreen extends ConsumerWidget {
                     child: Form(
                       key: _formKey,
                       child: MyTextFieldWidget(
+                        key: const ValueKey<String>('text-field'),
                         initialText: todo.text,
                         onChanged: (val) =>
                             ref.read(todoProvider(id).notifier).edit(
@@ -151,6 +153,7 @@ class CreateTodoScreen extends ConsumerWidget {
                       horizontal: 8,
                     ),
                     child: MyButtonWidget.red(
+                      key: const ValueKey<String>('delete-button'),
                       onPressed: () async {
                         final currentId = todo.id;
                         final res = await showDialog<bool>(
@@ -161,11 +164,7 @@ class CreateTodoScreen extends ConsumerWidget {
                             false;
 
                         if (res == true && context.mounted) {
-                          unawaited(
-                            ref
-                                .read(todoListProvider.notifier)
-                                .remove(currentId),
-                          );
+                          ref.read(todoListProvider.notifier).remove(currentId);
                           await context.pop();
                         }
                       },
