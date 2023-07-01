@@ -46,6 +46,7 @@ flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --da
 * deeplink on create todo screen
 * unit tests
 * integration test on CRUD flow
+* intl
 
 ### Libraries & Tools Used
 
@@ -53,7 +54,6 @@ flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --da
 * [freezed](https://pub.dev/packages/freezed) (data classes)
 * [hive_flutter](https://pub.dev/packages/hive_flutter) (local data provider)
 * [hooks_riverpod](https://pub.dev/packages/hooks_riverpod) (State Management)
-* (lint rules for Dart and Flutter) [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
 
 ### Application screenshots
