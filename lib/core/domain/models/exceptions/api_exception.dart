@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -64,11 +62,13 @@ class ApiException with _$ApiException implements AppException {
     DateTime? timeStamp,
   ) = _InternalApiException;
 
-  const factory ApiException.requestCancel(String? message) = _CancelRequestException;
+  const factory ApiException.requestCancel(String? message) =
+      _CancelRequestException;
 
   const ApiException._();
 
-  factory ApiException.fromJson(Map<String, Object?> json) => _$ApiExceptionFromJson(json);
+  factory ApiException.fromJson(Map<String, Object?> json) =>
+      _$ApiExceptionFromJson(json);
 
   factory ApiException.byError(
     Object? error,
@@ -112,7 +112,8 @@ class ApiException with _$ApiException implements AppException {
           DateTime.now(),
         );
       }
-      if (error.type == DioExceptionType.connectionError || error.error is SocketException) {
+      if (error.type == DioExceptionType.connectionError ||
+          error.error is SocketException) {
         return ApiException.noInternet(
           ErrorStrings.noInternet,
           stackTrace.toString(),

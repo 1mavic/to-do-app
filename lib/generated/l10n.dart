@@ -229,6 +229,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Локальные данные и данные на сервере отличаются.`
+  String get dataDiff {
+    return Intl.message(
+      'Локальные данные и данные на сервере отличаются.',
+      name: 'dataDiff',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите источник правды`
+  String get pickSource {
+    return Intl.message(
+      'Выберите источник правды',
+      name: 'pickSource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `локальные`
+  String get local {
+    return Intl.message(
+      'локальные',
+      name: 'local',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `сервер`
+  String get remote {
+    return Intl.message(
+      'сервер',
+      name: 'remote',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

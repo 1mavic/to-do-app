@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("ОТМЕНА"),
         "confirm":
             MessageLookupByLibrary.simpleMessage("Вы хотите удалить запись?"),
+        "dataDiff": MessageLookupByLibrary.simpleMessage(
+            "Локальные данные и данные на сервере отличаются."),
         "date": MessageLookupByLibrary.simpleMessage("дата"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "doSmth": MessageLookupByLibrary.simpleMessage("Что надо сделать…"),
@@ -36,11 +38,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Поле не должно быть пустым"),
         "hight": MessageLookupByLibrary.simpleMessage("!! Высокий"),
         "importance": MessageLookupByLibrary.simpleMessage("Важность"),
+        "local": MessageLookupByLibrary.simpleMessage("локальные"),
         "low": MessageLookupByLibrary.simpleMessage("Низкий"),
         "myTodos": MessageLookupByLibrary.simpleMessage("Мои дела"),
         "newItem": MessageLookupByLibrary.simpleMessage("Новое"),
         "no": MessageLookupByLibrary.simpleMessage("Нет"),
+        "pickSource":
+            MessageLookupByLibrary.simpleMessage("Выберите источник правды"),
         "ready": MessageLookupByLibrary.simpleMessage("ГОТОВО"),
+        "remote": MessageLookupByLibrary.simpleMessage("сервер"),
         "remove": MessageLookupByLibrary.simpleMessage("УДАЛИТЬ"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "syncData":

@@ -1,17 +1,19 @@
-// import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// final dataDiffProvider = StateNotifierProvider<DataDiffNotifier,bool>((ref) {
-//   return
-// });
+/// provider for datadiff notifier
+final dataDiffProvider = StateNotifierProvider<DataDiffNotifier, bool>(
+  (ref) => DataDiffNotifier(),
+);
 
-// class DataDiffNotifier extends StateNotifier<bool> {
-//   DataDiffNotifier(): super(false);
+/// data difference notifier. if local saved data and api have difference return true.
+class DataDiffNotifier extends StateNotifier<bool> {
+  DataDiffNotifier() : super(false);
 
-//   void changeState(bool newState){
-//     if(newState!=state){
-//       state=newState;
-//     }
-//   }
+  void hasDiff() {
+    state = true;
+  }
 
-//   void
-// }
+  void noDiff() {
+    state = false;
+  }
+}

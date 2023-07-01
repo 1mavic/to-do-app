@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';

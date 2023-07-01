@@ -2,11 +2,13 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:uuid/uuid.dart';
 import 'package:ya_todo_app/core/data/local_data_source/local_data_source_i.dart';
+import 'package:ya_todo_app/core/domain/models/data_source_enum.dart';
 import 'package:ya_todo_app/core/domain/models/exceptions/api_exception.dart';
 import 'package:ya_todo_app/core/domain/models/exceptions/local_db_exception.dart';
 import 'package:ya_todo_app/core/domain/models/exceptions/unexpected_exception.dart';
 import 'package:ya_todo_app/core/domain/models/responce_models/list_responce.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
+import 'package:ya_todo_app/core/domain/providers/data_difference_provider.dart';
 import 'package:ya_todo_app/core/domain/repository/todo_list_repository_i.dart';
 import 'package:ya_todo_app/core/domain/use_cases/data_diff.dart';
 import 'package:ya_todo_app/core/domain/use_cases/merge_lists.dart';
@@ -17,6 +19,7 @@ class DataServiceManager {
     this._localDb,
     this._listRepositoryI,
     this._overlayService,
+    this._dataDiffNotifier,
     this._diffUseCase,
     this._mergeUseCase,
   ) {
@@ -28,9 +31,11 @@ class DataServiceManager {
     );
   }
   final List<Todo> _currentList = [];
+  final List<Todo> _apiList = [];
   final LocalDataSourceI _localDb;
   final ListRepositoryI _listRepositoryI;
   final OverlayService _overlayService;
+  final DataDiffNotifier _dataDiffNotifier;
   final DataDiff _diffUseCase;
   final MergeLists _mergeUseCase;
   CancelToken? _cancelToken;
@@ -151,12 +156,54 @@ class DataServiceManager {
     _controller.add(_currentList);
   }
 
-  void _dataFromApi(ListResponce response) async {
+  /// handles data from api repository
+  Future<void> _dataFromApi(ListResponce response) async {
     final apiList = response.list;
-    final diffResult = await _diffUseCase.call(local: _currentList, api: apiList);
-    if (diffResult) {}
+
+    if (apiList.isEmpty) return;
+
+    if (_currentList.isEmpty) {
+      _currentList.addAll(apiList);
+      _controller.add(_currentList);
+      unawaited(_localDb.saveData(_currentList));
+      return;
+    }
+
+    final diffResult =
+        await _diffUseCase.call(local: _currentList, api: apiList);
+
+    if (diffResult) {
+      _apiList.clear();
+      _apiList.addAll(apiList);
+      _dataDiffNotifier.hasDiff();
+    }
   }
 
+  /// merge lists from api and local
+  Future<void> mergeLsts(DataSource prioritySource) async {
+    final newList =
+        await _mergeUseCase.call(_currentList, _apiList, prioritySource);
+    _apiList.clear();
+    _currentList
+      ..clear()
+      ..addAll(newList);
+    _controller.add(_currentList);
+
+    _dataDiffNotifier.noDiff();
+    _cancelToken?.cancel();
+    _cancelToken = CancelToken();
+
+    unawaited(_localDb.saveData(_currentList));
+    unawaited(
+      _listRepositoryI.updateList(
+        todos: _currentList,
+        afterSync: true,
+        cancelToken: _cancelToken,
+      ),
+    );
+  }
+
+  /// shows error from api repository
   void _errorFromApi(ApiException exc) {
     _overlayService.showErrorModal(exc);
   }

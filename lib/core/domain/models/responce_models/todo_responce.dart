@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 part 'todo_responce.freezed.dart';

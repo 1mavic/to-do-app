@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';

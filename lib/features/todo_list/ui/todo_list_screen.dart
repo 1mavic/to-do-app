@@ -13,7 +13,6 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/filter_button.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
-// import 'package:ya_todo_app/features/todo_list/ui/widgets/sync_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
 
@@ -40,7 +39,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients &&
+              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -56,7 +56,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
-      } else if ((previous?.syncInProcess ?? false) == true && next.syncInProcess == false) {
+      } else if ((previous?.syncInProcess ?? false) == true &&
+          next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });
@@ -80,7 +81,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                 elevation: 6,
                 pinned: true,
                 titleSpacing: 0,
-                backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+                backgroundColor:
+                    Theme.of(context).extension<AppColors>()?.backPrimary,
                 toolbarHeight: kToolBarHeight,
                 collapsedHeight: kCollapsedHeight,
                 expandedHeight: kExpandedHeight,
@@ -97,7 +99,9 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                         Text(
                           S.of(context).myTodos,
                           style: AppTextStyle.title.copyWith(
-                            color: Theme.of(context).extension<AppColors>()?.primary,
+                            color: Theme.of(context)
+                                .extension<AppColors>()
+                                ?.primary,
                           ),
                         ),
                         FilterButton(
@@ -123,7 +127,9 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                             Text(
                               S.of(context).myTodos,
                               style: AppTextStyle.largeTitle.copyWith(
-                                color: Theme.of(context).extension<AppColors>()?.primary,
+                                color: Theme.of(context)
+                                    .extension<AppColors>()
+                                    ?.primary,
                               ),
                             ),
                             const SizedBox(
@@ -131,13 +137,16 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
                             ),
                             AnimatedOpacity(
                               duration: const Duration(milliseconds: 400),
-                              opacity: ref.watch(doneCounterProvider) > 0 ? 1 : 0,
+                              opacity:
+                                  ref.watch(doneCounterProvider) > 0 ? 1 : 0,
                               child: Text(
                                 S.of(context).done(
                                       ref.watch(doneCounterProvider),
                                     ),
                                 style: AppTextStyle.body.copyWith(
-                                  color: Theme.of(context).extension<AppColors>()?.tertiary,
+                                  color: Theme.of(context)
+                                      .extension<AppColors>()
+                                      ?.tertiary,
                                 ),
                               ),
                             ),
@@ -168,8 +177,9 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
             ],
           ),
           const Positioned(
-            top: 50,
-            right: 20,
+            top: 40,
+            left: 10, right: 10,
+            // right: 50,
             child: AnimatedBannerWidget(),
           ),
         ],
@@ -183,20 +193,8 @@ class _ListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list1 = ref.watch(filteredListProvider);
-    final list = [
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-      ...list1,
-    ];
+    final list = ref.watch(filteredListProvider);
+
     return ListView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
