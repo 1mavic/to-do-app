@@ -160,7 +160,20 @@ class DataServiceManager {
   Future<void> _dataFromApi(ListResponce response) async {
     final apiList = response.list;
 
-    if (apiList.isEmpty) return;
+    if (apiList.isEmpty) {
+      if (_currentList.isNotEmpty) {
+        unawaited(
+          _listRepositoryI.updateList(
+            todos: _currentList,
+            afterSync: true,
+            cancelToken: _cancelToken,
+          ),
+        );
+        return;
+      } else {
+        return;
+      }
+    }
 
     if (_currentList.isEmpty) {
       _currentList.addAll(apiList);

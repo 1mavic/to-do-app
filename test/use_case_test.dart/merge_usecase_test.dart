@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ya_todo_app/core/domain/models/data_source_enum.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
-import 'package:ya_todo_app/core/domain/use_cases/data_diff.dart';
 import 'package:ya_todo_app/core/domain/use_cases/merge_lists.dart';
 
 void main() {

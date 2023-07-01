@@ -57,6 +57,7 @@ class _AnimatedBannerWidgetState extends ConsumerState<AnimatedBannerWidget>
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Theme.of(context).extension<AppColors>()?.backElevated,
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8),

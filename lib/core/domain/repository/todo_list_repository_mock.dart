@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dio/src/cancel_token.dart';
+import 'package:dio/dio.dart';
 import 'package:ya_todo_app/core/domain/models/responce_models/list_responce.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/repository/todo_list_repository_i.dart';
@@ -18,11 +18,23 @@ class ListRepositoryMock implements ListRepositoryI {
 
   @override
   Future<void> getList() async {
-    _controller.add(const ListResponce('ok', [], 0));
+    _controller.add(ListResponce(
+        'ok',
+        [
+          Todo(
+            id: '3',
+            text: 'test 3',
+            updatedBy: 'user',
+            done: false,
+            changedAt: 11111,
+            createdAt: 11116,
+          ),
+        ],
+        0));
   }
 
   @override
-  Stream<ListResponce> get responseStream => throw UnimplementedError();
+  Stream<ListResponce> get responseStream => _controller.stream;
 
   @override
   Future<void> updateList({
@@ -30,6 +42,21 @@ class ListRepositoryMock implements ListRepositoryI {
     bool afterSync = false,
     CancelToken? cancelToken,
   }) async {
-    _controller.add(const ListResponce('ok', [], 0));
+    _controller.add(
+      ListResponce(
+        'ok',
+        [
+          Todo(
+            id: '3',
+            text: 'test 3',
+            updatedBy: 'user',
+            done: false,
+            changedAt: 11111,
+            createdAt: 11111,
+          ),
+        ],
+        0,
+      ),
+    );
   }
 }
