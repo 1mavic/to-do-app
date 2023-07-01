@@ -57,7 +57,7 @@ flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --da
 
 
 ### Application screenshots
-<img src="https://i2.paste.pics/07a913d3108303c31c3996287c22cf91.png"/>
-<img src="https://i2.paste.pics/187c25ade8d68db1824cb9e46c055b00.png"/>
-<img src="https://i2.paste.pics/cd716bbc3f4e11744d96baf2e1b25706.png"/>
-<img src="https://i2.paste.pics/fdef021bc27edc05d6ce26c19c4a3f53.png"/>
+<img src="https://drive.google.com/file/d/1Ay_i8tMr5m4oD7KO01Vf1rTMUrp9mgQZ/view?usp=sharing"/>
+<img src="https://drive.google.com/file/d/1F-bXR4x-O8O6b2Ax9GNFffmKIuyzfZDM/view?usp=sharing"/>
+<img src="https://drive.google.com/file/d/1HLxN3znr5IGGNxfD1znI570CZsbWiCZH/view?usp=sharing"/>
+<img src="https://drive.google.com/file/d/1zj8iyDDRMnM-_vhSmHeqvOZPbOpzCV4X/view?usp=sharing"/>
