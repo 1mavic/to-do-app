@@ -26,6 +26,7 @@ class MergeLists {
     final mainIds = mainList.map((e) => e.id);
     final addToList =
         secondList.where((element) => !mainIds.contains(element.id));
+
     final resultList = [...mainList, ...addToList];
     resultList.sort((a, b) => (a.createdAt ?? 0).compareTo(b.createdAt ?? 0));
     return resultList;

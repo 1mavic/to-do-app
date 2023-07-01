@@ -118,6 +118,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                     unselectedWidgetColor: Colors.green,
                   ),
                   child: Checkbox(
+                    key: const ValueKey<String>('check-box'),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3),
                     ),

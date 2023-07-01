@@ -4,7 +4,6 @@ import 'package:ya_todo_app/core/domain/models/todo.dart';
 /// usee case for check difference between local storage data and api data
 class DataDiff {
   const DataDiff();
-
   Future<bool> call(
       {required List<Todo> local, required List<Todo> api}) async {
     return await compute(_getDiff, (local, api));

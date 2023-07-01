@@ -169,8 +169,7 @@ class DataServiceManager {
       return;
     }
 
-    final diffResult =
-        await _diffUseCase.call(local: _currentList, api: apiList);
+    final diffResult = await _diffUseCase(local: _currentList, api: apiList);
 
     if (diffResult) {
       _apiList.clear();
@@ -181,8 +180,7 @@ class DataServiceManager {
 
   /// merge lists from api and local
   Future<void> mergeLsts(DataSource prioritySource) async {
-    final newList =
-        await _mergeUseCase.call(_currentList, _apiList, prioritySource);
+    final newList = await _mergeUseCase(_currentList, _apiList, prioritySource);
     _apiList.clear();
     _currentList
       ..clear()

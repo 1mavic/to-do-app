@@ -204,6 +204,7 @@ class _ListWidget extends ConsumerWidget {
           return const NewButtonWidget();
         }
         return ListTileWidget(
+          key: const ValueKey<String>('list-tile'),
           todo: list[index],
         );
       },

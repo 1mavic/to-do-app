@@ -51,6 +51,7 @@ class CreateTodoScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 MyButtonWidget.blueBig(
+                  key: const ValueKey<String>('save-button'),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       if ((id ?? '').isEmpty) {
@@ -80,6 +81,7 @@ class CreateTodoScreen extends ConsumerWidget {
                     child: Form(
                       key: _formKey,
                       child: MyTextFieldWidget(
+                        key: const ValueKey<String>('text-field'),
                         initialText: todo.text,
                         onChanged: (val) =>
                             ref.read(todoProvider(id).notifier).edit(
@@ -151,6 +153,7 @@ class CreateTodoScreen extends ConsumerWidget {
                       horizontal: 8,
                     ),
                     child: MyButtonWidget.red(
+                      key: const ValueKey<String>('delete-button'),
                       onPressed: () async {
                         final currentId = todo.id;
                         final res = await showDialog<bool>(
