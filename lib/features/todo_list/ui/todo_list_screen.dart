@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
+import 'package:ya_todo_app/config/flavors/banner_widget.dart';
 import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/core/domain/providers/overlay_service_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
@@ -36,8 +37,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients &&
-              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -53,47 +53,48 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
-      } else if ((previous?.syncInProcess ?? false) == true &&
-          next.syncInProcess == false) {
+      } else if ((previous?.syncInProcess ?? false) == true && next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });
-    return Scaffold(
-      key: mainScreenKey,
-      backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.navigateTo(RouteConfig.detail(null));
-        },
-        backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
-        child: const Icon(Icons.add),
-      ),
-      body: Stack(
-        children: [
-          CustomScrollView(
-            key: const ValueKey<String>('main-scroll'),
-            controller: _controller,
-            slivers: [
-              MainScreenAppbarWidget(
-                expanded: _expanded,
-              ),
-              const SliverPadding(
-                padding: EdgeInsets.only(top: 10),
-                sliver: SliverToBoxAdapter(
-                  child: CardWidget(
-                    child: _ListWidget(),
+    return FlavorBannerWidget(
+      child: Scaffold(
+        key: mainScreenKey,
+        backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.navigateTo(RouteConfig.detail(null));
+          },
+          backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
+          child: const Icon(Icons.add),
+        ),
+        body: Stack(
+          children: [
+            CustomScrollView(
+              key: const ValueKey<String>('main-scroll'),
+              controller: _controller,
+              slivers: [
+                MainScreenAppbarWidget(
+                  expanded: _expanded,
+                ),
+                const SliverPadding(
+                  padding: EdgeInsets.only(top: 10),
+                  sliver: SliverToBoxAdapter(
+                    child: CardWidget(
+                      child: _ListWidget(),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const Positioned(
-            top: 40,
-            left: 10,
-            right: 10,
-            child: AnimatedBannerWidget(),
-          ),
-        ],
+              ],
+            ),
+            const Positioned(
+              top: 40,
+              left: 10,
+              right: 10,
+              child: AnimatedBannerWidget(),
+            ),
+          ],
+        ),
       ),
     );
   }

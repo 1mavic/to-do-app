@@ -3,9 +3,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ya_todo_app/config/themes/app_themes.dart';
+import 'package:ya_todo_app/config/flavors/app_flavor.dart';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
 import 'package:ya_todo_app/core/data/api_client/api_interceptors/queued_interceptor.dart';
 import 'package:ya_todo_app/core/data/api_client/api_interceptors/revision_interceptor.dart';
@@ -16,8 +15,7 @@ import 'package:ya_todo_app/core/domain/providers/api_client_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 import 'package:ya_todo_app/core/widgets/fatal_error_screen.dart';
-import 'package:ya_todo_app/generated/l10n.dart';
-import 'package:ya_todo_app/navigation/navigation.dart';
+import 'package:ya_todo_app/my_app.dart';
 
 void main() {
   unawaited(
@@ -65,7 +63,9 @@ void main() {
               localDbProvider.overrideWithValue(localDb),
               revisionProvider.overrideWithValue(dataRev)
             ],
-            child: const MyApp(),
+            child: const MyApp(
+              flavor: AppFlavor.dev,
+            ),
           ),
         );
       },
@@ -80,39 +80,4 @@ void main() {
       },
     ),
   );
-}
-
-/// application entry point
-class MyApp extends StatefulWidget {
-  /// application entry point
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final routerDelegate = AppRouterDelegate(
-    diContainer.appLogger,
-  );
-  final routerInformationParser = AppRouteInformationParser();
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationParser: routerInformationParser,
-      routerDelegate: routerDelegate,
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      darkTheme: AppTheme.darkTheme,
-      theme: AppTheme.lightTheme,
-      // home: const TodoListWidget(),
-      // routerDelegate: routerDelegate,
-      // routeInformationParser: routerInformationParser,
-    );
-  }
 }
