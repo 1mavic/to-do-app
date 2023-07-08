@@ -2,7 +2,7 @@
 
 Flutter to-do application for yandex summer school of mobile development.
 
-## Flutter version 3.10.0
+## Flutter version 3.10.5
 
 ## Getting Started
 
