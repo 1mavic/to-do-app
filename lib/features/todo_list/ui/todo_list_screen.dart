@@ -37,7 +37,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients &&
+              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -53,7 +54,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
-      } else if ((previous?.syncInProcess ?? false) == true && next.syncInProcess == false) {
+      } else if ((previous?.syncInProcess ?? false) == true &&
+          next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });
