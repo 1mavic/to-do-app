@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
@@ -12,7 +13,6 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
-import 'package:ya_todo_app/navigation/navigation.dart';
 
 /// key for main to-do list screen widget
 final mainScreenKey = GlobalKey();
@@ -65,7 +65,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
         backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.navigateTo(RouteConfig.detail(null));
+            FirebaseCrashlytics.instance.crash();
+            // context.navigateTo(RouteConfig.detail5(null));
           },
           backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
           child: const Icon(Icons.add),

@@ -24,6 +24,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final routerDelegate = AppRouterDelegate(
     diContainer.appLogger,
+    diContainer.appAnalitics,
   );
   final routerInformationParser = AppRouteInformationParser();
   @override

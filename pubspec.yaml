@@ -30,6 +30,10 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.2
   dio: ^5.2.1+1
+  firebase_analytics: ^10.4.3
+  firebase_core: ^2.14.0
+  firebase_crashlytics: ^3.3.3
+  firebase_remote_config: ^4.2.3
   flutter:
     sdk: flutter
   flutter_localizations:

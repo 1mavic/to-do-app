@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ya_todo_app/config/analytics/mock_analytics.dart';
 import 'package:ya_todo_app/core/data/local_data_source/mock_data_source.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
 import 'package:ya_todo_app/core/domain/providers/data_difference_provider.dart';
@@ -27,7 +28,7 @@ void main() {
         const MergeLists(),
       );
 
-      listNotifier = TodoListNotifier(manager);
+      listNotifier = TodoListNotifier(manager, AppAnalyticsMock());
 
       list = <Todo>[
         Todo(

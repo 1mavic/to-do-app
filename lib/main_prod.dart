@@ -68,7 +68,7 @@ void main() {
               revisionProvider.overrideWithValue(dataRev)
             ],
             child: const MyApp(
-              flavor: AppFlavor.dev,
+              flavor: AppFlavor.prod,
             ),
           ),
         );
