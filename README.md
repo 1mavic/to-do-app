@@ -14,9 +14,15 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 ## apk file
 [download apk](https://drive.google.com/file/d/1P8nb5sfJNYCmDtBUXU7WeV_m3gAiZnYq/view?usp=sharing)
 
+## flavors
+
+dev flavor
+prod flavor
+
 ## run
 
-fvm flutter run --target lib/main_dev.dart --dart-define URL=$url --dart-define token=$token
+fvm flutter run --target lib/main_dev.dart --flavor=dev --dart-define URL=$url --dart-define token=$token
+fvm flutter run --target lib/main_prod.dart --flavor=prod --dart-define URL=$url --dart-define token=$token
 
 ## build release
 
@@ -47,6 +53,11 @@ flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --da
 * unit tests
 * integration test on CRUD flow
 * intl
+* CI with GitHub actions
+* Firebase crashlytics
+* Firebase analytics
+* Firebase remoteconfig
+
 
 ### Libraries & Tools Used
 

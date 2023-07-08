@@ -15,7 +15,7 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: dart format -l 80 --set-exit-if-changed .
+      - run: flutter format -l 80 --set-exit-if-changed .
       - run: flutter analyze .
       - run: flutter test
 
