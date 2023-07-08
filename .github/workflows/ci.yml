@@ -15,9 +15,8 @@ jobs:
         with:
           channel: "stable"
       - run: dart format --set-exit-if-changed .
-
-jobs:
-  flutter_format:
+      
+  flutter_analyze:
     name: Run flutter test and analyze
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +29,6 @@ jobs:
           channel: "stable"
       - run: flutter analyze .
 
-jobs:
   flutter_test:
     name: Run flutter test and analyze
     runs-on: ubuntu-latest
@@ -43,7 +41,6 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter analyze
       - run: flutter test
 
   # build_ios:
