@@ -14,7 +14,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
-      - run: dart format --set-exit-if-changed .
+      - run: dart format -l 80 --set-exit-if-changed .
       
   flutter_analyze:
     name: Run flutter test and analyze
