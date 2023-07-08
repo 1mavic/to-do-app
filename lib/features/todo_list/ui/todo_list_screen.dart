@@ -1,9 +1,9 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/flavors/banner_widget.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/core/domain/providers/config_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/overlay_service_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
@@ -13,6 +13,7 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
+import 'package:ya_todo_app/navigation/navigation.dart';
 
 /// key for main to-do list screen widget
 final mainScreenKey = GlobalKey();
@@ -51,6 +52,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final a = ref.watch(configColorProvider);
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
@@ -65,8 +67,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
         backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            FirebaseCrashlytics.instance.crash();
-            // context.navigateTo(RouteConfig.detail5(null));
+            context.navigateTo(RouteConfig.detail(null));
           },
           backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
           child: const Icon(Icons.add),

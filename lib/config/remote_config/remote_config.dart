@@ -35,4 +35,6 @@ class AppRemoteConfigClass {
       );
     }
   }
+
+  Stream<RemoteConfigUpdate> get configStream => remoteConfig.onConfigUpdated;
 }

@@ -12,7 +12,7 @@ class AppAnalyticsImpl implements AppAnalytics {
       name: "todo_event",
       parameters: {
         "event_type": event.toString(),
-        "item_id": id,
+        "item_id": id ?? "new",
       },
     );
   }

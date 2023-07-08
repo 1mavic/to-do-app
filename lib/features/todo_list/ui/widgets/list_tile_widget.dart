@@ -8,6 +8,7 @@ import 'package:ya_todo_app/const/app_icons.dart';
 import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/core/domain/models/priority.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
+import 'package:ya_todo_app/core/domain/providers/config_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/todo_list_provider.dart';
 import 'package:ya_todo_app/core/extensions/date_time_ext.dart';
 import 'package:ya_todo_app/core/widgets/dialogs/remove_alert_dialog_widget.dart';
@@ -32,6 +33,7 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final hightColor = ref.watch(configColorProvider);
     return Dismissible(
       background: widget.todo.done
           ? ColoredBox(
@@ -153,7 +155,13 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                 Priority.important => SvgPicture.asset(
                     AppIcons.highPriority,
                     colorFilter: ColorFilter.mode(
-                      Theme.of(context).extension<AppColors>()!.red!,
+                      hightColor.map(
+                        data: (color) => color.value,
+                        error: (_) =>
+                            Theme.of(context).extension<AppColors>()!.red!,
+                        loading: (_) =>
+                            Theme.of(context).extension<AppColors>()!.red!,
+                      ),
                       BlendMode.srcIn,
                     ),
                   ),
