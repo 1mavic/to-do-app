@@ -14,6 +14,7 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart'
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
+import 'package:ya_todo_app/navigation/navigator_inherit.dart';
 
 /// key for main to-do list screen widget
 final mainScreenKey = GlobalKey();
@@ -38,8 +39,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients &&
-              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -52,12 +52,10 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final a = ref.watch(configColorProvider);
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
-      } else if ((previous?.syncInProcess ?? false) == true &&
-          next.syncInProcess == false) {
+      } else if ((previous?.syncInProcess ?? false) == true && next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });
@@ -67,7 +65,7 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
         backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.navigateTo(RouteConfig.detail(null));
+            AppNavigator.of(context)?.openTaskScreen(null);
           },
           backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
           child: const Icon(Icons.add),

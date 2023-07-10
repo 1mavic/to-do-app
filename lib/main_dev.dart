@@ -54,9 +54,9 @@ void main() {
             RevisionInterceptor(dataRev)
           ],
         );
-        await SystemChrome.setPreferredOrientations([
-          DeviceOrientation.portraitUp,
-        ]);
+        // await SystemChrome.setPreferredOrientations([
+        //   DeviceOrientation.portraitUp,
+        // ]);
         runApp(
           ProviderScope(
             observers: [

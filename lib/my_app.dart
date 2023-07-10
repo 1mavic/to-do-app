@@ -5,6 +5,8 @@ import 'package:ya_todo_app/config/flavors/flavor_provider.dart';
 import 'package:ya_todo_app/config/themes/app_themes.dart';
 import 'package:ya_todo_app/core/di/di_container.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
+import 'package:ya_todo_app/navigation/navigator_inherit.dart';
+import 'package:ya_todo_app/navigation/navigator_namager_impl.dart';
 import 'package:ya_todo_app/navigation/router_delegate.dart';
 import 'package:ya_todo_app/navigation/router_parser.dart';
 
@@ -22,31 +24,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final routerDelegate = AppRouterDelegate(
-    diContainer.appLogger,
-    diContainer.appAnalitics,
-  );
-  final routerInformationParser = AppRouteInformationParser();
+  final navigation = NavigatorManagerImpl(
+      AppRouterDelegate(
+        diContainer.appLogger,
+        diContainer.appAnalitics,
+      ),
+      AppRouteInformationParser());
   @override
   Widget build(BuildContext context) {
-    return FlavorProvider(
-      flavor: widget.flavor,
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routeInformationParser: routerInformationParser,
-        routerDelegate: routerDelegate,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        darkTheme: AppTheme.darkTheme,
-        theme: AppTheme.lightTheme,
-        // home: const TodoListWidget(),
-        // routerDelegate: routerDelegate,
-        // routeInformationParser: routerInformationParser,
+    return AppNavigator(
+      manager: navigation,
+      child: FlavorProvider(
+        flavor: widget.flavor,
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routeInformationParser: navigation.informationParser,
+          routerDelegate: navigation.instance,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          darkTheme: AppTheme.darkTheme,
+          theme: AppTheme.lightTheme,
+        ),
       ),
     );
   }

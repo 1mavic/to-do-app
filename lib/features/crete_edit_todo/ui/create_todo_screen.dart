@@ -12,6 +12,7 @@ import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_divider.dart'
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_text_field_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
+import 'package:ya_todo_app/navigation/navigator_inherit.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -35,15 +36,12 @@ class CreateTodoScreen extends ConsumerWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor:
-                Theme.of(context).extension<AppColors>()?.backPrimary,
+            backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
             automaticallyImplyLeading: false,
             titleSpacing: 8,
             leading: IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () {
-                context.pop();
-              },
+              onPressed: () => AppNavigator.of(context)?.goBack(),
               splashRadius: 0.1,
               color: Theme.of(context).extension<AppColors>()?.primary,
             ),
@@ -59,7 +57,7 @@ class CreateTodoScreen extends ConsumerWidget {
                       } else {
                         ref.read(todoListProvider.notifier).edit(todo);
                       }
-                      context.pop();
+                      AppNavigator.of(context)?.goBack();
                     }
                   },
                   disabled: todo.text.isEmpty,
@@ -83,12 +81,11 @@ class CreateTodoScreen extends ConsumerWidget {
                       child: MyTextFieldWidget(
                         key: const ValueKey<String>('text-field'),
                         initialText: todo.text,
-                        onChanged: (val) =>
-                            ref.read(todoProvider(id).notifier).edit(
-                                  ref.read(todoProvider(id)).copyWith(
-                                        text: val,
-                                      ),
-                                ),
+                        onChanged: (val) => ref.read(todoProvider(id).notifier).edit(
+                              ref.read(todoProvider(id)).copyWith(
+                                    text: val,
+                                  ),
+                            ),
                         validator: (value) {
                           if ((value ?? '').trim().isEmpty) {
                             return S.of(context).emptyFieldError;
@@ -158,14 +155,13 @@ class CreateTodoScreen extends ConsumerWidget {
                         final currentId = todo.id;
                         final res = await showDialog<bool>(
                               context: context,
-                              builder: (context) =>
-                                  const RemoveAlertDialogWidget(),
+                              builder: (context) => const RemoveAlertDialogWidget(),
                             ) ??
                             false;
 
                         if (res == true && context.mounted) {
                           ref.read(todoListProvider.notifier).remove(currentId);
-                          await context.pop();
+                          await AppNavigator.of(context)?.goBack();
                         }
                       },
                       disabled: (todo.id ?? '').isEmpty,

@@ -4,6 +4,7 @@ import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigation.dart';
+import 'package:ya_todo_app/navigation/navigator_inherit.dart';
 
 class NewButtonWidget extends StatefulWidget {
   const NewButtonWidget({
@@ -23,9 +24,7 @@ class _NewButtonWidgetState extends State<NewButtonWidget> {
         horizontal: hPadding,
       ),
       child: GestureDetector(
-        onTap: () {
-          context.navigateTo(RouteConfig.detail(null));
-        },
+        onTap: () => AppNavigator.of(context)?.openTaskScreen(null),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 2,

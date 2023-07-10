@@ -54,9 +54,9 @@ void main() {
             RevisionInterceptor(dataRev)
           ],
         );
-        await SystemChrome.setPreferredOrientations([
-          DeviceOrientation.portraitUp,
-        ]);
+        // await SystemChrome.setPreferredOrientations([
+        //   DeviceOrientation.portraitUp,
+        // ]);
         runApp(
           ProviderScope(
             observers: [
@@ -73,8 +73,7 @@ void main() {
           ),
         );
 
-        FlutterError.onError =
-            FirebaseCrashlytics.instance.recordFlutterFatalError;
+        FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       },
       (Object error, StackTrace stack) {
         FirebaseCrashlytics.instance.recordError(error, stack);
