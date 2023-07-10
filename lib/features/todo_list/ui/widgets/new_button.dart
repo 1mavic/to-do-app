@@ -23,7 +23,9 @@ class _NewButtonWidgetState extends State<NewButtonWidget> {
         horizontal: hPadding,
       ),
       child: GestureDetector(
-        onTap: () => context.findAncestorStateOfType<TodoListWidgetState>()?.openTodo(null),
+        onTap: () => context
+            .findAncestorStateOfType<TodoListWidgetState>()
+            ?.openTodo(null),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 2,

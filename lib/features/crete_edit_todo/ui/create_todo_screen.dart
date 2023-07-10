@@ -40,7 +40,8 @@ class CreateTodoScreen extends ConsumerWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+            backgroundColor:
+                Theme.of(context).extension<AppColors>()?.backPrimary,
             automaticallyImplyLeading: false,
             titleSpacing: 8,
             leading: fullScreen
@@ -90,11 +91,12 @@ class CreateTodoScreen extends ConsumerWidget {
                         // key: const ValueKey<String>('text-field'),
                         key: ValueKey<String?>(todo.id),
                         initialText: todo.text,
-                        onChanged: (val) => ref.read(todoProvider(id).notifier).edit(
-                              ref.read(todoProvider(id)).copyWith(
-                                    text: val,
-                                  ),
-                            ),
+                        onChanged: (val) =>
+                            ref.read(todoProvider(id).notifier).edit(
+                                  ref.read(todoProvider(id)).copyWith(
+                                        text: val,
+                                      ),
+                                ),
                         validator: (value) {
                           if ((value ?? '').trim().isEmpty) {
                             return S.of(context).emptyFieldError;
@@ -164,7 +166,8 @@ class CreateTodoScreen extends ConsumerWidget {
                         final currentId = todo.id;
                         final res = await showDialog<bool>(
                               context: context,
-                              builder: (context) => const RemoveAlertDialogWidget(),
+                              builder: (context) =>
+                                  const RemoveAlertDialogWidget(),
                             ) ??
                             false;
 
@@ -173,7 +176,9 @@ class CreateTodoScreen extends ConsumerWidget {
                           if (fullScreen) {
                             await AppNavigator.of(context)?.goBack();
                           } else {
-                            context.findAncestorStateOfType<TodoListWidgetState>()?.openTodo(null);
+                            context
+                                .findAncestorStateOfType<TodoListWidgetState>()
+                                ?.openTodo(null);
                           }
                         }
                       },

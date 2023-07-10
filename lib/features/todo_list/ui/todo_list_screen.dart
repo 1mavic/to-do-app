@@ -35,7 +35,8 @@ class TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients &&
+              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -44,7 +45,9 @@ class TodoListWidgetState extends ConsumerState<TodoListWidget> {
   void didChangeDependencies() {
     final size = MediaQuery.of(context).size;
     final orientation = MediaQuery.of(context).orientation;
-    _isTablet = orientation == Orientation.portrait ? size.width > 600 : size.height > 600;
+    _isTablet = orientation == Orientation.portrait
+        ? size.width > 600
+        : size.height > 600;
     super.didChangeDependencies();
   }
 
@@ -69,7 +72,8 @@ class TodoListWidgetState extends ConsumerState<TodoListWidget> {
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
-      } else if ((previous?.syncInProcess ?? false) == true && next.syncInProcess == false) {
+      } else if ((previous?.syncInProcess ?? false) == true &&
+          next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });

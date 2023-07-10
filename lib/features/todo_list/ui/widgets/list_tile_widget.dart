@@ -125,14 +125,17 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                       borderRadius: BorderRadius.circular(3),
                     ),
                     activeColor: Colors.amber,
-                    fillColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+                    fillColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
                       return widget.todo.priority == Priority.important
                           ? Theme.of(context).extension<AppColors>()!.red!
                           : Theme.of(context).extension<AppColors>()!.green!;
                     }),
                     value: widget.todo.done,
                     onChanged: (_) {
-                      ref.read(todoListProvider.notifier).toggle(widget.todo.id);
+                      ref
+                          .read(todoListProvider.notifier)
+                          .toggle(widget.todo.id);
                     },
                   ),
                 ),
@@ -154,8 +157,10 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                     colorFilter: ColorFilter.mode(
                       hightColor.map(
                         data: (color) => color.value,
-                        error: (_) => Theme.of(context).extension<AppColors>()!.red!,
-                        loading: (_) => Theme.of(context).extension<AppColors>()!.red!,
+                        error: (_) =>
+                            Theme.of(context).extension<AppColors>()!.red!,
+                        loading: (_) =>
+                            Theme.of(context).extension<AppColors>()!.red!,
                       ),
                       BlendMode.srcIn,
                     ),
@@ -168,15 +173,20 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
               Expanded(
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => context.findAncestorStateOfType<TodoListWidgetState>()?.openTodo(widget.todo.id),
+                  onTap: () => context
+                      .findAncestorStateOfType<TodoListWidgetState>()
+                      ?.openTodo(widget.todo.id),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         widget.todo.text,
                         style: AppTextStyle.body.copyWith(
-                          decoration: widget.todo.done ? TextDecoration.lineThrough : null,
-                          color: Theme.of(context).extension<AppColors>()?.primary,
+                          decoration: widget.todo.done
+                              ? TextDecoration.lineThrough
+                              : null,
+                          color:
+                              Theme.of(context).extension<AppColors>()?.primary,
                         ),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
@@ -190,7 +200,9 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                             widget.todo.deadline ?? 0,
                           ).getShortFormat(Intl.getCurrentLocale()),
                           style: AppTextStyle.subHead.copyWith(
-                            color: Theme.of(context).extension<AppColors>()?.tertiary,
+                            color: Theme.of(context)
+                                .extension<AppColors>()
+                                ?.tertiary,
                           ),
                         ),
                       ],
@@ -199,7 +211,9 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                 ),
               ),
               GestureDetector(
-                onTap: () => context.findAncestorStateOfType<TodoListWidgetState>()?.openTodo(widget.todo.id),
+                onTap: () => context
+                    .findAncestorStateOfType<TodoListWidgetState>()
+                    ?.openTodo(widget.todo.id),
                 child: SizedBox.square(
                   dimension: 24,
                   child: Icon(
