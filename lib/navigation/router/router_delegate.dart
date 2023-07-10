@@ -4,7 +4,8 @@ import 'package:ya_todo_app/config/analytics/app_analytics.dart';
 import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
-import 'package:ya_todo_app/navigation/router_config.dart';
+
+import 'navigation.dart';
 
 extension RouteExtension on BuildContext {
   Future<void> navigateTo(RouteConfig path) async {

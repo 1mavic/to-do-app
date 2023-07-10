@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/flavors/banner_widget.dart';
 import 'package:ya_todo_app/const/const_data.dart';
-import 'package:ya_todo_app/core/domain/providers/config_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/overlay_service_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
 import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
@@ -13,7 +12,6 @@ import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
 import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
-import 'package:ya_todo_app/navigation/navigation.dart';
 import 'package:ya_todo_app/navigation/navigator_inherit.dart';
 
 /// key for main to-do list screen widget
@@ -39,7 +37,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     _controller = ScrollController()
       ..addListener(() {
         setState(() {
-          _expanded = _controller.hasClients && _controller.offset > kExpandedHeight - kToolBarHeight - 10;
+          _expanded = _controller.hasClients &&
+              _controller.offset > kExpandedHeight - kToolBarHeight - 10;
         });
       });
   }
@@ -55,7 +54,8 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
-      } else if ((previous?.syncInProcess ?? false) == true && next.syncInProcess == false) {
+      } else if ((previous?.syncInProcess ?? false) == true &&
+          next.syncInProcess == false) {
         ref.read(overlayProvider).removeOverlay();
       }
     });

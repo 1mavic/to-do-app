@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
-import 'package:ya_todo_app/navigation/router_config.dart';
+
+import 'navigation.dart';
 
 class AppRouteInformationParser extends RouteInformationParser<RouteConfig> {
   @override

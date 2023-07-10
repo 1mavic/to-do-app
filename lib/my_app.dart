@@ -6,9 +6,6 @@ import 'package:ya_todo_app/config/themes/app_themes.dart';
 import 'package:ya_todo_app/core/di/di_container.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
 import 'package:ya_todo_app/navigation/navigator_inherit.dart';
-import 'package:ya_todo_app/navigation/navigator_namager_impl.dart';
-import 'package:ya_todo_app/navigation/router_delegate.dart';
-import 'package:ya_todo_app/navigation/router_parser.dart';
 
 /// application entry point
 class MyApp extends StatefulWidget {
@@ -24,12 +21,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final navigation = NavigatorManagerImpl(
-      AppRouterDelegate(
-        diContainer.appLogger,
-        diContainer.appAnalitics,
-      ),
-      AppRouteInformationParser());
+  final navigation = diContainer.navigationManager;
   @override
   Widget build(BuildContext context) {
     return AppNavigator(

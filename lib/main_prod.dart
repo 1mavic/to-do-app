@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/flavors/app_flavor.dart';
 import 'package:ya_todo_app/core/data/api_client/api_client.dart';
@@ -73,7 +72,8 @@ void main() {
           ),
         );
 
-        FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+        FlutterError.onError =
+            FirebaseCrashlytics.instance.recordFlutterFatalError;
       },
       (Object error, StackTrace stack) {
         FirebaseCrashlytics.instance.recordError(error, stack);

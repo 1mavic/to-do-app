@@ -11,7 +11,6 @@ import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_button_widget
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_divider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_text_field_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
-import 'package:ya_todo_app/navigation/navigation.dart';
 import 'package:ya_todo_app/navigation/navigator_inherit.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -36,7 +35,8 @@ class CreateTodoScreen extends ConsumerWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+            backgroundColor:
+                Theme.of(context).extension<AppColors>()?.backPrimary,
             automaticallyImplyLeading: false,
             titleSpacing: 8,
             leading: IconButton(
@@ -81,11 +81,12 @@ class CreateTodoScreen extends ConsumerWidget {
                       child: MyTextFieldWidget(
                         key: const ValueKey<String>('text-field'),
                         initialText: todo.text,
-                        onChanged: (val) => ref.read(todoProvider(id).notifier).edit(
-                              ref.read(todoProvider(id)).copyWith(
-                                    text: val,
-                                  ),
-                            ),
+                        onChanged: (val) =>
+                            ref.read(todoProvider(id).notifier).edit(
+                                  ref.read(todoProvider(id)).copyWith(
+                                        text: val,
+                                      ),
+                                ),
                         validator: (value) {
                           if ((value ?? '').trim().isEmpty) {
                             return S.of(context).emptyFieldError;
@@ -155,7 +156,8 @@ class CreateTodoScreen extends ConsumerWidget {
                         final currentId = todo.id;
                         final res = await showDialog<bool>(
                               context: context,
-                              builder: (context) => const RemoveAlertDialogWidget(),
+                              builder: (context) =>
+                                  const RemoveAlertDialogWidget(),
                             ) ??
                             false;
 
