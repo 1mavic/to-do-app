@@ -33,7 +33,6 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final hightColor = ref.watch(configColorProvider);
     return Dismissible(
       background: widget.todo.done
           ? ColoredBox(
@@ -124,11 +123,19 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3),
                     ),
-                    activeColor: Colors.amber,
+                    // activeColor: Colors.amber,
                     fillColor: MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
                       return widget.todo.priority == Priority.important
-                          ? Theme.of(context).extension<AppColors>()!.red!
+                          ? ref.watch(configColorProvider).map(
+                                data: (color) => color.value,
+                                error: (_) => Theme.of(context)
+                                    .extension<AppColors>()!
+                                    .red!,
+                                loading: (_) => Theme.of(context)
+                                    .extension<AppColors>()!
+                                    .red!,
+                              )
                           : Theme.of(context).extension<AppColors>()!.green!;
                     }),
                     value: widget.todo.done,
@@ -155,13 +162,13 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                 Priority.important => SvgPicture.asset(
                     AppIcons.highPriority,
                     colorFilter: ColorFilter.mode(
-                      hightColor.map(
-                        data: (color) => color.value,
-                        error: (_) =>
-                            Theme.of(context).extension<AppColors>()!.red!,
-                        loading: (_) =>
-                            Theme.of(context).extension<AppColors>()!.red!,
-                      ),
+                      ref.watch(configColorProvider).map(
+                            data: (color) => color.value,
+                            error: (_) =>
+                                Theme.of(context).extension<AppColors>()!.red!,
+                            loading: (_) =>
+                                Theme.of(context).extension<AppColors>()!.red!,
+                          ),
                       BlendMode.srcIn,
                     ),
                   ),

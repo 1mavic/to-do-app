@@ -78,7 +78,7 @@ class RetryInterceptor extends QueuedInterceptor {
         'message',
         'response',
         400,
-        stackTrace.toString(),
+        stackTrace,
         DateTime.now(),
       );
     }

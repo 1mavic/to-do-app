@@ -56,7 +56,7 @@ flutter test integration_tests/crud_todo_test.dart --flavor=dev --dart-define UR
 * CI with GitHub actions
 * Firebase crashlytics
 * Firebase analytics
-* Firebase remoteconfig
+* Firebase remoteconfig runtime update
 * portrait and landscape orientation
 * tablet support
 

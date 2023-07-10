@@ -14,111 +14,96 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ApiException _$ApiExceptionFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'defult':
-      return _DefaultApiException.fromJson(json);
-    case 'noInternet':
-      return _NoInternetApiException.fromJson(json);
-    case 'format':
-      return _FormatApiException.fromJson(json);
-    case 'timeOut':
-      return _TimeOutApiException.fromJson(json);
-    case 'badRequest':
-      return _BarRequestApiException.fromJson(json);
-    case 'notAuthorized':
-      return _AuthApiException.fromJson(json);
-    case 'notFound':
-      return _NotFoundApiException.fromJson(json);
-    case 'internalServerError':
-      return _InternalApiException.fromJson(json);
-    case 'requestCancel':
-      return _CancelRequestException.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'ApiException',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$ApiException {
   String? get message => throw _privateConstructorUsedError;
+  StackTrace? get stackTrace => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,7 +147,7 @@ mixin _$ApiException {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $ApiExceptionCopyWith<ApiException> get copyWith =>
       throw _privateConstructorUsedError;
@@ -174,7 +159,7 @@ abstract class $ApiExceptionCopyWith<$Res> {
           ApiException value, $Res Function(ApiException) then) =
       _$ApiExceptionCopyWithImpl<$Res, ApiException>;
   @useResult
-  $Res call({String? message});
+  $Res call({String? message, StackTrace? stackTrace});
 }
 
 /// @nodoc
@@ -191,12 +176,17 @@ class _$ApiExceptionCopyWithImpl<$Res, $Val extends ApiException>
   @override
   $Res call({
     Object? message = freezed,
+    Object? stackTrace = freezed,
   }) {
     return _then(_value.copyWith(
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      stackTrace: freezed == stackTrace
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace?,
     ) as $Val);
   }
 }
@@ -213,7 +203,7 @@ abstract class _$$_DefaultApiExceptionCopyWith<$Res>
       {String? message,
       String? response,
       int? code,
-      String? stackTrace,
+      StackTrace? stackTrace,
       DateTime? timeStamp});
 }
 
@@ -250,7 +240,7 @@ class __$$_DefaultApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -260,16 +250,12 @@ class __$$_DefaultApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_DefaultApiException extends _DefaultApiException {
-  const _$_DefaultApiException(
-      this.message, this.response, this.code, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'defult',
-        super._();
 
-  factory _$_DefaultApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_DefaultApiExceptionFromJson(json);
+class _$_DefaultApiException extends _DefaultApiException
+    with DiagnosticableTreeMixin {
+  const _$_DefaultApiException(
+      this.message, this.response, this.code, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
@@ -278,16 +264,25 @@ class _$_DefaultApiException extends _DefaultApiException {
   @override
   final int? code;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.defult(message: $message, response: $response, code: $code, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.defult(message: $message, response: $response, code: $code, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.defult'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('response', response))
+      ..add(DiagnosticsProperty('code', code))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -305,7 +300,6 @@ class _$_DefaultApiException extends _DefaultApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, message, response, code, stackTrace, timeStamp);
@@ -321,30 +315,31 @@ class _$_DefaultApiException extends _DefaultApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return defult(message, response, code, stackTrace, timeStamp);
   }
@@ -353,25 +348,30 @@ class _$_DefaultApiException extends _DefaultApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return defult?.call(message, response, code, stackTrace, timeStamp);
   }
@@ -380,25 +380,30 @@ class _$_DefaultApiException extends _DefaultApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (defult != null) {
@@ -458,13 +463,6 @@ class _$_DefaultApiException extends _DefaultApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_DefaultApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _DefaultApiException extends ApiException {
@@ -472,18 +470,16 @@ abstract class _DefaultApiException extends ApiException {
       final String? message,
       final String? response,
       final int? code,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_DefaultApiException;
   const _DefaultApiException._() : super._();
-
-  factory _DefaultApiException.fromJson(Map<String, dynamic> json) =
-      _$_DefaultApiException.fromJson;
 
   @override
   String? get message;
   String? get response;
   int? get code;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -499,7 +495,7 @@ abstract class _$$_NoInternetApiExceptionCopyWith<$Res>
       __$$_NoInternetApiExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? message, String? stackTrace, DateTime? timeStamp});
+  $Res call({String? message, StackTrace? stackTrace, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -525,7 +521,7 @@ class __$$_NoInternetApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -535,29 +531,32 @@ class __$$_NoInternetApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_NoInternetApiException extends _NoInternetApiException {
-  const _$_NoInternetApiException(this.message, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'noInternet',
-        super._();
 
-  factory _$_NoInternetApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_NoInternetApiExceptionFromJson(json);
+class _$_NoInternetApiException extends _NoInternetApiException
+    with DiagnosticableTreeMixin {
+  const _$_NoInternetApiException(this.message, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.noInternet(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.noInternet(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.noInternet'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -572,7 +571,6 @@ class _$_NoInternetApiException extends _NoInternetApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, message, stackTrace, timeStamp);
 
@@ -587,30 +585,31 @@ class _$_NoInternetApiException extends _NoInternetApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return noInternet(message, stackTrace, timeStamp);
   }
@@ -619,25 +618,30 @@ class _$_NoInternetApiException extends _NoInternetApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return noInternet?.call(message, stackTrace, timeStamp);
   }
@@ -646,25 +650,30 @@ class _$_NoInternetApiException extends _NoInternetApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (noInternet != null) {
@@ -724,28 +733,19 @@ class _$_NoInternetApiException extends _NoInternetApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_NoInternetApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _NoInternetApiException extends ApiException {
   const factory _NoInternetApiException(
       final String? message,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_NoInternetApiException;
   const _NoInternetApiException._() : super._();
 
-  factory _NoInternetApiException.fromJson(Map<String, dynamic> json) =
-      _$_NoInternetApiException.fromJson;
-
   @override
   String? get message;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -761,7 +761,7 @@ abstract class _$$_FormatApiExceptionCopyWith<$Res>
       __$$_FormatApiExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? message, String? stackTrace, DateTime? timeStamp});
+  $Res call({String? message, StackTrace? stackTrace, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -787,7 +787,7 @@ class __$$_FormatApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -797,29 +797,32 @@ class __$$_FormatApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_FormatApiException extends _FormatApiException {
-  const _$_FormatApiException(this.message, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'format',
-        super._();
 
-  factory _$_FormatApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_FormatApiExceptionFromJson(json);
+class _$_FormatApiException extends _FormatApiException
+    with DiagnosticableTreeMixin {
+  const _$_FormatApiException(this.message, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.format(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.format(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.format'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -834,7 +837,6 @@ class _$_FormatApiException extends _FormatApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, message, stackTrace, timeStamp);
 
@@ -849,30 +851,31 @@ class _$_FormatApiException extends _FormatApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return format(message, stackTrace, timeStamp);
   }
@@ -881,25 +884,30 @@ class _$_FormatApiException extends _FormatApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return format?.call(message, stackTrace, timeStamp);
   }
@@ -908,25 +916,30 @@ class _$_FormatApiException extends _FormatApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (format != null) {
@@ -986,28 +999,19 @@ class _$_FormatApiException extends _FormatApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_FormatApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _FormatApiException extends ApiException {
   const factory _FormatApiException(
       final String? message,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_FormatApiException;
   const _FormatApiException._() : super._();
 
-  factory _FormatApiException.fromJson(Map<String, dynamic> json) =
-      _$_FormatApiException.fromJson;
-
   @override
   String? get message;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1023,7 +1027,7 @@ abstract class _$$_TimeOutApiExceptionCopyWith<$Res>
       __$$_TimeOutApiExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? message, String? stackTrace, DateTime? timeStamp});
+  $Res call({String? message, StackTrace? stackTrace, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -1049,7 +1053,7 @@ class __$$_TimeOutApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -1059,29 +1063,32 @@ class __$$_TimeOutApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_TimeOutApiException extends _TimeOutApiException {
-  const _$_TimeOutApiException(this.message, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'timeOut',
-        super._();
 
-  factory _$_TimeOutApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_TimeOutApiExceptionFromJson(json);
+class _$_TimeOutApiException extends _TimeOutApiException
+    with DiagnosticableTreeMixin {
+  const _$_TimeOutApiException(this.message, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.timeOut(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.timeOut(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.timeOut'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -1096,7 +1103,6 @@ class _$_TimeOutApiException extends _TimeOutApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, message, stackTrace, timeStamp);
 
@@ -1111,30 +1117,31 @@ class _$_TimeOutApiException extends _TimeOutApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return timeOut(message, stackTrace, timeStamp);
   }
@@ -1143,25 +1150,30 @@ class _$_TimeOutApiException extends _TimeOutApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return timeOut?.call(message, stackTrace, timeStamp);
   }
@@ -1170,25 +1182,30 @@ class _$_TimeOutApiException extends _TimeOutApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (timeOut != null) {
@@ -1248,28 +1265,19 @@ class _$_TimeOutApiException extends _TimeOutApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_TimeOutApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _TimeOutApiException extends ApiException {
   const factory _TimeOutApiException(
       final String? message,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_TimeOutApiException;
   const _TimeOutApiException._() : super._();
 
-  factory _TimeOutApiException.fromJson(Map<String, dynamic> json) =
-      _$_TimeOutApiException.fromJson;
-
   @override
   String? get message;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1288,7 +1296,7 @@ abstract class _$$_BarRequestApiExceptionCopyWith<$Res>
   $Res call(
       {String? message,
       String? response,
-      String? stackTrace,
+      StackTrace? stackTrace,
       DateTime? timeStamp});
 }
 
@@ -1320,7 +1328,7 @@ class __$$_BarRequestApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -1330,32 +1338,36 @@ class __$$_BarRequestApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_BarRequestApiException extends _BarRequestApiException {
-  const _$_BarRequestApiException(
-      this.message, this.response, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'badRequest',
-        super._();
 
-  factory _$_BarRequestApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_BarRequestApiExceptionFromJson(json);
+class _$_BarRequestApiException extends _BarRequestApiException
+    with DiagnosticableTreeMixin {
+  const _$_BarRequestApiException(
+      this.message, this.response, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
   @override
   final String? response;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.badRequest(message: $message, response: $response, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.badRequest(message: $message, response: $response, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.badRequest'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('response', response))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -1372,7 +1384,6 @@ class _$_BarRequestApiException extends _BarRequestApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, message, response, stackTrace, timeStamp);
@@ -1388,30 +1399,31 @@ class _$_BarRequestApiException extends _BarRequestApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return badRequest(message, response, stackTrace, timeStamp);
   }
@@ -1420,25 +1432,30 @@ class _$_BarRequestApiException extends _BarRequestApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return badRequest?.call(message, response, stackTrace, timeStamp);
   }
@@ -1447,25 +1464,30 @@ class _$_BarRequestApiException extends _BarRequestApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -1525,30 +1547,21 @@ class _$_BarRequestApiException extends _BarRequestApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_BarRequestApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _BarRequestApiException extends ApiException {
   const factory _BarRequestApiException(
       final String? message,
       final String? response,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_BarRequestApiException;
   const _BarRequestApiException._() : super._();
-
-  factory _BarRequestApiException.fromJson(Map<String, dynamic> json) =
-      _$_BarRequestApiException.fromJson;
 
   @override
   String? get message;
   String? get response;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1564,7 +1577,7 @@ abstract class _$$_AuthApiExceptionCopyWith<$Res>
       __$$_AuthApiExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? message, String? stackTrace, DateTime? timeStamp});
+  $Res call({String? message, StackTrace? stackTrace, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -1590,7 +1603,7 @@ class __$$_AuthApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -1600,29 +1613,32 @@ class __$$_AuthApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_AuthApiException extends _AuthApiException {
-  const _$_AuthApiException(this.message, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'notAuthorized',
-        super._();
 
-  factory _$_AuthApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_AuthApiExceptionFromJson(json);
+class _$_AuthApiException extends _AuthApiException
+    with DiagnosticableTreeMixin {
+  const _$_AuthApiException(this.message, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.notAuthorized(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.notAuthorized(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.notAuthorized'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -1637,7 +1653,6 @@ class _$_AuthApiException extends _AuthApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, message, stackTrace, timeStamp);
 
@@ -1651,30 +1666,31 @@ class _$_AuthApiException extends _AuthApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return notAuthorized(message, stackTrace, timeStamp);
   }
@@ -1683,25 +1699,30 @@ class _$_AuthApiException extends _AuthApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return notAuthorized?.call(message, stackTrace, timeStamp);
   }
@@ -1710,25 +1731,30 @@ class _$_AuthApiException extends _AuthApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (notAuthorized != null) {
@@ -1788,28 +1814,19 @@ class _$_AuthApiException extends _AuthApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_AuthApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _AuthApiException extends ApiException {
   const factory _AuthApiException(
       final String? message,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_AuthApiException;
   const _AuthApiException._() : super._();
 
-  factory _AuthApiException.fromJson(Map<String, dynamic> json) =
-      _$_AuthApiException.fromJson;
-
   @override
   String? get message;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -1828,7 +1845,7 @@ abstract class _$$_NotFoundApiExceptionCopyWith<$Res>
   $Res call(
       {String? message,
       String? response,
-      String? stackTrace,
+      StackTrace? stackTrace,
       DateTime? timeStamp});
 }
 
@@ -1860,7 +1877,7 @@ class __$$_NotFoundApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -1870,32 +1887,36 @@ class __$$_NotFoundApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_NotFoundApiException extends _NotFoundApiException {
-  const _$_NotFoundApiException(
-      this.message, this.response, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'notFound',
-        super._();
 
-  factory _$_NotFoundApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_NotFoundApiExceptionFromJson(json);
+class _$_NotFoundApiException extends _NotFoundApiException
+    with DiagnosticableTreeMixin {
+  const _$_NotFoundApiException(
+      this.message, this.response, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
   @override
   final String? response;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.notFound(message: $message, response: $response, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.notFound(message: $message, response: $response, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.notFound'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('response', response))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -1912,7 +1933,6 @@ class _$_NotFoundApiException extends _NotFoundApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, message, response, stackTrace, timeStamp);
@@ -1928,30 +1948,31 @@ class _$_NotFoundApiException extends _NotFoundApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return notFound(message, response, stackTrace, timeStamp);
   }
@@ -1960,25 +1981,30 @@ class _$_NotFoundApiException extends _NotFoundApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return notFound?.call(message, response, stackTrace, timeStamp);
   }
@@ -1987,25 +2013,30 @@ class _$_NotFoundApiException extends _NotFoundApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -2065,30 +2096,21 @@ class _$_NotFoundApiException extends _NotFoundApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_NotFoundApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _NotFoundApiException extends ApiException {
   const factory _NotFoundApiException(
       final String? message,
       final String? response,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_NotFoundApiException;
   const _NotFoundApiException._() : super._();
-
-  factory _NotFoundApiException.fromJson(Map<String, dynamic> json) =
-      _$_NotFoundApiException.fromJson;
 
   @override
   String? get message;
   String? get response;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -2104,7 +2126,7 @@ abstract class _$$_InternalApiExceptionCopyWith<$Res>
       __$$_InternalApiExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? message, String? stackTrace, DateTime? timeStamp});
+  $Res call({String? message, StackTrace? stackTrace, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -2130,7 +2152,7 @@ class __$$_InternalApiExceptionCopyWithImpl<$Res>
       freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -2140,29 +2162,32 @@ class __$$_InternalApiExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_InternalApiException extends _InternalApiException {
-  const _$_InternalApiException(this.message, this.stackTrace, this.timeStamp,
-      {final String? $type})
-      : $type = $type ?? 'internalServerError',
-        super._();
 
-  factory _$_InternalApiException.fromJson(Map<String, dynamic> json) =>
-      _$$_InternalApiExceptionFromJson(json);
+class _$_InternalApiException extends _InternalApiException
+    with DiagnosticableTreeMixin {
+  const _$_InternalApiException(this.message, this.stackTrace, this.timeStamp)
+      : super._();
 
   @override
   final String? message;
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.internalServerError(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  }
 
   @override
-  String toString() {
-    return 'ApiException.internalServerError(message: $message, stackTrace: $stackTrace, timeStamp: $timeStamp)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.internalServerError'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace))
+      ..add(DiagnosticsProperty('timeStamp', timeStamp));
   }
 
   @override
@@ -2177,7 +2202,6 @@ class _$_InternalApiException extends _InternalApiException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, message, stackTrace, timeStamp);
 
@@ -2192,30 +2216,31 @@ class _$_InternalApiException extends _InternalApiException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
     return internalServerError(message, stackTrace, timeStamp);
   }
@@ -2224,25 +2249,30 @@ class _$_InternalApiException extends _InternalApiException {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
     return internalServerError?.call(message, stackTrace, timeStamp);
   }
@@ -2251,25 +2281,30 @@ class _$_InternalApiException extends _InternalApiException {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (internalServerError != null) {
@@ -2329,28 +2364,19 @@ class _$_InternalApiException extends _InternalApiException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_InternalApiExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _InternalApiException extends ApiException {
   const factory _InternalApiException(
       final String? message,
-      final String? stackTrace,
+      final StackTrace? stackTrace,
       final DateTime? timeStamp) = _$_InternalApiException;
   const _InternalApiException._() : super._();
 
-  factory _InternalApiException.fromJson(Map<String, dynamic> json) =
-      _$_InternalApiException.fromJson;
-
   @override
   String? get message;
-  String? get stackTrace;
+  @override
+  StackTrace? get stackTrace;
   DateTime? get timeStamp;
   @override
   @JsonKey(ignore: true)
@@ -2366,7 +2392,7 @@ abstract class _$$_CancelRequestExceptionCopyWith<$Res>
       __$$_CancelRequestExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? message});
+  $Res call({String? message, StackTrace? stackTrace});
 }
 
 /// @nodoc
@@ -2381,35 +2407,44 @@ class __$$_CancelRequestExceptionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
+    Object? stackTrace = freezed,
   }) {
     return _then(_$_CancelRequestException(
       freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      freezed == stackTrace
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_CancelRequestException extends _CancelRequestException {
-  const _$_CancelRequestException(this.message, {final String? $type})
-      : $type = $type ?? 'requestCancel',
-        super._();
 
-  factory _$_CancelRequestException.fromJson(Map<String, dynamic> json) =>
-      _$$_CancelRequestExceptionFromJson(json);
+class _$_CancelRequestException extends _CancelRequestException
+    with DiagnosticableTreeMixin {
+  const _$_CancelRequestException(this.message, this.stackTrace) : super._();
 
   @override
   final String? message;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @override
+  final StackTrace? stackTrace;
 
   @override
-  String toString() {
-    return 'ApiException.requestCancel(message: $message)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ApiException.requestCancel(message: $message, stackTrace: $stackTrace)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ApiException.requestCancel'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('stackTrace', stackTrace));
   }
 
   @override
@@ -2417,12 +2452,13 @@ class _$_CancelRequestException extends _CancelRequestException {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CancelRequestException &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.stackTrace, stackTrace) ||
+                other.stackTrace == stackTrace));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, stackTrace);
 
   @JsonKey(ignore: true)
   @override
@@ -2435,88 +2471,99 @@ class _$_CancelRequestException extends _CancelRequestException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         defult,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         noInternet,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         format,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         timeOut,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         badRequest,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         notAuthorized,
     required TResult Function(String? message, String? response,
-            String? stackTrace, DateTime? timeStamp)
+            StackTrace? stackTrace, DateTime? timeStamp)
         notFound,
     required TResult Function(
-            String? message, String? stackTrace, DateTime? timeStamp)
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)
         internalServerError,
-    required TResult Function(String? message) requestCancel,
+    required TResult Function(String? message, StackTrace? stackTrace)
+        requestCancel,
   }) {
-    return requestCancel(message);
+    return requestCancel(message, stackTrace);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult? Function(String? message, String? response, String? stackTrace,
+    TResult? Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult? Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult? Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult? Function(String? message)? requestCancel,
+    TResult? Function(String? message, StackTrace? stackTrace)? requestCancel,
   }) {
-    return requestCancel?.call(message);
+    return requestCancel?.call(message, stackTrace);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message, String? response, int? code,
-            String? stackTrace, DateTime? timeStamp)?
+            StackTrace? stackTrace, DateTime? timeStamp)?
         defult,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         noInternet,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         format,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         timeOut,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         badRequest,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         notAuthorized,
-    TResult Function(String? message, String? response, String? stackTrace,
+    TResult Function(String? message, String? response, StackTrace? stackTrace,
             DateTime? timeStamp)?
         notFound,
-    TResult Function(String? message, String? stackTrace, DateTime? timeStamp)?
+    TResult Function(
+            String? message, StackTrace? stackTrace, DateTime? timeStamp)?
         internalServerError,
-    TResult Function(String? message)? requestCancel,
+    TResult Function(String? message, StackTrace? stackTrace)? requestCancel,
     required TResult orElse(),
   }) {
     if (requestCancel != null) {
-      return requestCancel(message);
+      return requestCancel(message, stackTrace);
     }
     return orElse();
   }
@@ -2572,25 +2619,18 @@ class _$_CancelRequestException extends _CancelRequestException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_CancelRequestExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _CancelRequestException extends ApiException {
-  const factory _CancelRequestException(final String? message) =
+  const factory _CancelRequestException(
+          final String? message, final StackTrace? stackTrace) =
       _$_CancelRequestException;
   const _CancelRequestException._() : super._();
 
-  factory _CancelRequestException.fromJson(Map<String, dynamic> json) =
-      _$_CancelRequestException.fromJson;
-
   @override
   String? get message;
+  @override
+  StackTrace? get stackTrace;
   @override
   @JsonKey(ignore: true)
   _$$_CancelRequestExceptionCopyWith<_$_CancelRequestException> get copyWith =>

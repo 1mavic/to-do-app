@@ -14,56 +14,47 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-LocalDdException _$LocalDdExceptionFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'initException':
-      return _InitException.fromJson(json);
-    case 'readException':
-      return _ReadException.fromJson(json);
-    case 'writeException':
-      return _WriteException.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'LocalDdException',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$LocalDdException {
-  String get stackTrace => throw _privateConstructorUsedError;
+  StackTrace get stackTrace => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   DateTime? get timeStamp => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         initException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         readException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         writeException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
     required TResult orElse(),
   }) =>
@@ -90,7 +81,7 @@ mixin _$LocalDdException {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $LocalDdExceptionCopyWith<LocalDdException> get copyWith =>
       throw _privateConstructorUsedError;
@@ -102,7 +93,7 @@ abstract class $LocalDdExceptionCopyWith<$Res> {
           LocalDdException value, $Res Function(LocalDdException) then) =
       _$LocalDdExceptionCopyWithImpl<$Res, LocalDdException>;
   @useResult
-  $Res call({String stackTrace, String? message, DateTime? timeStamp});
+  $Res call({StackTrace stackTrace, String? message, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -126,7 +117,7 @@ class _$LocalDdExceptionCopyWithImpl<$Res, $Val extends LocalDdException>
       stackTrace: null == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StackTrace,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -147,7 +138,7 @@ abstract class _$$_InitExceptionCopyWith<$Res>
       __$$_InitExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String stackTrace, String? message, DateTime? timeStamp});
+  $Res call({StackTrace stackTrace, String? message, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -169,7 +160,7 @@ class __$$_InitExceptionCopyWithImpl<$Res>
       stackTrace: null == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StackTrace,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -183,28 +174,18 @@ class __$$_InitExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_InitException extends _InitException {
   const _$_InitException(
-      {required this.stackTrace,
-      this.message,
-      this.timeStamp,
-      final String? $type})
-      : $type = $type ?? 'initException',
-        super._();
-
-  factory _$_InitException.fromJson(Map<String, dynamic> json) =>
-      _$$_InitExceptionFromJson(json);
+      {required this.stackTrace, this.message, this.timeStamp})
+      : super._();
 
   @override
-  final String stackTrace;
+  final StackTrace stackTrace;
   @override
   final String? message;
   @override
   final DateTime? timeStamp;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -223,7 +204,6 @@ class _$_InitException extends _InitException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, stackTrace, message, timeStamp);
 
@@ -237,13 +217,13 @@ class _$_InitException extends _InitException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         initException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         readException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         writeException,
   }) {
     return initException(stackTrace, message, timeStamp);
@@ -252,11 +232,14 @@ class _$_InitException extends _InitException {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
   }) {
     return initException?.call(stackTrace, message, timeStamp);
@@ -265,11 +248,14 @@ class _$_InitException extends _InitException {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
     required TResult orElse(),
   }) {
@@ -312,27 +298,17 @@ class _$_InitException extends _InitException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_InitExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _InitException extends LocalDdException {
   const factory _InitException(
-      {required final String stackTrace,
+      {required final StackTrace stackTrace,
       final String? message,
       final DateTime? timeStamp}) = _$_InitException;
   const _InitException._() : super._();
 
-  factory _InitException.fromJson(Map<String, dynamic> json) =
-      _$_InitException.fromJson;
-
   @override
-  String get stackTrace;
+  StackTrace get stackTrace;
   @override
   String? get message;
   @override
@@ -351,7 +327,7 @@ abstract class _$$_ReadExceptionCopyWith<$Res>
       __$$_ReadExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String stackTrace, String? message, DateTime? timeStamp});
+  $Res call({StackTrace stackTrace, String? message, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -373,7 +349,7 @@ class __$$_ReadExceptionCopyWithImpl<$Res>
       stackTrace: null == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StackTrace,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -387,28 +363,18 @@ class __$$_ReadExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_ReadException extends _ReadException {
   const _$_ReadException(
-      {required this.stackTrace,
-      this.message,
-      this.timeStamp,
-      final String? $type})
-      : $type = $type ?? 'readException',
-        super._();
-
-  factory _$_ReadException.fromJson(Map<String, dynamic> json) =>
-      _$$_ReadExceptionFromJson(json);
+      {required this.stackTrace, this.message, this.timeStamp})
+      : super._();
 
   @override
-  final String stackTrace;
+  final StackTrace stackTrace;
   @override
   final String? message;
   @override
   final DateTime? timeStamp;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -427,7 +393,6 @@ class _$_ReadException extends _ReadException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, stackTrace, message, timeStamp);
 
@@ -441,13 +406,13 @@ class _$_ReadException extends _ReadException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         initException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         readException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         writeException,
   }) {
     return readException(stackTrace, message, timeStamp);
@@ -456,11 +421,14 @@ class _$_ReadException extends _ReadException {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
   }) {
     return readException?.call(stackTrace, message, timeStamp);
@@ -469,11 +437,14 @@ class _$_ReadException extends _ReadException {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
     required TResult orElse(),
   }) {
@@ -516,27 +487,17 @@ class _$_ReadException extends _ReadException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ReadExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _ReadException extends LocalDdException {
   const factory _ReadException(
-      {required final String stackTrace,
+      {required final StackTrace stackTrace,
       final String? message,
       final DateTime? timeStamp}) = _$_ReadException;
   const _ReadException._() : super._();
 
-  factory _ReadException.fromJson(Map<String, dynamic> json) =
-      _$_ReadException.fromJson;
-
   @override
-  String get stackTrace;
+  StackTrace get stackTrace;
   @override
   String? get message;
   @override
@@ -555,7 +516,7 @@ abstract class _$$_WriteExceptionCopyWith<$Res>
       __$$_WriteExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String stackTrace, String? message, DateTime? timeStamp});
+  $Res call({StackTrace stackTrace, String? message, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -577,7 +538,7 @@ class __$$_WriteExceptionCopyWithImpl<$Res>
       stackTrace: null == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StackTrace,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -591,28 +552,18 @@ class __$$_WriteExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_WriteException extends _WriteException {
   const _$_WriteException(
-      {required this.stackTrace,
-      this.message,
-      this.timeStamp,
-      final String? $type})
-      : $type = $type ?? 'writeException',
-        super._();
-
-  factory _$_WriteException.fromJson(Map<String, dynamic> json) =>
-      _$$_WriteExceptionFromJson(json);
+      {required this.stackTrace, this.message, this.timeStamp})
+      : super._();
 
   @override
-  final String stackTrace;
+  final StackTrace stackTrace;
   @override
   final String? message;
   @override
   final DateTime? timeStamp;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
   @override
   String toString() {
@@ -631,7 +582,6 @@ class _$_WriteException extends _WriteException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, stackTrace, message, timeStamp);
 
@@ -645,13 +595,13 @@ class _$_WriteException extends _WriteException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         initException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         readException,
     required TResult Function(
-            String stackTrace, String? message, DateTime? timeStamp)
+            StackTrace stackTrace, String? message, DateTime? timeStamp)
         writeException,
   }) {
     return writeException(stackTrace, message, timeStamp);
@@ -660,11 +610,14 @@ class _$_WriteException extends _WriteException {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult? Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult? Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
   }) {
     return writeException?.call(stackTrace, message, timeStamp);
@@ -673,11 +626,14 @@ class _$_WriteException extends _WriteException {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         initException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         readException,
-    TResult Function(String stackTrace, String? message, DateTime? timeStamp)?
+    TResult Function(
+            StackTrace stackTrace, String? message, DateTime? timeStamp)?
         writeException,
     required TResult orElse(),
   }) {
@@ -720,27 +676,17 @@ class _$_WriteException extends _WriteException {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_WriteExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _WriteException extends LocalDdException {
   const factory _WriteException(
-      {required final String stackTrace,
+      {required final StackTrace stackTrace,
       final String? message,
       final DateTime? timeStamp}) = _$_WriteException;
   const _WriteException._() : super._();
 
-  factory _WriteException.fromJson(Map<String, dynamic> json) =
-      _$_WriteException.fromJson;
-
   @override
-  String get stackTrace;
+  StackTrace get stackTrace;
   @override
   String? get message;
   @override

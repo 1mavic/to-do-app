@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/flavors/banner_widget.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/core/domain/providers/config_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/overlay_service_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
@@ -69,6 +70,7 @@ class TodoListWidgetState extends ConsumerState<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(configColorProvider);
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);

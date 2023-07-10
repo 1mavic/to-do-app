@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ya_todo_app/core/data/local_data_source/local_data_source_i.dart';
 import 'package:ya_todo_app/core/data/models/todo_data_model.dart';
@@ -21,11 +22,13 @@ class HiveDataSource implements LocalDataSourceI {
         ..registerAdapter(TodoDataModelAdapter());
       _box = await Hive.openBox<TodoDataModel>(_localKey);
     } catch (e, stackTrace) {
-      throw LocalDdException.initException(
+      final error = LocalDdException.initException(
         message: 'unknown hive init error',
-        stackTrace: stackTrace.toString(),
+        stackTrace: stackTrace,
         timeStamp: DateTime.now(),
       );
+      FirebaseCrashlytics.instance.recordError(error, error.stackTrace);
+      throw error;
     }
   }
 
@@ -35,11 +38,13 @@ class HiveDataSource implements LocalDataSourceI {
       final dataToSave = TodoDataModel(data);
       await _box.put(_localKey, dataToSave);
     } catch (e, stackTrace) {
-      throw LocalDdException.writeException(
+      final error = LocalDdException.writeException(
         message: e.toString(),
-        stackTrace: stackTrace.toString(),
+        stackTrace: stackTrace,
         timeStamp: DateTime.now(),
       );
+      FirebaseCrashlytics.instance.recordError(error, error.stackTrace);
+      throw error;
     }
   }
 
@@ -50,11 +55,13 @@ class HiveDataSource implements LocalDataSourceI {
       final list = data?.todos ?? [];
       return list;
     } catch (e, stackTrace) {
-      throw LocalDdException.readException(
+      final error = LocalDdException.readException(
         message: e.toString(),
-        stackTrace: stackTrace.toString(),
+        stackTrace: stackTrace,
         timeStamp: DateTime.now(),
       );
+      FirebaseCrashlytics.instance.recordError(error, error.stackTrace);
+      throw error;
     }
   }
 }
