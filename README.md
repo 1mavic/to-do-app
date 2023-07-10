@@ -38,7 +38,7 @@ xcrun simctl openurl booted mrdekk://beta.mrdekk.ru/detail
 
 ## run integration test
 
-flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --dart-define token={$token}
+flutter test integration_tests/crud_todo_test.dart --flavor=dev --dart-define URL={$URL} --dart-define token={$token}
 
 
 ## Features:
@@ -57,6 +57,8 @@ flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --da
 * Firebase crashlytics
 * Firebase analytics
 * Firebase remoteconfig
+* portrait and landscape orientation
+* tablet support
 
 
 ### Libraries & Tools Used

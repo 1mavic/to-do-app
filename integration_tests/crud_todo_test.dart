@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_text_field_widget.dart';
 import 'package:ya_todo_app/main_dev.dart' as app;
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
+
+Future<void> restoreFlutterError(Future<void> Function() call) async {
+  final originalOnError = FlutterError.onError!;
+  await call();
+  final overriddenOnError = FlutterError.onError!;
+
+  // restore FlutterError.onError
+  FlutterError.onError = (FlutterErrorDetails details) {
+    if (overriddenOnError != originalOnError) overriddenOnError(details);
+    originalOnError(details);
+  };
+}
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -16,10 +29,12 @@ void main() {
     });
 
     tearDown(() {});
-
+    // TODO(macegora): fix integration test with onerror
     testWidgets('crud todo ', (tester) async {
       // start app
-      app.main();
+      await restoreFlutterError(() async {
+        app.main();
+      });
 
       await tester.pumpAndSettle(
         const Duration(seconds: 2),
@@ -33,7 +48,8 @@ void main() {
 
       expect(find.byType(CreateTodoScreen), findsOneWidget);
 
-      final textField = find.byKey(const ValueKey<String>('text-field'));
+      // final textField = find.byKey(const ValueKey<String>('text-field'));
+      final textField = find.byElementType(MyTextFieldWidget);
 
       await tester.tap(textField);
       await tester.enterText(textField, todoText);

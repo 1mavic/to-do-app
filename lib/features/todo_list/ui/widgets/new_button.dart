@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
 import 'package:ya_todo_app/config/styles/app_text_styles.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
-import 'package:ya_todo_app/navigation/navigator_inherit.dart';
 
 class NewButtonWidget extends StatefulWidget {
   const NewButtonWidget({
@@ -23,7 +23,7 @@ class _NewButtonWidgetState extends State<NewButtonWidget> {
         horizontal: hPadding,
       ),
       child: GestureDetector(
-        onTap: () => AppNavigator.of(context)?.openTaskScreen(null),
+        onTap: () => context.findAncestorStateOfType<TodoListWidgetState>()?.openTodo(null),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 2,
