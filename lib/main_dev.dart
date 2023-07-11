@@ -19,6 +19,7 @@ import 'package:ya_todo_app/core/domain/providers/config_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/local_db_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/revision_provider.dart';
 import 'package:ya_todo_app/core/widgets/fatal_error_screen.dart';
+import 'package:ya_todo_app/firebase_options.dart';
 import 'package:ya_todo_app/my_app.dart';
 
 // TODO(macegora): add animation with todo
@@ -30,7 +31,7 @@ void main() {
     runZonedGuarded(
       () async {
         WidgetsFlutterBinding.ensureInitialized();
-        await Firebase.initializeApp();
+        await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform(AppFlavor.dev));
 
         final localDb = HiveDataSource();
         final apiClient = ApiClient(
@@ -87,8 +88,7 @@ void main() {
           ),
         );
 
-        FlutterError.onError =
-            FirebaseCrashlytics.instance.recordFlutterFatalError;
+        FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       },
       (Object error, StackTrace stack) {
         FirebaseCrashlytics.instance.recordError(error, stack);
