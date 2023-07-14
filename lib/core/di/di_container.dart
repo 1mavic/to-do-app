@@ -23,7 +23,8 @@ class _DiContainer {
   DataDiff get diffUseCase => _diffUseCase;
   MergeLists get mergeUseCase => _mergeUseCase;
   AppAnalytics get appAnalitics => _appAnalytics;
-  NavigatorManager get navigationManager => _navigationManager ??= NavigatorManagerImpl(
+  NavigatorManager get navigationManager =>
+      _navigationManager ??= NavigatorManagerImpl(
         AppRouterDelegate(_logger, _appAnalytics),
         AppRouteInformationParser(),
       );
