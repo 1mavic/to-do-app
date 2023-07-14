@@ -54,7 +54,7 @@ class _ListWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(filteredListProvider);
     return AnimatedSize(
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 300),
       alignment: Alignment.topCenter,
       child: ListView.builder(
         padding: EdgeInsets.zero,
