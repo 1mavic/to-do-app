@@ -24,7 +24,10 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
@@ -49,22 +52,13 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDDGWEIi8eac7p7nT84kFU7AFYEZWBgkIQ',
-    appId: '1:761127175277:android:a246bc048922b12e7feb64',
-    messagingSenderId: '761127175277',
-    projectId: 'ya-todo-prod',
-    storageBucket: 'ya-todo-prod.appspot.com',
-  );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCn769U9VrMUulEYfSW__wB7Vi7yOBGdpA',
     appId: '1:761127175277:ios:7d6110dc59716a157feb64',
     messagingSenderId: '761127175277',
     projectId: 'ya-todo-prod',
     storageBucket: 'ya-todo-prod.appspot.com',
-    iosClientId:
-        '761127175277-nj32psko009v6q0rtmhs7kk349q2i0ib.apps.googleusercontent.com',
+    iosClientId: '761127175277-nj32psko009v6q0rtmhs7kk349q2i0ib.apps.googleusercontent.com',
     iosBundleId: 'com.example.yaTodoApp',
   );
 }

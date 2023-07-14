@@ -30,4 +30,11 @@ jobs:
       - run: echo "${{ secrets.KEYSTORE2 }}" | base64 --decode > android/app/key.jks
 
 
-      - run: flutter build apk --release -t lib/main_dev.dart --flavor=dev --dart-define URL=${{ secrets.URL }} --dart-define token=${{ secrets.token }}
+      - run: flutter build apk --release -t lib/main_prod.dart --flavor=prod --dart-define URL=${{ secrets.URL }} --dart-define token=${{ secrets.token }}
+
+
+       - name: Upload artefato
+        uses: actions/upload-artifact@v2
+        with:
+          name: appbundle
+          path: build/app/outputs/bundle/release

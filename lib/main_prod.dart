@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -31,8 +32,11 @@ void main() {
     runZonedGuarded(
       () async {
         WidgetsFlutterBinding.ensureInitialized();
-        await Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform);
+        Platform.isAndroid
+            ? await Firebase.initializeApp()
+            : await Firebase.initializeApp(
+                options: DefaultFirebaseOptions.currentPlatform,
+              );
 
         final localDb = HiveDataSource();
         final apiClient = ApiClient(
@@ -89,8 +93,7 @@ void main() {
           ),
         );
 
-        FlutterError.onError =
-            FirebaseCrashlytics.instance.recordFlutterFatalError;
+        FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       },
       (Object error, StackTrace stack) {
         FirebaseCrashlytics.instance.recordError(error, stack);
