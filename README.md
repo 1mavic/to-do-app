@@ -38,7 +38,7 @@ xcrun simctl openurl booted mrdekk://beta.mrdekk.ru/detail
 
 ## run integration test
 
-flutter test integration_tests/crud_todo_test.dart --flavor=dev --dart-define URL={$URL} --dart-define token={$token}
+fvm flutter test integration_tests/crud_todo_test.dart --flavor=dev --dart-define URL={$URL} --dart-define token={$token}
 
 
 ## Features:

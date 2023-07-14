@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/widgets/my_text_field_widget.dart';
-import 'package:ya_todo_app/main_dev.dart' as app;
+import 'package:ya_todo_app/main_dev_test.dart' as app;
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 
 Future<void> restoreFlutterError(Future<void> Function() call) async {
@@ -37,7 +37,7 @@ void main() {
       });
 
       await tester.pumpAndSettle(
-        const Duration(seconds: 2),
+        const Duration(seconds: 4),
       );
 
       expect(find.byIcon(Icons.add), findsOneWidget);
