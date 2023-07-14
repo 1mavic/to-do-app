@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ya_todo_app/config/colors/app_colors.dart';
+import 'package:ya_todo_app/config/flavors/banner_widget.dart';
 import 'package:ya_todo_app/const/const_data.dart';
+import 'package:ya_todo_app/core/domain/providers/config_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/overlay_service_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/sync_provider.dart';
-import 'package:ya_todo_app/features/todo_list/domain/providers/filtered_list_provider.dart';
-import 'package:ya_todo_app/features/todo_list/ui/widgets/animated_banner.dart';
-import 'package:ya_todo_app/features/todo_list/ui/widgets/appbar_widget.dart';
-import 'package:ya_todo_app/features/todo_list/ui/widgets/card_widget.dart';
-import 'package:ya_todo_app/features/todo_list/ui/widgets/list_tile_widget.dart';
-import 'package:ya_todo_app/features/todo_list/ui/widgets/new_button.dart';
+import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
+import 'package:ya_todo_app/features/todo_list/ui/widgets/list_body_widget.dart';
 import 'package:ya_todo_app/generated/l10n.dart';
-import 'package:ya_todo_app/navigation/navigation.dart';
+import 'package:ya_todo_app/navigation/navigator_inherit.dart';
 
 /// key for main to-do list screen widget
 final mainScreenKey = GlobalKey();
@@ -24,12 +22,14 @@ class TodoListWidget extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<TodoListWidget> createState() => _TodoListWidgetState();
+  ConsumerState<TodoListWidget> createState() => TodoListWidgetState();
 }
 
-class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
+class TodoListWidgetState extends ConsumerState<TodoListWidget> {
   late ScrollController _controller;
   bool _expanded = false;
+  bool _isTablet = false;
+  String? _currentTaskId;
   @override
   void initState() {
     super.initState();
@@ -43,13 +43,34 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    final size = MediaQuery.of(context).size;
+    final orientation = MediaQuery.of(context).orientation;
+    _isTablet = orientation == Orientation.portrait
+        ? size.width > 600
+        : size.height > 600;
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  void openTodo(String? newTodo) {
+    if (_isTablet) {
+      setState(() {
+        _currentTaskId = newTodo;
+      });
+    } else {
+      AppNavigator.of(context)?.openTaskScreen(newTodo);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.watch(configColorProvider);
     ref.listen(syncProvider, (previous, next) {
       if (previous?.syncInProcess == false && next.syncInProcess == true) {
         ref.read(overlayProvider).showTextModal(S.of(context).syncData);
@@ -58,67 +79,38 @@ class _TodoListWidgetState extends ConsumerState<TodoListWidget> {
         ref.read(overlayProvider).removeOverlay();
       }
     });
-    return Scaffold(
-      key: mainScreenKey,
-      backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.navigateTo(RouteConfig.detail(null));
-        },
-        backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
-        child: const Icon(Icons.add),
-      ),
-      body: Stack(
-        children: [
-          CustomScrollView(
-            key: const ValueKey<String>('main-scroll'),
-            controller: _controller,
-            slivers: [
-              MainScreenAppbarWidget(
+    return FlavorBannerWidget(
+      child: Scaffold(
+        key: mainScreenKey,
+        backgroundColor: Theme.of(context).extension<AppColors>()?.backPrimary,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => openTodo(null),
+          backgroundColor: Theme.of(context).extension<AppColors>()?.blue,
+          child: const Icon(Icons.add),
+        ),
+        body: _isTablet
+            ? Row(
+                children: [
+                  Expanded(
+                    child: TodoListBodyWidget(
+                      controller: _controller,
+                      expanded: _expanded,
+                    ),
+                  ),
+                  Expanded(
+                    child: CreateTodoScreen(
+                      id: _currentTaskId,
+                      fullScreen: false,
+                      key: ValueKey<String?>(_currentTaskId),
+                    ),
+                  ),
+                ],
+              )
+            : TodoListBodyWidget(
+                controller: _controller,
                 expanded: _expanded,
               ),
-              const SliverPadding(
-                padding: EdgeInsets.only(top: 10),
-                sliver: SliverToBoxAdapter(
-                  child: CardWidget(
-                    child: _ListWidget(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const Positioned(
-            top: 40,
-            left: 10,
-            right: 10,
-            child: AnimatedBannerWidget(),
-          ),
-        ],
       ),
-    );
-  }
-}
-
-class _ListWidget extends ConsumerWidget {
-  const _ListWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(filteredListProvider);
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        if (index == list.length) {
-          return const NewButtonWidget();
-        }
-        return ListTileWidget(
-          key: const ValueKey<String>('list-tile'),
-          todo: list[index],
-        );
-      },
-      itemCount: list.length + 1,
     );
   }
 }

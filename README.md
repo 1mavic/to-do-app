@@ -2,7 +2,7 @@
 
 Flutter to-do application for yandex summer school of mobile development.
 
-## Flutter version 3.10.0
+## Flutter version 3.10.5
 
 ## Getting Started
 
@@ -12,11 +12,18 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
 ## apk file
-[download apk](https://drive.google.com/file/d/1P8nb5sfJNYCmDtBUXU7WeV_m3gAiZnYq/view?usp=sharing)
+[download apk DEV](https://drive.google.com/file/d/1eTlMlO9vOxX2tRrhhNdLUKpOSm7qD5uz/view?usp=sharing)
+[download apk PROD](https://drive.google.com/file/d/1H2sfQapNhtwLmV4z5miFprkEB6ufxpNj/view?usp=sharing)
+
+## flavors
+
+dev flavor
+prod flavor
 
 ## run
 
-fvm flutter run --target lib/main_dev.dart --dart-define URL=$url --dart-define token=$token
+fvm flutter run --target lib/main_dev.dart --flavor=dev --dart-define URL=$url --dart-define token=$token
+fvm flutter run --target lib/main_prod.dart --flavor=prod --dart-define URL=$url --dart-define token=$token
 
 ## build release
 
@@ -32,7 +39,7 @@ xcrun simctl openurl booted mrdekk://beta.mrdekk.ru/detail
 
 ## run integration test
 
-flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --dart-define token={$token}
+fvm flutter test integration_tests/crud_todo_test.dart --flavor=dev --dart-define URL={$URL} --dart-define token={$token}
 
 
 ## Features:
@@ -47,6 +54,13 @@ flutter test integration_tests/crud_todo_test.dart --dart-define URL={$URL} --da
 * unit tests
 * integration test on CRUD flow
 * intl
+* CI with GitHub actions (format, analyze, test, build)
+* Firebase crashlytics
+* Firebase analytics
+* Firebase remoteconfig runtime update
+* portrait and landscape orientation
+* tablet support
+
 
 ### Libraries & Tools Used
 

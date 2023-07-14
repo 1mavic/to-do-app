@@ -8,10 +8,11 @@ import 'package:ya_todo_app/const/app_icons.dart';
 import 'package:ya_todo_app/const/const_data.dart';
 import 'package:ya_todo_app/core/domain/models/priority.dart';
 import 'package:ya_todo_app/core/domain/models/todo.dart';
+import 'package:ya_todo_app/core/domain/providers/config_provider.dart';
 import 'package:ya_todo_app/core/domain/providers/todo_list_provider.dart';
 import 'package:ya_todo_app/core/extensions/date_time_ext.dart';
 import 'package:ya_todo_app/core/widgets/dialogs/remove_alert_dialog_widget.dart';
-import 'package:ya_todo_app/navigation/navigation.dart';
+import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
 
 /// list tile widget with to do
 class ListTileWidget extends ConsumerStatefulWidget {
@@ -122,11 +123,19 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3),
                     ),
-                    activeColor: Colors.amber,
+                    // activeColor: Colors.amber,
                     fillColor: MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
                       return widget.todo.priority == Priority.important
-                          ? Theme.of(context).extension<AppColors>()!.red!
+                          ? ref.watch(configColorProvider).map(
+                                data: (color) => color.value,
+                                error: (_) => Theme.of(context)
+                                    .extension<AppColors>()!
+                                    .red!,
+                                loading: (_) => Theme.of(context)
+                                    .extension<AppColors>()!
+                                    .red!,
+                              )
                           : Theme.of(context).extension<AppColors>()!.green!;
                     }),
                     value: widget.todo.done,
@@ -153,7 +162,13 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                 Priority.important => SvgPicture.asset(
                     AppIcons.highPriority,
                     colorFilter: ColorFilter.mode(
-                      Theme.of(context).extension<AppColors>()!.red!,
+                      ref.watch(configColorProvider).map(
+                            data: (color) => color.value,
+                            error: (_) =>
+                                Theme.of(context).extension<AppColors>()!.red!,
+                            loading: (_) =>
+                                Theme.of(context).extension<AppColors>()!.red!,
+                          ),
                       BlendMode.srcIn,
                     ),
                   ),
@@ -165,9 +180,9 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
               Expanded(
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => context.navigateTo(
-                    RouteConfig.detail(widget.todo.id),
-                  ),
+                  onTap: () => context
+                      .findAncestorStateOfType<TodoListWidgetState>()
+                      ?.openTodo(widget.todo.id),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -203,11 +218,9 @@ class _ListTileWidgetState extends ConsumerState<ListTileWidget> {
                 ),
               ),
               GestureDetector(
-                onTap: () => context.navigateTo(
-                  RouteConfig.detail(
-                    widget.todo.id,
-                  ),
-                ),
+                onTap: () => context
+                    .findAncestorStateOfType<TodoListWidgetState>()
+                    ?.openTodo(widget.todo.id),
                 child: SizedBox.square(
                   dimension: 24,
                   child: Icon(

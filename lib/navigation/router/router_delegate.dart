@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ya_todo_app/config/analytics/app_analytics.dart';
 import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
 import 'package:ya_todo_app/features/crete_edit_todo/ui/create_todo_screen.dart';
 import 'package:ya_todo_app/features/todo_list/ui/todo_list_screen.dart';
-import 'package:ya_todo_app/navigation/router_config.dart';
+
+import 'navigation.dart';
 
 extension RouteExtension on BuildContext {
   Future<void> navigateTo(RouteConfig path) async {
@@ -26,8 +28,9 @@ extension RouteExtension on BuildContext {
 
 class AppRouterDelegate extends RouterDelegate<RouteConfig>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<RouteConfig> {
-  AppRouterDelegate(this._logger);
+  AppRouterDelegate(this._logger, this._analytics);
   final AppLogger _logger;
+  final AppAnalytics _analytics;
 
   @override
   GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
@@ -112,12 +115,15 @@ class AppRouterDelegate extends RouterDelegate<RouteConfig>
     _logger.logNavigation(
       '''push to ${path.pageType} ${path.param != null ? 'id:${path.param}' : ''}''',
     );
+    _analytics.logNavigation((path.pageType ?? '').toString(), 'push');
     _routeConfigs.add(path);
     notifyListeners();
   }
 
   void pop() {
     _logger.logNavigation('${_routeConfigs.last.pageType} pop');
+    _analytics.logNavigation(
+        (_routeConfigs.last.pageType ?? '').toString(), 'pop');
     _routeConfigs.removeLast();
     notifyListeners();
   }

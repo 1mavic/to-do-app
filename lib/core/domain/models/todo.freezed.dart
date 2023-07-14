@@ -199,26 +199,16 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 @HiveType(typeId: 1)
 class _$_Todo extends _Todo {
   _$_Todo(
-      {@HiveField(0)
-          this.id,
-      @HiveField(1)
-          this.text = '',
-      @HiveField(2)
-      @JsonKey(name: 'importance')
-          this.priority = Priority.basic,
-      @HiveField(3)
-          this.deadline,
-      @HiveField(4)
-          this.done = false,
-      @JsonKey(name: 'created_at')
-      @HiveField(5)
-          this.createdAt,
-      @JsonKey(name: 'changed_at')
-      @HiveField(6)
-          this.changedAt,
+      {@HiveField(0) this.id,
+      @HiveField(1) this.text = '',
+      @HiveField(2) @JsonKey(name: 'importance') this.priority = Priority.basic,
+      @HiveField(3) this.deadline,
+      @HiveField(4) this.done = false,
+      @JsonKey(name: 'created_at') @HiveField(5) this.createdAt,
+      @JsonKey(name: 'changed_at') @HiveField(6) this.changedAt,
       @JsonKey(name: 'last_updated_by')
       @HiveField(7)
-          this.updatedBy = 'local_user'})
+      this.updatedBy = 'local_user'})
       : super._();
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
@@ -301,26 +291,16 @@ class _$_Todo extends _Todo {
 
 abstract class _Todo extends Todo {
   factory _Todo(
-      {@HiveField(0)
-          final String? id,
-      @HiveField(1)
-          final String text,
-      @HiveField(2)
-      @JsonKey(name: 'importance')
-          final Priority priority,
-      @HiveField(3)
-          final int? deadline,
-      @HiveField(4)
-          final bool done,
-      @JsonKey(name: 'created_at')
-      @HiveField(5)
-          final int? createdAt,
-      @JsonKey(name: 'changed_at')
-      @HiveField(6)
-          final int? changedAt,
+      {@HiveField(0) final String? id,
+      @HiveField(1) final String text,
+      @HiveField(2) @JsonKey(name: 'importance') final Priority priority,
+      @HiveField(3) final int? deadline,
+      @HiveField(4) final bool done,
+      @JsonKey(name: 'created_at') @HiveField(5) final int? createdAt,
+      @JsonKey(name: 'changed_at') @HiveField(6) final int? changedAt,
       @JsonKey(name: 'last_updated_by')
       @HiveField(7)
-          final String updatedBy}) = _$_Todo;
+      final String updatedBy}) = _$_Todo;
   _Todo._() : super._();
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;

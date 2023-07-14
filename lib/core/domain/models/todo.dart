@@ -12,30 +12,20 @@ class Todo extends HiveObject with _$Todo {
   @HiveType(typeId: 1)
   factory Todo({
     /// id property. if null to do is not saved
-    @HiveField(0)
-        String? id,
-    @HiveField(1)
-    @Default('')
-        String text,
+    @HiveField(0) String? id,
+    @HiveField(1) @Default('') String text,
     @HiveField(2)
     @JsonKey(name: 'importance')
     @Default(Priority.basic)
-        Priority priority,
-    @HiveField(3)
-        int? deadline,
-    @HiveField(4)
-    @Default(false)
-        bool done,
-    @JsonKey(name: 'created_at')
-    @HiveField(5)
-        int? createdAt,
-    @JsonKey(name: 'changed_at')
-    @HiveField(6)
-        int? changedAt,
+    Priority priority,
+    @HiveField(3) int? deadline,
+    @HiveField(4) @Default(false) bool done,
+    @JsonKey(name: 'created_at') @HiveField(5) int? createdAt,
+    @JsonKey(name: 'changed_at') @HiveField(6) int? changedAt,
     @JsonKey(name: 'last_updated_by')
     @HiveField(7)
     @Default('local_user')
-        String updatedBy,
+    String updatedBy,
   }) = _Todo;
 
   Todo._();

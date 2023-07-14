@@ -14,16 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UnexpectedException _$UnexpectedExceptionFromJson(Map<String, dynamic> json) {
-  return _UnexpectedException.fromJson(json);
-}
-
 /// @nodoc
 mixin _$UnexpectedException {
-  String? get stackTrace => throw _privateConstructorUsedError;
+  StackTrace? get stackTrace => throw _privateConstructorUsedError;
   DateTime? get timeStamp => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UnexpectedExceptionCopyWith<UnexpectedException> get copyWith =>
       throw _privateConstructorUsedError;
@@ -35,7 +30,7 @@ abstract class $UnexpectedExceptionCopyWith<$Res> {
           UnexpectedException value, $Res Function(UnexpectedException) then) =
       _$UnexpectedExceptionCopyWithImpl<$Res, UnexpectedException>;
   @useResult
-  $Res call({String? stackTrace, DateTime? timeStamp});
+  $Res call({StackTrace? stackTrace, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -58,7 +53,7 @@ class _$UnexpectedExceptionCopyWithImpl<$Res, $Val extends UnexpectedException>
       stackTrace: freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       timeStamp: freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -75,7 +70,7 @@ abstract class _$$_UnexpectedExceptionCopyWith<$Res>
       __$$_UnexpectedExceptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? stackTrace, DateTime? timeStamp});
+  $Res call({StackTrace? stackTrace, DateTime? timeStamp});
 }
 
 /// @nodoc
@@ -96,7 +91,7 @@ class __$$_UnexpectedExceptionCopyWithImpl<$Res>
       stackTrace: freezed == stackTrace
           ? _value.stackTrace
           : stackTrace // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as StackTrace?,
       timeStamp: freezed == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
@@ -106,15 +101,12 @@ class __$$_UnexpectedExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_UnexpectedException extends _UnexpectedException {
   const _$_UnexpectedException({this.stackTrace, this.timeStamp}) : super._();
 
-  factory _$_UnexpectedException.fromJson(Map<String, dynamic> json) =>
-      _$$_UnexpectedExceptionFromJson(json);
-
   @override
-  final String? stackTrace;
+  final StackTrace? stackTrace;
   @override
   final DateTime? timeStamp;
 
@@ -134,7 +126,6 @@ class _$_UnexpectedException extends _UnexpectedException {
                 other.timeStamp == timeStamp));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, stackTrace, timeStamp);
 
@@ -144,26 +135,16 @@ class _$_UnexpectedException extends _UnexpectedException {
   _$$_UnexpectedExceptionCopyWith<_$_UnexpectedException> get copyWith =>
       __$$_UnexpectedExceptionCopyWithImpl<_$_UnexpectedException>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_UnexpectedExceptionToJson(
-      this,
-    );
-  }
 }
 
 abstract class _UnexpectedException extends UnexpectedException {
   const factory _UnexpectedException(
-      {final String? stackTrace,
+      {final StackTrace? stackTrace,
       final DateTime? timeStamp}) = _$_UnexpectedException;
   const _UnexpectedException._() : super._();
 
-  factory _UnexpectedException.fromJson(Map<String, dynamic> json) =
-      _$_UnexpectedException.fromJson;
-
   @override
-  String? get stackTrace;
+  StackTrace? get stackTrace;
   @override
   DateTime? get timeStamp;
   @override

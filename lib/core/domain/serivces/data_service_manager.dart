@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:uuid/uuid.dart';
 import 'package:ya_todo_app/core/data/local_data_source/local_data_source_i.dart';
 import 'package:ya_todo_app/core/domain/models/data_source_enum.dart';
@@ -54,7 +55,7 @@ class DataServiceManager {
       return [];
     } catch (e, stackTrace) {
       _overlayService.showErrorModal(UnexpectedException(
-        stackTrace: stackTrace.toString(),
+        stackTrace: stackTrace,
         timeStamp: DateTime.now(),
       ));
       return [];
@@ -216,6 +217,7 @@ class DataServiceManager {
 
   /// shows error from api repository
   void _errorFromApi(ApiException exc) {
+    FirebaseCrashlytics.instance.recordError(exc, exc.errorStackTrace);
     _overlayService.showErrorModal(exc);
   }
 
