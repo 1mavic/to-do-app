@@ -13,7 +13,7 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 
 ## apk file
 [download apk DEV](https://drive.google.com/file/d/1eTlMlO9vOxX2tRrhhNdLUKpOSm7qD5uz/view?usp=sharing)
-[download apk PROD](https://drive.google.com/file/d/1eTlMlO9vOxX2tRrhhNdLUKpOSm7qD5uz/view?usp=sharing)
+[download apk PROD](https://drive.google.com/file/d/1H2sfQapNhtwLmV4z5miFprkEB6ufxpNj/view?usp=sharing)
 
 ## flavors
 
