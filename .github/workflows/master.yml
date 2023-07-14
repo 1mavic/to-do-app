@@ -42,10 +42,10 @@ jobs:
           name: app-prod-release
           path: build/app/outputs/flutter-apk/
     
-      - name: upload artifact to Firebase App Distribution
-      - uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{secrets.APPID}}
-          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          groups: test
-          file: build/app/outputs/flutter-apk/app-prod-release.apk
+      # - name: upload artifact to Firebase App Distribution
+      # - uses: wzieba/Firebase-Distribution-Github-Action@v1
+      #   with:
+      #     appId: ${{secrets.APPID}}
+      #     serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+      #     groups: test
+      #     file: build/app/outputs/flutter-apk/app-prod-release.apk
