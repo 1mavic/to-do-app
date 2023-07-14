@@ -1,5 +1,5 @@
 import 'package:ya_todo_app/config/analytics/app_analytics.dart';
-import 'package:ya_todo_app/config/analytics/firebase_analutics.dart';
+import 'package:ya_todo_app/config/analytics/firebase_analytics.dart';
 import 'package:ya_todo_app/core/domain/serivces/app_loger.dart';
 import 'package:ya_todo_app/core/domain/use_cases/data_diff.dart';
 import 'package:ya_todo_app/core/domain/use_cases/merge_lists.dart';
@@ -23,8 +23,7 @@ class _DiContainer {
   DataDiff get diffUseCase => _diffUseCase;
   MergeLists get mergeUseCase => _mergeUseCase;
   AppAnalytics get appAnalitics => _appAnalytics;
-  NavigatorManager get navigationManager =>
-      _navigationManager ??= NavigatorManagerImpl(
+  NavigatorManager get navigationManager => _navigationManager ??= NavigatorManagerImpl(
         AppRouterDelegate(_logger, _appAnalytics),
         AppRouteInformationParser(),
       );
