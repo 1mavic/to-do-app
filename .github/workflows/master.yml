@@ -1,6 +1,8 @@
 name: CI
 on
   push:
+    branches:
+      - master
 
 env:
   PROPERTIES_PATH: "./android/key.properties"

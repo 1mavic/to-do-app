@@ -53,7 +53,7 @@ fvm flutter test integration_tests/crud_todo_test.dart --flavor=dev --dart-defin
 * unit tests
 * integration test on CRUD flow
 * intl
-* CI with GitHub actions
+* CI with GitHub actions (format, analyze, test, build)
 * Firebase crashlytics
 * Firebase analytics
 * Firebase remoteconfig runtime update
