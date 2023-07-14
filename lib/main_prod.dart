@@ -93,7 +93,8 @@ void main() {
           ),
         );
 
-        FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+        FlutterError.onError =
+            FirebaseCrashlytics.instance.recordFlutterFatalError;
       },
       (Object error, StackTrace stack) {
         FirebaseCrashlytics.instance.recordError(error, stack);

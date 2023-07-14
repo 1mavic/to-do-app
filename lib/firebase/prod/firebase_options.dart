@@ -58,7 +58,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '761127175277',
     projectId: 'ya-todo-prod',
     storageBucket: 'ya-todo-prod.appspot.com',
-    iosClientId: '761127175277-nj32psko009v6q0rtmhs7kk349q2i0ib.apps.googleusercontent.com',
+    iosClientId:
+        '761127175277-nj32psko009v6q0rtmhs7kk349q2i0ib.apps.googleusercontent.com',
     iosBundleId: 'com.example.yaTodoApp',
   );
 }

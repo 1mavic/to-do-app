@@ -33,7 +33,7 @@ jobs:
       - run: flutter build apk --release -t lib/main_prod.dart --flavor=prod --dart-define URL=${{ secrets.URL }} --dart-define token=${{ secrets.token }}
 
 
-       - name: Upload artefato
+      - name: Upload artefato
         uses: actions/upload-artifact@v2
         with:
           name: appbundle
