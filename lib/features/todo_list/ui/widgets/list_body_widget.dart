@@ -53,20 +53,24 @@ class _ListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(filteredListProvider);
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        if (index == list.length) {
-          return const NewButtonWidget();
-        }
-        return ListTileWidget(
-          key: const ValueKey<String>('list-tile'),
-          todo: list[index],
-        );
-      },
-      itemCount: list.length + 1,
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 600),
+      alignment: Alignment.topCenter,
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          if (index == list.length) {
+            return const NewButtonWidget();
+          }
+          return ListTileWidget(
+            key: const ValueKey<String>('list-tile'),
+            todo: list[index],
+          );
+        },
+        itemCount: list.length + 1,
+      ),
     );
   }
 }
