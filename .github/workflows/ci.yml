@@ -17,6 +17,7 @@ jobs:
       - run: flutter pub get
       - run: dart format -l 80 --set-exit-if-changed .
       - run: flutter analyze .
+      - run: flutter test
 
       - run: |
           echo keyPassword=\${{ secrets.KEY_STORE }} > ${{env.PROPERTIES_PATH}}
@@ -25,5 +26,5 @@ jobs:
       # Decoding base64 key into a file
       - run: echo "${{ secrets.KEYSTORE2 }}" | base64 --decode > android/app/key.jks
 
-      - run: flutter test
+
       - run: flutter build apk --release -t lib/main_dev.dart --flavor=dev --dart-define URL=${{ secrets.URL }} --dart-define token=${{ secrets.token }}
