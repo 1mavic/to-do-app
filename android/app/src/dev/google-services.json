@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "411404993911",
+    "project_id": "ya-todo-dev",
+    "storage_bucket": "ya-todo-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411404993911:android:29071574a151bf39fa8d72",
+        "android_client_info": {
+          "package_name": "com.example.ya_todo_app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411404993911-g64g1p1rhh2e86b5ktbr4m5sm80dd2pu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOe8djAc3GnxLoqQG5g9_6FdxhqM5Xs8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411404993911-g64g1p1rhh2e86b5ktbr4m5sm80dd2pu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "411404993911-dl9pud8u0jducbnlpcahb57jui1agjl7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yaTodoApp.dev"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411404993911:android:2b1f371779986214fa8d72",
+        "android_client_info": {
+          "package_name": "com.example.ya_todo_app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411404993911-g64g1p1rhh2e86b5ktbr4m5sm80dd2pu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOe8djAc3GnxLoqQG5g9_6FdxhqM5Xs8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411404993911-g64g1p1rhh2e86b5ktbr4m5sm80dd2pu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "411404993911-dl9pud8u0jducbnlpcahb57jui1agjl7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yaTodoApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
