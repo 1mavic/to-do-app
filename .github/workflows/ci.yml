@@ -2,6 +2,9 @@ name: CI
 on:
   push:
 
+env:
+  PROPERTIES_PATH: "./android/key.properties"
+
 jobs:
   flutter_format_analyze_test:
     name: Run flutter test and analyze
