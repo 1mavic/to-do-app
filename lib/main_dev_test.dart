@@ -31,7 +31,8 @@ void main() {
     runZonedGuarded(
       () async {
         WidgetsFlutterBinding.ensureInitialized();
-        await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform(AppFlavor.dev));
+        await Firebase.initializeApp(
+            options: DefaultFirebaseOptions.currentPlatform(AppFlavor.dev));
 
         final localDb = HiveDataSource();
         final apiClient = ApiClient(
